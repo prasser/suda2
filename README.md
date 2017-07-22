@@ -18,5 +18,5 @@ Online documentation can be found [here](https://rawgithub.com/prasser/suda2/mas
 Too see SUDA2 in action, take a look at [ARX](https://github.com/arx-deidentifier/arx).
 
 ## License
-------
+
 Apache 2
