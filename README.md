@@ -1,5 +1,5 @@
 # SUDA2
-Java implementation of the SUDA2 algorithm for detecting Minimum Sample Uniques (MSUs)
+Java implementation of the SUDA2 algorithm for detecting Minimal Sample Uniques (MSUs)
 
 This project is work in progress.
 
