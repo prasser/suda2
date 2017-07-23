@@ -21,10 +21,11 @@ package de.linearbits.suda2;
  * 
  * @author Fabian Prasser
  */
-public interface SUDA2ProgressListener {
+public interface SUDA2ListenerProgress {
 
     /**
-     * Number in [0, 1]
+     * Progress update
+     * @param progress Number in [0, 1]
      */
     public void update(double progress);
 }

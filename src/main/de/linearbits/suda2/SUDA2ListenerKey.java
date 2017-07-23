@@ -23,7 +23,7 @@ import java.util.Set;
  * 
  * @author Fabian Prasser
  */
-public abstract class SUDA2Listener extends SUDA2Result {
+public abstract class SUDA2ListenerKey extends SUDA2Result {
 
     /**
      * A MSU has been discovered
@@ -32,6 +32,11 @@ public abstract class SUDA2Listener extends SUDA2Result {
      * @param size
      */
     public abstract void keyFound(int row, int size);
+
+    @Override
+    void init(int columns, int maxK) {
+        // Empty by design
+    }
 
     @Override
     void registerKey(Set<SUDA2Item> set) {
@@ -44,11 +49,15 @@ public abstract class SUDA2Listener extends SUDA2Result {
         for (int i = 0; i < set.size(); i++) {
             temp = temp.getProjection(set.get(i).getRows());
         }
-        keyFound(temp.getRows().iterator().next().value, set.size() + 1);
+        int row = temp.getRows().iterator().next().value;
+        int size = set.size() + 1;
+        keyFound(row, size);
     }
 
     @Override
     void registerKey(SUDA2ItemSet set) {
-        keyFound(set.get(0).getRows().iterator().next().value, set.size());
+        int row = set.get(0).getRows().iterator().next().value;
+        int size = set.size();
+        keyFound(row, size);
     }
 }

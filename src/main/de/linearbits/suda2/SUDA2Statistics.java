@@ -24,12 +24,11 @@ import java.util.Set;
  * The result of executing SUDA2
  * 
  * @author Fabian Prasser
- * @author Raffael Bild
  */
 public class SUDA2Statistics extends SUDA2Result {
 
     /** Intermediate scores */
-    private final double[] SUDA_INTERMEDIATE_SCORES;
+    private final double[] intermediateScores;
     /** Num. columns */
     private final int      columns;
     /** Maximal size of an MSU considered */
@@ -64,13 +63,8 @@ public class SUDA2Statistics extends SUDA2Result {
         this.columnKeyTotals = new double[columns];
         this.columnKeyCounts = new double[columns];
         this.sizeDistribution = new double[maxK];
+        this.intermediateScores = new SUDA2Scores(columns, maxK, sdcMicroScores).getIntermediateScores();
 
-        // Calculate intermediate scores
-        this.SUDA_INTERMEDIATE_SCORES = new double[maxK];
-        for (int size = 1; size <= maxK; size++) {
-            double score = sdcMicroScores ? getScoreSdcMicro(size) : getScoreElliot(size);
-            SUDA_INTERMEDIATE_SCORES[size - 1] = score;
-        }
     }
     
     @Override
@@ -200,41 +194,6 @@ public class SUDA2Statistics extends SUDA2Result {
     }
     
     /**
-     * Calculates the score for an MSU as originally described by Elliot et al.
-     * 
-     * @param size
-     * @return
-     */
-    private double getScoreElliot(int size) {
-        final int UPPER = Math.min(maxK, columns - 1);
-        double score = 1d;
-        for (int i = size; i < UPPER; i++) {
-            score *= (double) (columns - i);
-        }
-        return score;
-    }
-
-    /**
-     * Calculates the score for an MSU as implemented by sdcMicro
-     * @param size
-     * @return
-     */
-    private double getScoreSdcMicro(int size) {
-        final int UPPER = columns-size;
-        double score = Math.pow(2d, UPPER) - 1d;
-        for (int j = 2; j <= size; j++) {
-            score *= j;
-        }
-        for (int k = 2; k <= UPPER; k++) {
-            score *= k;
-        }
-        double factorial = 1d;
-        for (int i = 2; i <= columns; i++) {
-            factorial *= (double)i;
-        }
-        return score / factorial;
-    }
-    /**
      * Renders a distribution
      * @param intent
      * @param array
@@ -286,11 +245,16 @@ public class SUDA2Statistics extends SUDA2Result {
     }
     
     @Override
+    void init(int columns, int maxK) {
+        // Empty by design
+    }
+
+    @Override
     void registerKey(Set<SUDA2Item> set) {
         this.numKeys++;
         this.totalKeySize += set.size();
         this.sizeDistribution[set.size() - 1]++;
-        double score = SUDA_INTERMEDIATE_SCORES[set.size() - 1];
+        double score = intermediateScores[set.size() - 1];
         this.totalScore += score;
         for (SUDA2Item item : set) {
             int column = item.getColumn();
@@ -306,7 +270,7 @@ public class SUDA2Statistics extends SUDA2Result {
         this.totalKeySize += set.size() + 1;
         this.sizeDistribution[set.size()]++;
         int size = set.size();
-        double score = SUDA_INTERMEDIATE_SCORES[size];
+        double score = intermediateScores[size];
         this.totalScore += score;
         for (int i = 0; i < size; i++) {
             int column = set.get(i).getColumn();
@@ -325,7 +289,7 @@ public class SUDA2Statistics extends SUDA2Result {
         this.totalKeySize += set.size();
         this.sizeDistribution[set.size() - 1]++;
         int size = set.size();
-        double score = SUDA_INTERMEDIATE_SCORES[size - 1];
+        double score = intermediateScores[size - 1];
         this.totalScore += score;
         for (int i = 0; i < size; i++) {
             int column = set.get(i).getColumn();

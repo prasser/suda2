@@ -26,6 +26,13 @@ import java.util.Set;
 public abstract class SUDA2Result {
 
     /**
+     * Initializer
+     * @param columns
+     * @param maxK
+     */
+    abstract void init(int columns, int maxK);
+    
+    /**
      * Registers an MSU
      * @param set
      */

@@ -60,7 +60,7 @@ public class SUDA2 {
     /** The result */
     private SUDA2Result           result;
     /** Progress listener */
-    private SUDA2ProgressListener progressListener;
+    private SUDA2ListenerProgress progressListener;
     /** Stop flag */
     private boolean               stop;
 
@@ -82,18 +82,19 @@ public class SUDA2 {
      * @param maxKeyLength If maxKeyLength <= 0, maxKeyLength will be set to the number of columns
      * @return
      */
-    public void findKeys(int maxKeyLength, SUDA2Listener listener) {
+    public void getKeys(int maxKeyLength, SUDA2ListenerKey listener) {
 
         // If maxK <= 0, maxK will be set to the number of columns
         maxKeyLength = maxKeyLength > 0 ? maxKeyLength : columns;
 
         // Check
-        if (this.data.length == 0 || this.data[0].length == 0) {
+        if (isEmpty(data)) {
             return;
         }
         
         // Execute
         this.result = listener;
+        this.result.init(this.columns, maxKeyLength);
         this.suda2(maxKeyLength, this.getItems().getItemList(), data.length);
     }
     
@@ -102,8 +103,8 @@ public class SUDA2 {
      * 
      * @return
      */
-    public void findKeys(SUDA2Listener listener) {
-       findKeys(0, listener); 
+    public void getKeys(SUDA2ListenerKey listener) {
+       getKeys(0, listener); 
     }
 
     /**
@@ -151,7 +152,7 @@ public class SUDA2 {
         this.result = new SUDA2Statistics(this.data.length, this.columns, maxKeyLength, sdcMicroScores);
         
         // Check
-        if (this.data.length == 0 || this.data[0].length == 0) {
+        if (isEmpty(this.data)) {
             return (SUDA2Statistics)this.result;
         }
         
@@ -165,10 +166,10 @@ public class SUDA2 {
      * Sets a progress listener
      * @param progressListener
      */
-    public void setProgressListener(SUDA2ProgressListener progressListener) {
+    public void setProgressListener(SUDA2ListenerProgress progressListener) {
         this.progressListener = progressListener;
     }
-        
+
     /**
      * Stops the process
      * @param stop
@@ -176,17 +177,17 @@ public class SUDA2 {
     public void stop() {
         this.stop = true;
     }
-    
+        
     /**
      * Check argument
      * @param data
      */
     private void check(int[][] data) {
-        if (data == null) {
+        if (data == null || (data.length > 0 && data[0] == null)) {
             throw new NullPointerException("Data must not be null");
         }
     }
-
+    
     /**
      * Returns all items
      * @return
@@ -282,10 +283,20 @@ public class SUDA2 {
         for (int index = fromIndex; index < list.size(); index++) {
             SUDA2Item item = list.get(index).get1MSU(referenceRows);
             if (item != null) {
-                result.add(new SUDA2ItemSet(item)); // TODO: Get rid of itemset
+                // TODO: Get rid of itemset
+                result.add(new SUDA2ItemSet(item));
             }
         }
         return result;
+    }
+
+    /**
+     * Check data
+     * @param data
+     * @return
+     */
+    private boolean isEmpty(int[][] data) {
+        return data.length == 0 || data[0].length == 0;
     }
 
     /**
