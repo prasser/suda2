@@ -96,12 +96,50 @@ public class SUDA2 {
         this.result = listener;
         this.suda2(maxKeyLength, this.getItems().getItemList(), data.length);
     }
+    
+    /**
+     * Executes the SUDA2 algorithm, calls the callback for each key found
+     * 
+     * @return
+     */
+    public void findMSUs(SUDA2Listener listener) {
+       findMSUs(0, listener); 
+    }
+
+    /**
+     * Executes the SUDA2 algorithm.
+     * 
+     * @return
+     */
+    public SUDA2Statistics getMSUStatistics() {
+        return getMSUStatistics(0, false);
+    }
+    
+    /**
+     * Executes the SUDA2 algorithm.
+     * @param sdcMicroScores Calculate SUDA scores analogously to sdcMicro
+     * 
+     * @return
+     */
+    public SUDA2Statistics getMSUStatistics(boolean sdcMicroScores) {
+        return getMSUStatistics(0, sdcMicroScores);
+    }
 
     /**
      * Executes the SUDA2 algorithm.
      * 
      * @param maxKeyLength If maxKeyLength <= 0, maxKeyLength will be set to the number of columns
-     * @param sdcMicroScores
+     * @return
+     */
+    public SUDA2Statistics getMSUStatistics(int maxKeyLength) {
+        return getMSUStatistics(maxKeyLength, false);
+    }
+
+    /**
+     * Executes the SUDA2 algorithm.
+     * 
+     * @param maxKeyLength If maxKeyLength <= 0, maxKeyLength will be set to the number of columns
+     * @param sdcMicroScores Calculate SUDA scores analogously to sdcMicro
      * @return
      */
     public SUDA2Statistics getMSUStatistics(int maxKeyLength, boolean sdcMicroScores) {
@@ -123,16 +161,6 @@ public class SUDA2 {
         return (SUDA2Statistics)this.result;
     }
     
-    /**
-     * Executes the SUDA2 algorithm.
-     * 
-     * @param maxKeyLength If maxKeyLength <= 0, maxKeyLength will be set to the number of columns
-     * @return
-     */
-    public SUDA2Statistics getMSUStatistics(int maxKeyLength) {
-        return getMSUStatistics(maxKeyLength, false);
-    }
-
     /**
      * Sets a progress listener
      * @param progressListener
