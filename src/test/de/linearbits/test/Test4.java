@@ -61,7 +61,7 @@ public class Test4 extends AbstractTest{
         };
         print(data);
         System.out.println("\n-----\n"); 
-        SUDA2Result result1 = new SUDA2(data).getMSUStatistics(0);
+        SUDA2Result result1 = new SUDA2(data).getKeyStatistics(0);
         System.out.println(result1.toString());
     }
 }

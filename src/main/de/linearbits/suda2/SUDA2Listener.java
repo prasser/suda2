@@ -31,24 +31,24 @@ public abstract class SUDA2Listener extends SUDA2Result {
      * @param row
      * @param size
      */
-    public abstract void msuFound(int row, int size);
+    public abstract void keyFound(int row, int size);
 
     @Override
-    void registerMSU(Set<SUDA2Item> set) {
+    void registerKey(Set<SUDA2Item> set) {
         throw new UnsupportedOperationException("");
     }
 
     @Override
-    void registerMSU(SUDA2Item item, SUDA2ItemSet set) {
+    void registerKey(SUDA2Item item, SUDA2ItemSet set) {
         SUDA2Item temp = item;
         for (int i = 0; i < set.size(); i++) {
             temp = temp.getProjection(set.get(i).getRows());
         }
-        msuFound(temp.getRows().iterator().next().value, set.size() + 1);
+        keyFound(temp.getRows().iterator().next().value, set.size() + 1);
     }
 
     @Override
-    void registerMSU(SUDA2ItemSet set) {
-        msuFound(set.get(0).getRows().iterator().next().value, set.size());
+    void registerKey(SUDA2ItemSet set) {
+        keyFound(set.get(0).getRows().iterator().next().value, set.size());
     }
 }

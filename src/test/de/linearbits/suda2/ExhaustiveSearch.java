@@ -75,7 +75,7 @@ public class ExhaustiveSearch extends SUDA2Statistics{
      * Performs an exhaustive search for comparison
      * @return
      */
-    public SUDA2Result getMSUStatistics() {
+    public SUDA2Result getKeyStatistics() {
 
         Map<Set<SUDA2Item>, Integer> counts = new HashMap<Set<SUDA2Item>, Integer>();
 
@@ -143,7 +143,7 @@ public class ExhaustiveSearch extends SUDA2Statistics{
 
         SUDA2Result _result = new SUDA2Statistics(this.data.length, this.columns, this.columns, false);
         for (Set<SUDA2Item> msu : result) {
-            _result.registerMSU(msu);
+            _result.registerKey(msu);
         }
         return _result;
     }

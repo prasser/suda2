@@ -41,7 +41,7 @@ public class Test5 extends AbstractTest{
         long time = System.currentTimeMillis();
         SUDA2Result result1 = null;
         for (int i=0; i<5; i++) {
-            result1 = new SUDA2(data).getMSUStatistics(0);
+            result1 = new SUDA2(data).getKeyStatistics(0);
         }
         time = (long)((System.currentTimeMillis() - time) / 5d);
         System.out.println("Time: " + time);

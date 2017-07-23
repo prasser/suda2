@@ -27,7 +27,7 @@ import java.util.Set;
  * @author Raffael Bild
  */
 public class SUDA2Statistics extends SUDA2Result {
-    
+
     /** Intermediate scores */
     private final double[] SUDA_INTERMEDIATE_SCORES;
     /** Num. columns */
@@ -35,9 +35,9 @@ public class SUDA2Statistics extends SUDA2Result {
     /** Maximal size of an MSU considered */
     private final int      maxK;
     /** The number of MSUs */
-    private long           numMSUs    = 0;
+    private long           numKeys      = 0;
     /** The total size of MSUs */
-    private long           totalMSUs    = 0;
+    private long           totalKeySize = 0;
     /** Contributions of each column */
     private final double[] columnKeyContributions;
     /** Contributions of each column */
@@ -47,7 +47,7 @@ public class SUDA2Statistics extends SUDA2Result {
     /** Distribution of sizes of MSUs */
     private final double[] sizeDistribution;
     /** Risk distribution */
-    private double         totalScore = 0d;
+    private double         totalScore   = 0d;
 
     /**
      * Creates a new instance
@@ -83,9 +83,9 @@ public class SUDA2Statistics extends SUDA2Result {
         if (!Arrays.equals(columnKeyCounts, other.columnKeyCounts)) return false;
         if (!Arrays.equals(columnKeyTotals, other.columnKeyTotals)) return false;
         if (maxK != other.maxK) return false;
-        if (numMSUs != other.numMSUs) return false;
+        if (numKeys != other.numKeys) return false;
         if (!Arrays.equals(sizeDistribution, other.sizeDistribution)) return false;
-        if (totalMSUs != other.totalMSUs) return false;
+        if (totalKeySize != other.totalKeySize) return false;
         if (Double.doubleToLongBits(totalScore) != Double.doubleToLongBits(other.totalScore)) return false;
         return true;
     }
@@ -95,7 +95,7 @@ public class SUDA2Statistics extends SUDA2Result {
      * @return
      */
     public double getAverageKeySize() {
-        return (double)this.totalMSUs / (double)this.numMSUs;
+        return (double)this.totalKeySize / (double)this.numKeys;
     }
     
     /**
@@ -111,7 +111,7 @@ public class SUDA2Statistics extends SUDA2Result {
     }
 
     /**
-     * Returns the contributions of each column
+     * Returns the contributions of each column to the total score
      * @return
      */
     public double[] getColumnKeyContributions() {
@@ -129,7 +129,7 @@ public class SUDA2Statistics extends SUDA2Result {
     public double[] getKeySizeDistribution() {
         double[] result = new double[this.sizeDistribution.length];
         for (int i = 0; i < result.length; i++) {
-            result[i] = (double)this.sizeDistribution[i] / (double)this.numMSUs;
+            result[i] = (double)this.sizeDistribution[i] / (double)this.numKeys;
         }
         return result;
     }
@@ -155,7 +155,7 @@ public class SUDA2Statistics extends SUDA2Result {
      * @return
      */
     public long getNumKeys() {
-        return this.numMSUs;
+        return this.numKeys;
     }
     
     @Override
@@ -166,9 +166,9 @@ public class SUDA2Statistics extends SUDA2Result {
         result = prime * result + Arrays.hashCode(columnKeyCounts);
         result = prime * result + Arrays.hashCode(columnKeyTotals);
         result = prime * result + maxK;
-        result = prime * result + (int) (numMSUs ^ (numMSUs >>> 32));
+        result = prime * result + (int) (numKeys ^ (numKeys >>> 32));
         result = prime * result + Arrays.hashCode(sizeDistribution);
-        result = prime * result + (int) (totalMSUs ^ (totalMSUs >>> 32));
+        result = prime * result + (int) (totalKeySize ^ (totalKeySize >>> 32));
         long temp;
         temp = Double.doubleToLongBits(totalScore);
         result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -182,13 +182,13 @@ public class SUDA2Statistics extends SUDA2Result {
         double[] totalsContributions = new double[columns];
         Arrays.fill(totalsContributions, totalScore);        
         double[] totalsSize = new double[maxK];
-        Arrays.fill(totalsSize, numMSUs);
+        Arrays.fill(totalsSize, numKeys);
         
         // Render
         StringBuilder builder = new StringBuilder();
         builder.append("Minimal Sample Uniques\n");
         builder.append(" - Number of columns: ").append(this.columns).append("\n");
-        builder.append(" - Number of keys: ").append(this.numMSUs).append("\n");
+        builder.append(" - Number of keys: ").append(this.numKeys).append("\n");
         builder.append(" - Average size of keys: ").append(this.getAverageKeySize()).append("\n");
         builder.append(" - Column key contributions\n");
         builder.append(toString("     ", columnKeyContributions, totalsContributions));
@@ -286,9 +286,9 @@ public class SUDA2Statistics extends SUDA2Result {
     }
     
     @Override
-    void registerMSU(Set<SUDA2Item> set) {
-        this.numMSUs++;
-        this.totalMSUs += set.size();
+    void registerKey(Set<SUDA2Item> set) {
+        this.numKeys++;
+        this.totalKeySize += set.size();
         this.sizeDistribution[set.size() - 1]++;
         double score = SUDA_INTERMEDIATE_SCORES[set.size() - 1];
         this.totalScore += score;
@@ -301,9 +301,9 @@ public class SUDA2Statistics extends SUDA2Result {
     }
 
     @Override
-    void registerMSU(SUDA2Item item, SUDA2ItemSet set) {
-        this.numMSUs++;
-        this.totalMSUs += set.size() + 1;
+    void registerKey(SUDA2Item item, SUDA2ItemSet set) {
+        this.numKeys++;
+        this.totalKeySize += set.size() + 1;
         this.sizeDistribution[set.size()]++;
         int size = set.size();
         double score = SUDA_INTERMEDIATE_SCORES[size];
@@ -320,9 +320,9 @@ public class SUDA2Statistics extends SUDA2Result {
     }
 
     @Override
-    void registerMSU(SUDA2ItemSet set) {
-        this.numMSUs++;
-        this.totalMSUs += set.size();
+    void registerKey(SUDA2ItemSet set) {
+        this.numKeys++;
+        this.totalKeySize += set.size();
         this.sizeDistribution[set.size() - 1]++;
         int size = set.size();
         double score = SUDA_INTERMEDIATE_SCORES[size - 1];

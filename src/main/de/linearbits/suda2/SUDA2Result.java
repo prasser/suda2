@@ -29,19 +29,19 @@ public abstract class SUDA2Result {
      * Registers an MSU
      * @param set
      */
-    abstract void registerMSU(Set<SUDA2Item> set);
+    abstract void registerKey(Set<SUDA2Item> set);
 
     /**
      * Registers an MSU
      * @param item
      * @param set
      */
-    abstract void registerMSU(SUDA2Item item, SUDA2ItemSet set);
+    abstract void registerKey(SUDA2Item item, SUDA2ItemSet set);
 
     /**
      * Registers an MSU
      * @param set
      */
-    abstract void registerMSU(SUDA2ItemSet set);
+    abstract void registerKey(SUDA2ItemSet set);
 
 }

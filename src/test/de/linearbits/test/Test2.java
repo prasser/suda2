@@ -41,10 +41,10 @@ public class Test2 extends AbstractTest {
         };
         print(data);
         System.out.println("\n-----\n"); 
-        SUDA2Result result1 = new SUDA2(data).getMSUStatistics(0);
+        SUDA2Result result1 = new SUDA2(data).getKeyStatistics(0);
         System.out.println(result1.toString());
         System.out.println("\n-----\n");
-        SUDA2Result result2 = new ExhaustiveSearch(data).getMSUStatistics();
+        SUDA2Result result2 = new ExhaustiveSearch(data).getKeyStatistics();
         System.out.println(result2.toString());
         
         /* sdcMicro

@@ -82,7 +82,7 @@ public class SUDA2 {
      * @param maxKeyLength If maxKeyLength <= 0, maxKeyLength will be set to the number of columns
      * @return
      */
-    public void findMSUs(int maxKeyLength, SUDA2Listener listener) {
+    public void findKeys(int maxKeyLength, SUDA2Listener listener) {
 
         // If maxK <= 0, maxK will be set to the number of columns
         maxKeyLength = maxKeyLength > 0 ? maxKeyLength : columns;
@@ -102,8 +102,8 @@ public class SUDA2 {
      * 
      * @return
      */
-    public void findMSUs(SUDA2Listener listener) {
-       findMSUs(0, listener); 
+    public void findKeys(SUDA2Listener listener) {
+       findKeys(0, listener); 
     }
 
     /**
@@ -111,8 +111,8 @@ public class SUDA2 {
      * 
      * @return
      */
-    public SUDA2Statistics getMSUStatistics() {
-        return getMSUStatistics(0, false);
+    public SUDA2Statistics getKeyStatistics() {
+        return getKeyStatistics(0, false);
     }
     
     /**
@@ -121,8 +121,8 @@ public class SUDA2 {
      * 
      * @return
      */
-    public SUDA2Statistics getMSUStatistics(boolean sdcMicroScores) {
-        return getMSUStatistics(0, sdcMicroScores);
+    public SUDA2Statistics getKeyStatistics(boolean sdcMicroScores) {
+        return getKeyStatistics(0, sdcMicroScores);
     }
 
     /**
@@ -131,8 +131,8 @@ public class SUDA2 {
      * @param maxKeyLength If maxKeyLength <= 0, maxKeyLength will be set to the number of columns
      * @return
      */
-    public SUDA2Statistics getMSUStatistics(int maxKeyLength) {
-        return getMSUStatistics(maxKeyLength, false);
+    public SUDA2Statistics getKeyStatistics(int maxKeyLength) {
+        return getKeyStatistics(maxKeyLength, false);
     }
 
     /**
@@ -142,7 +142,7 @@ public class SUDA2 {
      * @param sdcMicroScores Calculate SUDA scores analogously to sdcMicro
      * @return
      */
-    public SUDA2Statistics getMSUStatistics(int maxKeyLength, boolean sdcMicroScores) {
+    public SUDA2Statistics getKeyStatistics(int maxKeyLength, boolean sdcMicroScores) {
         
         // If maxK <= 0, maxK will be set to the number of columns
         maxKeyLength = maxKeyLength > 0 ? maxKeyLength : columns;
@@ -389,7 +389,7 @@ public class SUDA2 {
             
             // Register 1-MSUs for the original table
             for (SUDA2ItemSet msu : msus) {
-                result.registerMSU(msu);
+                result.registerKey(msu);
             }
         } 
         
@@ -441,7 +441,7 @@ public class SUDA2 {
 
                 // Add MSU
                 if (numRecords == data.length) {
-                    result.registerMSU(referenceItem, candidate);
+                    result.registerKey(referenceItem, candidate);
                 } else {
                     candidate.add(referenceItem);
                     msus.add(candidate);

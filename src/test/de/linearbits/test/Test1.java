@@ -42,7 +42,7 @@ public class Test1 extends AbstractTest {
                 new int[] { 1, 2, 1, 0, 2 }  // 5
         };
 
-        SUDA2Statistics result = new SUDA2(data).getMSUStatistics(0);
+        SUDA2Statistics result = new SUDA2(data).getKeyStatistics(0);
         System.out.println(result.toString());
     }
 }
