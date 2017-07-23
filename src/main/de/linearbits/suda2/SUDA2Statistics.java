@@ -194,7 +194,7 @@ public class SUDA2Statistics extends SUDA2Result {
         builder.append(toString("     ", columnKeyContributions, totalsContributions));
         builder.append(" - Column key average size\n");
         builder.append(toString("     ", columnKeyTotals, columnKeyCounts));
-        builder.append(" - Size distribution\n");
+        builder.append(" - Key size distribution\n");
         builder.append(toString("     ", sizeDistribution, totalsSize));
         return builder.toString();
     }
