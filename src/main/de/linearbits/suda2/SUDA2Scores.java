@@ -16,6 +16,8 @@
  */
 package de.linearbits.suda2;
 
+import java.util.Arrays;
+
 /**
  * A class for calculating SUDA scores
  * 
@@ -24,9 +26,19 @@ package de.linearbits.suda2;
  */
 class SUDA2Scores {
 
+    public static void main(String[] args) {
+        double[] scores = {0.00, 0.00, 1.75, 0.00, 3.25, 0.00, 1.75, 2.75, 0.00, 0.00};
+        long numUniqueRecords = 6;
+        long numNonUniqueRecords = 4;
+        int columns = 4;
+        double disFraction = 0.5d;
+        SUDA2Scores calc = new SUDA2Scores(4, 4, true);
+        System.out.println(Arrays.toString(calc.getScoreDIS(scores, numUniqueRecords, numNonUniqueRecords, columns, disFraction)));
+    }
+    
     /** Intermediate scores */
     private final double[] scores;
-    
+
     /**
      * Creates a new instance
      * @param columns
@@ -43,6 +55,41 @@ class SUDA2Scores {
     }
 
     /**
+     * Returns SUDA DIS scores for the given scores
+     * @param scores
+     * @param numUniqueRecords Number of records in equivalence classes of size 1
+     * @param numNonUniqueRecords Number of records in equivalence classes of size > 1
+     * @param columns
+     * @param disFraction Default: 0.5d
+     * @return
+     */
+    private double[] getScoreDIS(double[] scores, 
+                                 long numUniqueRecords, long numNonUniqueRecords, 
+                                 int columns, double disFraction) {
+        
+        // Prepare
+        double[] result = new double[scores.length];
+        double parameterQ = 1.0d + (8.0d - (double) columns) / 20.0d;
+        disFraction = (double)numUniqueRecords * disFraction / 
+                     ((double)numUniqueRecords * disFraction + (double)numNonUniqueRecords * (1.0d - disFraction));
+
+        // Adjustment factor
+        double adjustmentFactor = 0.0;
+        for (double score : scores) {
+            adjustmentFactor += (score > 0) ? (1.0d / Math.pow(score, parameterQ)) : 0d;
+        }
+        adjustmentFactor = ((double)numUniqueRecords / disFraction - (double)numUniqueRecords) / adjustmentFactor;
+        
+        // Calculate DIS scores
+        for (int i=0; i< scores.length; i++) {
+            result[i] = (scores[i] > 0) ? (1.0d / (1.0d + Math.pow(scores[i], -parameterQ) * adjustmentFactor)) : 0d;
+        }
+        
+        // Return
+        return result;
+    }
+    
+    /**
      * Calculates the score for an MSU as originally described by Elliot et al.
      * @param columns
      * @param maxK
@@ -57,7 +104,7 @@ class SUDA2Scores {
         }
         return score;
     }
-
+    
     /**
      * Calculates the score for an MSU as implemented by sdcMicro
      * @param columns
