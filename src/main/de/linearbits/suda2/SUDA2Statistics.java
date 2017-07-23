@@ -68,7 +68,7 @@ public class SUDA2Statistics extends SUDA2Result {
         // Calculate intermediate scores
         this.SUDA_INTERMEDIATE_SCORES = new double[maxK];
         for (int size = 1; size <= maxK; size++) {
-            double score = sdcMicroScores ? scoreSdcMicro(size) : scoreElliot(size);
+            double score = sdcMicroScores ? getScoreSdcMicro(size) : getScoreElliot(size);
             SUDA_INTERMEDIATE_SCORES[size - 1] = score;
         }
     }
@@ -205,7 +205,7 @@ public class SUDA2Statistics extends SUDA2Result {
      * @param size
      * @return
      */
-    private double scoreElliot(int size) {
+    private double getScoreElliot(int size) {
         final int UPPER = Math.min(maxK, columns - 1);
         double score = 1d;
         for (int i = size; i < UPPER; i++) {
@@ -219,7 +219,7 @@ public class SUDA2Statistics extends SUDA2Result {
      * @param size
      * @return
      */
-    private double scoreSdcMicro(int size) {
+    private double getScoreSdcMicro(int size) {
         final int UPPER = columns-size;
         double score = Math.pow(2d, UPPER) - 1d;
         for (int j = 2; j <= size; j++) {
@@ -263,7 +263,8 @@ public class SUDA2Statistics extends SUDA2Result {
         for (int i = 0; i < array.length; i++) {
             double _value = array[i];
             double _total = totals[i];
-            String value = doubleFormat.format((double) _value / (double) _total).replace(',', '.');
+            double _result = _total != 0d ? _value / _total : 0d;
+            String value = doubleFormat.format(_result).replace(',', '.');
             if (value.equals("0") && _value > 0) value = "~0";
             builder.append(toString(value, VALUE_WIDTH)).append("|");
         }
