@@ -79,6 +79,15 @@ public class SUDA2Item {
         this.rows.add(row);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        // Just for debugging purposes
+        SUDA2Item other = (SUDA2Item) obj;
+        if (column != other.column) return false;
+        if (value != other.value) return false;
+        return true;
+    }
+
     /**
      * Returns this item if it becomes a 1-MSU in the given set of rows,
      * null otherwise
@@ -130,7 +139,7 @@ public class SUDA2Item {
     public long getId() {
         return id;
     }
-
+    
     /**
      * Returns an instance of this item projected to the given rows
      * @param otherRows
@@ -160,7 +169,7 @@ public class SUDA2Item {
         // Return
         return rows.isEmpty() ? null : new SUDA2Item(this.column, this.value, this.id, rows);
     }
-    
+
     /**
      * Returns the rows in which this item is located
      * @return
@@ -185,6 +194,16 @@ public class SUDA2Item {
         return value;
     }
 
+    @Override
+    public int hashCode() {
+        // Just for debugging purposes
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + column;
+        result = prime * result + value;
+        return result;
+    }
+
     /**
      * Returns whether the item is contained in a given row
      * @param row
@@ -199,24 +218,5 @@ public class SUDA2Item {
         StringBuilder builder = new StringBuilder();
         builder.append("(").append(column).append(",").append(value).append(")");
         return builder.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        // Just for debugging purposes
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + column;
-        result = prime * result + value;
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        // Just for debugging purposes
-        SUDA2Item other = (SUDA2Item) obj;
-        if (column != other.column) return false;
-        if (value != other.value) return false;
-        return true;
     }
 }

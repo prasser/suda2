@@ -11,16 +11,6 @@ import java.util.List;
 public class AbstractTest {
 
     /**
-     * Prints the data
-     * @param data
-     */
-    protected static void print(int[][] data) {
-        for (int[] row : data) {
-            System.out.println(" - " + Arrays.toString(row));
-        }
-    }
-
-    /**
      * Loads data from a file
      * @param file
      * @return
@@ -48,6 +38,16 @@ public class AbstractTest {
             if (reader != null) {
                 reader.close();
             }
+        }
+    }
+
+    /**
+     * Prints the data
+     * @param data
+     */
+    protected static void print(int[][] data) {
+        for (int[] row : data) {
+            System.out.println(" - " + Arrays.toString(row));
         }
     }
 }

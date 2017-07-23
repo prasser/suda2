@@ -73,42 +73,6 @@ public class SUDA2Statistics extends SUDA2Result {
         }
     }
     
-    /**
-     * Calculates the score for an MSU as originally described by Elliot et al.
-     * 
-     * @param size
-     * @return
-     */
-    private double scoreElliot(int size) {
-        final int UPPER = Math.min(maxK, columns - 1);
-        double score = 1d;
-        for (int i = size; i < UPPER; i++) {
-            score *= (double) (columns - i);
-        }
-        return score;
-    }
-    
-    /**
-     * Calculates the score for an MSU as implemented by sdcMicro
-     * @param size
-     * @return
-     */
-    private double scoreSdcMicro(int size) {
-        final int UPPER = columns-size;
-        double score = Math.pow(2d, UPPER) - 1d;
-        for (int j = 2; j <= size; j++) {
-            score *= j;
-        }
-        for (int k = 2; k <= UPPER; k++) {
-            score *= k;
-        }
-        double factorial = 1d;
-        for (int i = 2; i <= columns; i++) {
-            factorial *= (double)i;
-        }
-        return score / factorial;
-    }
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -125,7 +89,7 @@ public class SUDA2Statistics extends SUDA2Result {
         if (Double.doubleToLongBits(totalScore) != Double.doubleToLongBits(other.totalScore)) return false;
         return true;
     }
-
+    
     /**
      * Returns the average key size
      * @return
@@ -133,7 +97,7 @@ public class SUDA2Statistics extends SUDA2Result {
     public double getAverageKeySize() {
         return (double)this.totalMSUs / (double)this.numMSUs;
     }
-
+    
     /**
      * Returns the average key size per column
      * @return
@@ -157,7 +121,7 @@ public class SUDA2Statistics extends SUDA2Result {
         }
         return result;
     }
-    
+
     /**
      * Returns the distribution of the sizes of MSUs
      * @return
@@ -169,7 +133,7 @@ public class SUDA2Statistics extends SUDA2Result {
         }
         return result;
     }
-    
+
     /**
      * Returns the maximal size which has been searched for
      * @return
@@ -210,7 +174,7 @@ public class SUDA2Statistics extends SUDA2Result {
         result = prime * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
-
+    
     @Override
     public String toString() {
         
@@ -233,6 +197,42 @@ public class SUDA2Statistics extends SUDA2Result {
         builder.append(" - Size distribution\n");
         builder.append(toString("     ", sizeDistribution, totalsSize));
         return builder.toString();
+    }
+    
+    /**
+     * Calculates the score for an MSU as originally described by Elliot et al.
+     * 
+     * @param size
+     * @return
+     */
+    private double scoreElliot(int size) {
+        final int UPPER = Math.min(maxK, columns - 1);
+        double score = 1d;
+        for (int i = size; i < UPPER; i++) {
+            score *= (double) (columns - i);
+        }
+        return score;
+    }
+
+    /**
+     * Calculates the score for an MSU as implemented by sdcMicro
+     * @param size
+     * @return
+     */
+    private double scoreSdcMicro(int size) {
+        final int UPPER = columns-size;
+        double score = Math.pow(2d, UPPER) - 1d;
+        for (int j = 2; j <= size; j++) {
+            score *= j;
+        }
+        for (int k = 2; k <= UPPER; k++) {
+            score *= k;
+        }
+        double factorial = 1d;
+        for (int i = 2; i <= columns; i++) {
+            factorial *= (double)i;
+        }
+        return score / factorial;
     }
     /**
      * Renders a distribution
