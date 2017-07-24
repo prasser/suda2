@@ -16,8 +16,6 @@
  */
 package de.linearbits.suda2;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
-
 /**
  * Each itemset is a concrete value for a concrete attribute
  * 
@@ -36,13 +34,13 @@ public class SUDA2Item {
     }
 
     /** Column */
-    private final int            column;
+    private final int         column;
     /** Unique id */
-    private final long           id;
+    private final long        id;
     /** Value */
-    private final int            value;
+    private final int         value;
     /** Support rows */
-    private final IntOpenHashSet rows;
+    private final SUDA2IntSet rows;
 
     /**
      * Creates a new item
@@ -54,7 +52,7 @@ public class SUDA2Item {
         this.column = column;
         this.value = value;
         this.id = id;
-        this.rows = new IntOpenHashSet();
+        this.rows = new SUDA2IntSet();
     }
     
     /**
@@ -64,7 +62,7 @@ public class SUDA2Item {
      * @param id
      * @param rows
      */
-    SUDA2Item(int column, int value, long id, IntOpenHashSet rows) {
+    SUDA2Item(int column, int value, long id, SUDA2IntSet rows) {
         this.column = column;
         this.value = value;
         this.id = id;
@@ -94,28 +92,25 @@ public class SUDA2Item {
      * @param otherRows
      * @return
      */
-    public SUDA2Item get1MSU(IntOpenHashSet otherRows) {
+    public SUDA2Item get1MSU(SUDA2IntSet otherRows) {
 
         // Smaller set is rows1
-        int size1 = this.rows.size();
-        int size2 = otherRows.size();
-        IntOpenHashSet rows1 = size1 < size2 ? this.rows : otherRows;
-        IntOpenHashSet rows2 = size1 < size2 ? otherRows : this.rows;
+        int size1 = this.rows.size;
+        int size2 = otherRows.size;
+        SUDA2IntSet rows1 = size1 < size2 ? this.rows : otherRows;
+        SUDA2IntSet rows2 = size1 < size2 ? otherRows : this.rows;
         
         // Check if they intersect with exactly one support row
         boolean supportRowFound = false;
-        final int [] keys = rows1.keys;
-        final boolean [] allocated = rows1.allocated;
-        for (int i = 0; i < allocated.length; i++) {
-            if (allocated[i]) {
-                int row = keys[i];
-                if (rows2.contains(row)) {
-                    // More than one support row
-                    if (supportRowFound) {
-                        return null;
-                    } else {
-                        supportRowFound = true;
-                    }
+        int[] buckets = rows1.buckets;
+        for (int i = 0; i < buckets.length; i++) {
+            int row = buckets[i];
+            if (row != 0 && rows2.contains(row)) {
+                // More than one support row
+                if (supportRowFound) {
+                    return null;
+                } else {
+                    supportRowFound = true;
                 }
             }
         }
@@ -145,36 +140,33 @@ public class SUDA2Item {
      * @param otherRows
      * @return
      */
-    public SUDA2Item getProjection(IntOpenHashSet otherRows) {
+    public SUDA2Item getProjection(SUDA2IntSet otherRows) {
 
         // Smaller set is set 1
-        int size1 = this.rows.size();
-        int size2 = otherRows.size();
-        IntOpenHashSet rows1 = size1 < size2 ? this.rows : otherRows;
-        IntOpenHashSet rows2 = size1 < size2 ? otherRows : this.rows;
+        int size1 = this.rows.size;
+        int size2 = otherRows.size;
+        SUDA2IntSet rows1 = size1 < size2 ? this.rows : otherRows;
+        SUDA2IntSet rows2 = size1 < size2 ? otherRows : this.rows;
         
         // Intersect support rows with those provided
-        IntOpenHashSet rows = new IntOpenHashSet();
-        final int [] keys = rows1.keys;
-        final boolean [] allocated = rows1.allocated;
-        for (int i = 0; i < allocated.length; i++) {
-            if (allocated[i]) {
-                int row = keys[i];
-                if (rows2.contains(row)) {
-                    rows.add(row);
-                }
+        SUDA2IntSet rows = new SUDA2IntSet();
+        final int[] buckets = rows1.buckets;
+        for (int i = 0; i < buckets.length; i++) {
+            int row = buckets[i];
+            if (row != 0 && rows2.contains(row)) {
+                rows.add(row);
             }
         }
         
         // Return
-        return rows.isEmpty() ? null : new SUDA2Item(this.column, this.value, this.id, rows);
+        return rows.size == 0 ? null : new SUDA2Item(this.column, this.value, this.id, rows);
     }
 
     /**
      * Returns the rows in which this item is located
      * @return
      */
-    public IntOpenHashSet getRows() {
+    public SUDA2IntSet getRows() {
         return this.rows;
     }
 
@@ -183,7 +175,7 @@ public class SUDA2Item {
      * @return
      */
     public int getSupport() {
-        return this.rows.size();
+        return this.rows.size;
     }
 
     /**

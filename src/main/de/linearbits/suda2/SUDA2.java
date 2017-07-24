@@ -21,8 +21,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-import com.carrotsearch.hppc.IntOpenHashSet;
-
 /**
  * This class implements the SUDA2 algorithm
  * 
@@ -211,7 +209,7 @@ public class SUDA2 {
         // Collect all items and their support rows
         SUDA2IndexedItemSet items = new SUDA2IndexedItemSet();
         SUDA2Groupify groupify = new SUDA2Groupify(data.length);
-        int index = 0;
+        int index = 1; // Value 0 is reserved for empty entries in SUDA2IntSet
         for (int[] row : data) {
             if (!groupify.canBeIgnored(row)) {
                 for (int column = 0; column < columns; column++) {
@@ -238,7 +236,7 @@ public class SUDA2 {
         // For all items within the given range
         SUDA2IndexedItemSet items = new SUDA2IndexedItemSet();
         List<SUDA2Item> list = itemList.getList();
-        IntOpenHashSet referenceRows = reference.getRows();
+        SUDA2IntSet referenceRows = reference.getRows();
         for (int index = fromIndex; index < list.size(); index++) {
             
             // Extract item of interest
@@ -296,7 +294,7 @@ public class SUDA2 {
         // For all items within the given range
         List<SUDA2ItemSet> result = new ArrayList<>();
         List<SUDA2Item> list = itemList.getList();
-        IntOpenHashSet referenceRows = reference.getRows();
+        SUDA2IntSet referenceRows = reference.getRows();
         for (int index = fromIndex; index < list.size(); index++) {
             SUDA2Item item = list.get(index).get1MSU(referenceRows);
             if (item != null) {
@@ -345,13 +343,13 @@ public class SUDA2 {
         //     than that the reference item is contained
         
         // Find item with smallest support 
-        IntOpenHashSet rows = null;
+        SUDA2IntSet rows = null;
         SUDA2Item pivot = null;
         int candidateSize = candidate.size();
         for (int i = 0; i < candidateSize; i++) {
             SUDA2Item item = candidate.get(i);
-            IntOpenHashSet _rows = currentList.getItem(item.getId()).getRows();
-            if (rows == null || _rows.size() < rows.size()) {
+            SUDA2IntSet _rows = currentList.getItem(item.getId()).getRows();
+            if (rows == null || _rows.size < rows.size) {
                 rows = _rows;
                 pivot = item;
             }
@@ -377,11 +375,10 @@ public class SUDA2 {
         });
         
         // And search for the special row
-        final int [] keys = rows.keys;
-        final boolean [] allocated = rows.allocated;
-        outer: for (int i = 0; i < allocated.length; i++) {
-            if (allocated[i]) {
-                int[] row = data[keys[i]];
+        final int [] buckets = rows.buckets;
+        outer: for (int i = 0; i < buckets.length; i++) {
+            if (buckets[i] != 0) {
+                int[] row = data[buckets[i] - 1];
                 for (SUDA2Item item : items) {
                     if (!item.isContained(row)) {
                         continue outer;
@@ -454,7 +451,7 @@ public class SUDA2 {
             if (upperLimit > 1) {
                 msus_i = suda2(upperLimit,
                                getItems(currentList, referenceItem, index).getItemList(),
-                               referenceItem.getRows().size());
+                               referenceItem.getRows().size);
             } else {
                 msus_i = getMSUs(currentList, referenceItem, index);
             }

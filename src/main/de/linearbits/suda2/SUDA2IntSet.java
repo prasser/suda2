@@ -1,9 +1,26 @@
+/*
+ * SUDA2: An implementation of the SUDA2 algorithm for Java
+ * Copyright 2017 Fabian Prasser
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package de.linearbits.suda2;
 
-import java.util.Random;
-
-import com.carrotsearch.hppc.IntOpenHashSet;
-
+/**
+ * A very basic integer set using murmur hashing and linear probing.
+ * 
+ * @author Fabian Prasser
+ */
 public class SUDA2IntSet {
     
     /** Default */
@@ -12,28 +29,24 @@ public class SUDA2IntSet {
     /** Default */
     private static final int   DEFAULT_INITIAL_CAPACITY = 8;
 
-    public static void main(String[] args) {
-        
-        Random random = new Random(0xDEADBEEF);
-        long time = System.currentTimeMillis();
-        for (int r=0; r<100; r++) {
-            SUDA2IntSet set = new SUDA2IntSet();
-            for (int k=0; k<1000000; k++) {
-                set.add(random.nextInt() + 1);
-            }
-        }
-        System.out.println("OWN: " + (System.currentTimeMillis() - time));
+    /**
+     * Returns a seed for this specific collection
+     * @return
+     */
+    private static final int getSeed() {
+        long seed = System.nanoTime();
+        seed = (seed ^ (seed >>> 32)) * 0x4cd6944c5cc20b6dL;
+        seed = (seed ^ (seed >>> 29)) * 0xfc12c5b19d3259e9L;
+        return (int) (seed ^ (seed >>> 32));
+    }
 
-        random = new Random(0xDEADBEEF);
-        time = System.currentTimeMillis();
-        for (int r=0; r<100; r++) {
-            IntOpenHashSet set = new IntOpenHashSet();
-            for (int k=0; k<1000000; k++) {
-                set.add(random.nextInt() + 1);
-            }
-        }
-        System.out.println("HPPC: " + (System.currentTimeMillis() - time));
-        
+    /**
+     * Returns the threshold
+     * @param size
+     * @return
+     */
+    private static final int getThreshold(int size) {
+        return (int) Math.ceil(size * DEFAULT_LOAD_FACTOR);
     }
 
     /** Seed */
@@ -47,93 +60,90 @@ public class SUDA2IntSet {
 
     /** Current number of elements. */
     public int        size;
-
+    
     /** The last element added to this set */
     public int        last;
-
+   
+    /**
+     * Creates a new instance
+     */
     public SUDA2IntSet() {
         this.buckets = new int[DEFAULT_INITIAL_CAPACITY];
         this.threshold = getThreshold(this.buckets.length);
     }
-    
+
+    /**
+     * Adds a new value to the set
+     * @param value
+     */
     public void add(int value) {
         size += this.add(this.buckets, value, hashcode(value)) ? 1 : 0;
         if (size == threshold) {
             this.rehash();
         }
     }
-   
-    public boolean contains(int value) {
-        
-        final int mask = (buckets.length) - 1;
-        final int slot = (hashcode(value) & mask);
-
-        for (int i = slot; i < buckets.length; i ++) {
-            if (buckets[i] == value) {
-                return false;
-            } else if (buckets[i] == 0) {
-                buckets[i] = value;
-                return true;
-            }
-        }
-
-        for (int i = 0; i < slot; i ++) {
-            if (buckets[i] == value) {
-                return false;
-            } else if (buckets[i] == 0) {
-                buckets[i] = value;
-                return true;
-            }
-        }
-        
-        throw new IllegalStateException("Element not added");
-    }
-
-    private boolean add(int[] buckets, int value, int hash) {
-        
-        this.last = value;
-        final int mask = (buckets.length) - 1;
-        final int slot = (hash & mask);
-
-        for (int i = slot; i < buckets.length; i ++) {
-            if (buckets[i] == value) {
-                return false;
-            } else if (buckets[i] == 0) {
-                buckets[i] = value;
-                return true;
-            }
-        }
-
-        for (int i = 0; i < slot; i ++) {
-            if (buckets[i] == value) {
-                return false;
-            } else if (buckets[i] == 0) {
-                buckets[i] = value;
-                return true;
-            }
-        }
-        
-        throw new IllegalStateException("Element not added");
-    }
 
     /**
-     * Returns a seed for this specific collection
+     * Returns whether the given value is contained
+     * @param value
      * @return
      */
-    private final int getSeed() {
-        long seed = System.nanoTime();
-        seed = (seed ^ (seed >>> 32)) * 0x4cd6944c5cc20b6dL;
-        seed = (seed ^ (seed >>> 29)) * 0xfc12c5b19d3259e9L;
-        return (int) (seed ^ (seed >>> 32));
+    public boolean contains(int value) {
+        
+        final int mask = buckets.length - 1;
+        final int slot = hashcode(value) & mask;
+
+        for (int i = slot; i < buckets.length; i ++) {
+            if (buckets[i] == value) {
+                return true;
+            } else if (buckets[i] == 0) {
+                return false;
+            }
+        }
+
+        for (int i = 0; i < slot; i ++) {
+            if (buckets[i] == value) {
+                return true;
+            } else if (buckets[i] == 0) {
+                return false;
+            }
+        }
+        
+        throw new IllegalStateException("Illegal state. This should not happen.");
     }
     
     /**
-     * Returns the threshold
-     * @param size
+     * Adds a value to the set
+     * @param buckets
+     * @param value
+     * @param hash
      * @return
      */
-    private int getThreshold(int size) {
-        return (int) Math.ceil(size * DEFAULT_LOAD_FACTOR);
+    private boolean add(int[] buckets, int value, int hash) {
+        
+        this.last = value;
+        final int mask = buckets.length - 1;
+        final int slot = hash & mask;
+        
+        for (int i = slot; i < buckets.length; i ++) {
+            if (buckets[i] == value) {
+                return false;
+            } else if (buckets[i] == 0) {
+                buckets[i] = value;
+                return true;
+            }
+        }
+
+        for (int i = 0; i < slot; i ++) {
+            if (buckets[i] == value) {
+                return false;
+            } else if (buckets[i] == 0) {
+                buckets[i] = value;
+                return true;
+            }
+        }
+        
+        throw new IllegalStateException("Illegal state. This should not happen.");
     }
     
     /**
@@ -141,12 +151,15 @@ public class SUDA2IntSet {
      * @param value
      * @return
      */
-    private final int hashcode(int value) {
+    private int hashcode(int value) {
         value = (value ^ (value >>> 16)) * 0x85ebca6b;
         value = (value ^ (value >>> 13)) * 0xc2b2ae35;
         return (value ^ (value >>> 16)) ^ seed;
     }
 
+    /**
+     * Rehashes the set
+     */
     private void rehash() {
         
         int[] _buckets = new int[buckets.length << 1];

@@ -49,15 +49,15 @@ public abstract class SUDA2ListenerKey extends SUDA2Result {
         for (int i = 0; i < set.size(); i++) {
             temp = temp.getProjection(set.get(i).getRows());
         }
-        int row = temp.getRows().iterator().next().value;
+        int row = temp.getRows().last;
         int size = set.size() + 1;
-        keyFound(row, size);
+        keyFound(row - 1, size);
     }
 
     @Override
     void registerKey(SUDA2ItemSet set) {
-        int row = set.get(0).getRows().iterator().next().value;
+        int row = set.get(0).getRows().last;
         int size = set.size();
-        keyFound(row, size);
+        keyFound(row - 1, size);
     }
 }
