@@ -25,15 +25,18 @@ import java.util.Arrays;
  * @author Raffael Bild
  */
 class SUDA2Scores {
+    
+    private static final double[] SCORES = {7d, 0d, 0d, 1.75d, 0d, 3.25d, 0d, 1.75d, 2.75d, 0d, 0d};
+    private static final double[] DIS = {0.028038903d, 0d, 0d, 0.005435918d, 0d, 0.011357785d, 0d, 0.005435918d, 0.009313862d, 0d, 0d};
 
     public static void main(String[] args) {
-        double[] scores = {0.00, 0.00, 1.75, 0.00, 3.25, 0.00, 1.75, 2.75, 0.00, 0.00};
         long numUniqueRecords = 6;
         long numNonUniqueRecords = 4;
         int columns = 4;
         double disFraction = 0.5d;
         SUDA2Scores calc = new SUDA2Scores(4, 4, true);
-        System.out.println(Arrays.toString(calc.getScoreDIS(scores, numUniqueRecords, numNonUniqueRecords, columns, disFraction)));
+        System.out.println(Arrays.toString(calc.getScoreDIS(SCORES, numUniqueRecords, numNonUniqueRecords, columns, disFraction)));
+        System.out.println(Arrays.toString(DIS));
     }
     
     /** Intermediate scores */
