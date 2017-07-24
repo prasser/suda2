@@ -1,0 +1,11 @@
+Residence;Gender;Education_level;Labor_status
+Urban;Female;Secondary_incomplete;Employed
+Urban;Female;Secondary_incomplete;Employed
+Urban;Female;Primary_incomplete;Non-LF
+Urban;Male;Secondary_complete;Employed
+Rural;Female;Secondary_complete;Unemployed
+Urban;Male;Secondary_complete;Employed
+Urban;Female;Primary_complete;Non-LF
+Urban;Male;Post-secondary;Unemployed
+Urban;Female;Secondary_incomplete;Non-LF
+Urban;Female;Secondary_incomplete;Non-LF
