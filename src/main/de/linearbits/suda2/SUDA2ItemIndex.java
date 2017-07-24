@@ -127,7 +127,7 @@ public class SUDA2ItemIndex {
     }
     
     /**
-     * Adds a new value to the set
+     * Adds a new entry to the map
      * @param key
      * @param value
      */
@@ -203,7 +203,7 @@ public class SUDA2ItemIndex {
     }
 
     /**
-     * Rehashes the set
+     * Rehashes the map
      */
     private void rehash() {
         
