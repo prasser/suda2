@@ -165,7 +165,7 @@ public class SUDA2Item {
                 }
             }
         }
-
+        
         // Return
         return rows.isEmpty() ? null : new SUDA2Item(this.column, this.value, this.id, rows);
     }
