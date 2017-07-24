@@ -19,11 +19,7 @@ package de.linearbits.suda2;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-
-import com.carrotsearch.hppc.LongObjectOpenHashMap;
-import com.carrotsearch.hppc.cursors.ObjectCursor;
 
 /**
  * A set of items
@@ -33,7 +29,7 @@ import com.carrotsearch.hppc.cursors.ObjectCursor;
 public class SUDA2IndexedItemSet {
 
     /** The underlying map */
-    private final LongObjectOpenHashMap<SUDA2Item> items = new LongObjectOpenHashMap<SUDA2Item>();
+    private final SUDA2ItemIndex items = new SUDA2ItemIndex();
     
     /**
      * Adds an item
@@ -62,9 +58,10 @@ public class SUDA2IndexedItemSet {
 
         // Create list and sort by support
         List<SUDA2Item> list = new ArrayList<SUDA2Item>();
-        Iterator<ObjectCursor<SUDA2Item>> iter = items.values().iterator();
-        while (iter.hasNext()) {
-            list.add(iter.next().value);
+        for (SUDA2Item item : this.items.values) {
+            if (item != null) {
+                list.add(item);
+            }
         }
         Collections.sort(list, new Comparator<SUDA2Item>() {
             @Override
@@ -86,13 +83,13 @@ public class SUDA2IndexedItemSet {
      */
     public SUDA2Item getOrCreateItem(int column, int value) {
         long id = SUDA2Item.getId(column, value);
-        SUDA2Item item;
-        if (items.containsKey(id)) {
-            item = items.lget(); 
+        int slot = items.getSlot(id);
+        if (slot >= 0) {
+            return items.values[slot];
         } else {
-            item = new SUDA2Item(column, value, id);
-            items.put(id, item);
+            SUDA2Item item = new SUDA2Item(column, value, id);
+            items.putSlot(id, -(slot + 1), item);
+            return item;
         }
-        return item;
     }
 }

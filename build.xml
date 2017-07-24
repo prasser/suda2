@@ -6,18 +6,6 @@
 	<!-- defines the version number -->
 	<property name="version" value="0.0.1" />
 
-	<!-- defines the to be included libraries -->
-	<fileset id="lib.jars" dir="lib">
-		<or>
-			<filename name="**/hppc-0.6.0.jar" />
-		</or>
-	</fileset>
-
-	<fileset id="gui.jars" dir="lib">
-		<or>
-		</or>
-	</fileset>
-
 	<target name="release" depends="jars, javadoc">
 	</target>
 
@@ -26,17 +14,11 @@
 	</target>
 
 	<target name="end-clean">
-		<delete dir="build/lib" failonerror="true" />
-		<delete dir="build/gui" failonerror="true" />
-		<delete dir="build/extLibs" failonerror="true" />
 		<delete dir="build" failonerror="true" />
 	</target>
 
 	<target name="prepare" depends="clean">
 		<mkdir dir="build" />
-		<mkdir dir="build/extLibs" />
-		<mkdir dir="build/lib" />
-		<mkdir dir="build/gui" />
 		<mkdir dir="jars" />
 	</target>
 
@@ -51,13 +33,7 @@
 	<target name="javadoc-api" depends="clean-javadoc">
 		<javadoc destdir="doc" source="1.7" notree="false" nonavbar="false" noindex="false" splitindex="true" access="public" use="true" author="Fabian Prasser" version="${version}" windowtitle="SUDA2" private="false" failonerror="true" additionalparam="-notimestamp">
 			<classpath>
-				<fileset refid="lib.jars" />
 				<path path="src/main" />
-				<fileset dir="lib">
-					<or>
-						<filename name="**/libsvm.jar" />
-					</or>
-				</fileset>
 			</classpath>
 			<packageset dir="src/main/" defaultexcludes="yes">
 			</packageset>
@@ -69,29 +45,16 @@
 	</target>
 
 	<target name="compile" depends="prepare" description="compile the source ">
-		<javac includeantruntime="false" srcdir="src/main/" destdir="build/lib" source="1.7">
+		<javac includeantruntime="false" srcdir="src/main/" destdir="build" source="1.7">
 			<classpath>
-				<fileset refid="lib.jars" />
 				<path path="src/main" />
-				<fileset dir="lib">
-					<or>
-						<filename name="**/hppc-0.6.0.jar" />
-					</or>
-				</fileset>
 			</classpath>
 		</javac>
 	</target>
 
-	<target name="buildExternalLibs">
-		<jar jarfile="build/extLibs/lib.jar">
-			<zipgroupfileset refid="lib.jars" />
-		</jar>
-	</target>
-
-	<target name="jar-libs" depends="compile, buildExternalLibs">
+	<target name="jar-libs" depends="compile">
 		<jar destfile="jars/suda2-${version}.jar">
-			<fileset dir="build/lib" defaultexcludes="no" />
-			<zipfileset src="build/extLibs/lib.jar" excludes="META-INF/*.RSA,META-INF/*.SF,META-INF/*.DSA" />
+			<fileset dir="build" defaultexcludes="no" />
 		</jar>
 	</target>
 
@@ -102,7 +65,7 @@
 	</target>
 
 
-	<target name="jars" depends="jar-libs, jar-docs">
+	<target name="jars" depends="jar-docs, jar-libs">
 		<antcall target="end-clean" />
 	</target>
 </project>

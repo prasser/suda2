@@ -33,8 +33,8 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../de/linearbits/suda2/SUDA2IndexedItemSet.html" title="class in de.linearbits.suda2"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../de/linearbits/suda2/SUDA2ItemList.html" title="class in de.linearbits.suda2"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../de/linearbits/suda2/SUDA2ItemIndex.html" title="class in de.linearbits.suda2"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?de/linearbits/suda2/SUDA2Item.html" target="_top">Frames</a></li>
@@ -147,7 +147,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></code></td>
-<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2Item.html#get1MSU(com.carrotsearch.hppc.IntOpenHashSet)">get1MSU</a></strong>(com.carrotsearch.hppc.IntOpenHashSet&nbsp;otherRows)</code>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2Item.html#get1MSU(de.linearbits.suda2.SUDA2IntSet)">get1MSU</a></strong>(<a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;otherRows)</code>
 <div class="block">Returns this item if it becomes a 1-MSU in the given set of rows,
  null otherwise</div>
 </td>
@@ -173,12 +173,12 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></code></td>
-<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2Item.html#getProjection(com.carrotsearch.hppc.IntOpenHashSet)">getProjection</a></strong>(com.carrotsearch.hppc.IntOpenHashSet&nbsp;otherRows)</code>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2Item.html#getProjection(de.linearbits.suda2.SUDA2IntSet)">getProjection</a></strong>(<a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;otherRows)</code>
 <div class="block">Returns an instance of this item projected to the given rows</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>com.carrotsearch.hppc.IntOpenHashSet</code></td>
+<td class="colFirst"><code><a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></code></td>
 <td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2Item.html#getRows()">getRows</a></strong>()</code>
 <div class="block">Returns the rows in which this item is located</div>
 </td>
@@ -276,13 +276,26 @@ extends java.lang.Object</pre>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>row</code> - </dd></dl>
 </li>
 </ul>
-<a name="get1MSU(com.carrotsearch.hppc.IntOpenHashSet)">
+<a name="equals(java.lang.Object)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>equals</h4>
+<pre>public&nbsp;boolean&nbsp;equals(java.lang.Object&nbsp;obj)</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>equals</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
+</dl>
+</li>
+</ul>
+<a name="get1MSU(de.linearbits.suda2.SUDA2IntSet)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>get1MSU</h4>
-<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;get1MSU(com.carrotsearch.hppc.IntOpenHashSet&nbsp;otherRows)</pre>
+<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;get1MSU(<a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;otherRows)</pre>
 <div class="block">Returns this item if it becomes a 1-MSU in the given set of rows,
  null otherwise</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>otherRows</code> - </dd>
@@ -311,13 +324,13 @@ extends java.lang.Object</pre>
 <dl><dt><span class="strong">Returns:</span></dt><dd></dd></dl>
 </li>
 </ul>
-<a name="getProjection(com.carrotsearch.hppc.IntOpenHashSet)">
+<a name="getProjection(de.linearbits.suda2.SUDA2IntSet)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getProjection</h4>
-<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;getProjection(com.carrotsearch.hppc.IntOpenHashSet&nbsp;otherRows)</pre>
+<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;getProjection(<a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;otherRows)</pre>
 <div class="block">Returns an instance of this item projected to the given rows</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>otherRows</code> - </dd>
 <dt><span class="strong">Returns:</span></dt><dd></dd></dl>
@@ -329,7 +342,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getRows</h4>
-<pre>public&nbsp;com.carrotsearch.hppc.IntOpenHashSet&nbsp;getRows()</pre>
+<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;getRows()</pre>
 <div class="block">Returns the rows in which this item is located</div>
 <dl><dt><span class="strong">Returns:</span></dt><dd></dd></dl>
 </li>
@@ -356,6 +369,19 @@ extends java.lang.Object</pre>
 <dl><dt><span class="strong">Returns:</span></dt><dd></dd></dl>
 </li>
 </ul>
+<a name="hashCode()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>hashCode</h4>
+<pre>public&nbsp;int&nbsp;hashCode()</pre>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>hashCode</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
+</dl>
+</li>
+</ul>
 <a name="isContained(int[])">
 <!--   -->
 </a>
@@ -371,39 +397,13 @@ extends java.lang.Object</pre>
 <a name="toString()">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>toString</h4>
 <pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
 <dl>
 <dt><strong>Overrides:</strong></dt>
 <dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
-</dl>
-</li>
-</ul>
-<a name="hashCode()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>hashCode</h4>
-<pre>public&nbsp;int&nbsp;hashCode()</pre>
-<dl>
-<dt><strong>Overrides:</strong></dt>
-<dd><code>hashCode</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
-</dl>
-</li>
-</ul>
-<a name="equals(java.lang.Object)">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>equals</h4>
-<pre>public&nbsp;boolean&nbsp;equals(java.lang.Object&nbsp;obj)</pre>
-<dl>
-<dt><strong>Overrides:</strong></dt>
-<dd><code>equals</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 </dl>
 </li>
 </ul>
@@ -432,8 +432,8 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../de/linearbits/suda2/SUDA2IndexedItemSet.html" title="class in de.linearbits.suda2"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../de/linearbits/suda2/SUDA2ItemList.html" title="class in de.linearbits.suda2"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../de/linearbits/suda2/SUDA2ItemIndex.html" title="class in de.linearbits.suda2"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?de/linearbits/suda2/SUDA2Item.html" target="_top">Frames</a></li>

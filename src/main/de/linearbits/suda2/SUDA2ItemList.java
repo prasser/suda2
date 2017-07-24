@@ -18,8 +18,6 @@ package de.linearbits.suda2;
 
 import java.util.List;
 
-import com.carrotsearch.hppc.LongObjectOpenHashMap;
-
 /**
  * A list of items. It may be indexed dynamically.
  * 
@@ -29,9 +27,9 @@ import com.carrotsearch.hppc.LongObjectOpenHashMap;
 public class SUDA2ItemList {
 
     /** The actual list */
-    private final List<SUDA2Item>            list;
+    private final List<SUDA2Item> list;
     /** The index */
-    private LongObjectOpenHashMap<SUDA2Item> index = null;
+    private SUDA2ItemIndex        index = null;
 
     /**
      * Creates a new instance
@@ -56,7 +54,7 @@ public class SUDA2ItemList {
      */
     public SUDA2Item getItem(long id) {
         if (index == null) {
-            index = new LongObjectOpenHashMap<>();
+            index = new SUDA2ItemIndex();
             for (SUDA2Item item : list) {
                 index.put(item.getId(), item);
             }
