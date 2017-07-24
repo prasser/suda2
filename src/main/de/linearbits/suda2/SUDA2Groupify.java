@@ -189,55 +189,13 @@ public class SUDA2Groupify {
      *
      * @param capacity The capacity
      */
-    public SUDA2Groupify(int capacity) {
+    SUDA2Groupify(int capacity) {
         // Initialize
         this.elements = 0;
         this.buckets = new Entry[calculateCapacity(capacity)];
         this.threshold = calculateThreshold(buckets.length, loadFactor);
     }
     
-    /**
-     * Adds a record
-     * @param record
-     */
-    public void add(int[] record) {
-
-        // Find or create entry
-        int hash = hashcode(record);
-        int index = hash & (buckets.length - 1);
-        Entry entry = findEntry(record, index, hash);
-        if (entry == null) {
-            if (++elements > threshold) {
-                rehash();
-                index = hash & (buckets.length - 1);
-            }
-            entry = createEntry(record, index, hash);
-        }
-        
-        // Track counts
-        entry.count++;
-        numClassesOfSize1 += entry.count == 1 ? 1 : 0;
-        numClassesOfSize1 -= entry.count == 2 ? 1 : 0;
-        numClassesOfSize2 += entry.count == 2 ? 1 : 0;
-        numClassesOfSize2 -= entry.count == 3 ? 1 : 0;
-    }
-    
-    /**
-     * Returns the number of records in equivalence classes of size 2
-     * @return
-     */
-    public int getNumDuplicateRecords() {
-        return this.numClassesOfSize2 * 2;
-    }
-        
-    /**
-     * Returns the number of records in equivalence classes of size 1
-     * @return
-     */
-    public int getNumUniqueRecords() {
-        return this.numClassesOfSize1;
-    }
-     
     /**
      * Creates a new entry.
      * 
@@ -266,7 +224,7 @@ public class SUDA2Groupify {
         }
         return m;
     }
-    
+        
     /**
      * Rehashes this operator.
      */
@@ -283,5 +241,50 @@ public class SUDA2Groupify {
         }
         buckets = newData;
         threshold = calculateThreshold(buckets.length, loadFactor);
+    }
+
+    /**
+     * Adds a record
+     * @param record
+     */
+    boolean canBeIgnored(int[] record) {
+
+        // Find or create entry
+        int hash = hashcode(record);
+        int index = hash & (buckets.length - 1);
+        Entry entry = findEntry(record, index, hash);
+        if (entry == null) {
+            if (++elements > threshold) {
+                rehash();
+                index = hash & (buckets.length - 1);
+            }
+            entry = createEntry(record, index, hash);
+        }
+        
+        // Track counts
+        entry.count++;
+        numClassesOfSize1 += entry.count == 1 ? 1 : 0;
+        numClassesOfSize1 -= entry.count == 2 ? 1 : 0;
+        numClassesOfSize2 += entry.count == 2 ? 1 : 0;
+        numClassesOfSize2 -= entry.count == 3 ? 1 : 0;
+        
+        // Return
+        return entry.count > 2;
+    }
+    
+    /**
+     * Returns the number of records in equivalence classes of size 2
+     * @return
+     */
+    int getNumDuplicateRecords() {
+        return this.numClassesOfSize2 * 2;
+    }
+    
+    /**
+     * Returns the number of records in equivalence classes of size 1
+     * @return
+     */
+    int getNumUniqueRecords() {
+        return this.numClassesOfSize1;
     }
 }

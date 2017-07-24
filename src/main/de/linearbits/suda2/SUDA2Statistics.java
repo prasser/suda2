@@ -245,7 +245,7 @@ public class SUDA2Statistics extends SUDA2Result {
     }
     
     @Override
-    void init(int columns, int maxK) {
+    void init(int columns, int maxK, int numUniqueRecords, int numDuplicateRecords) {
         // Empty by design
     }
 

@@ -19,7 +19,6 @@ package de.linearbits.test;
 import java.io.IOException;
 
 import de.linearbits.suda2.SUDA2;
-import de.linearbits.suda2.SUDA2Groupify;
 import de.linearbits.suda2.SUDA2Result;
 
 /**
@@ -39,20 +38,14 @@ public class Test5 extends AbstractTest{
         // As array
         int[][] data = getData("data/test.csv");
         
+        // Process
         long time = System.currentTimeMillis();
         SUDA2Result result1 = null;
-        for (int i=0; i<5; i++) {
+        for (int i=0; i<10; i++) {
             result1 = new SUDA2(data).getKeyStatistics(0, true);
         }
-        time = (long)((System.currentTimeMillis() - time) / 5d);
+        time = (long)((System.currentTimeMillis() - time) / 10d);
         System.out.println("Time: " + time);
         System.out.println(result1);
-        
-        SUDA2Groupify groupify = new SUDA2Groupify(data.length);
-        for (int[] record : data) {
-            groupify.add(record);
-        }
-        System.out.println(groupify.getNumUniqueRecords());
-        System.out.println(groupify.getNumDuplicateRecords());
     }
 }

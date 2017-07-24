@@ -56,7 +56,7 @@ public abstract class SUDA2ListenerScore extends SUDA2ListenerKey {
     public abstract void scoreFound(int row, int size, double score);
 
     @Override
-    void init(int columns, int maxK) {
+    void init(int columns, int maxK, int numUniqueRecords, int numDuplicateRecords) {
         this.intermediateScores = new SUDA2Scores(columns, maxK, sdcMicroScores).getIntermediateScores();
     }
 }

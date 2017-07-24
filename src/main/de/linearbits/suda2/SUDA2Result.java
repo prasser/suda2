@@ -29,8 +29,10 @@ public abstract class SUDA2Result {
      * Initializer
      * @param columns
      * @param maxK
+     * @param numUniqueRecords
+     * @param numDuplicateRecords
      */
-    abstract void init(int columns, int maxK);
+    abstract void init(int columns, int maxK, int numUniqueRecords, int numDuplicateRecords);
     
     /**
      * Registers an MSU

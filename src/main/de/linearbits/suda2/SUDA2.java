@@ -92,10 +92,16 @@ public class SUDA2 {
             return;
         }
         
+        // Prepare
+        Pair<SUDA2ItemList, Pair<Integer, Integer>> state = getInitialState();
+        SUDA2ItemList list = state.first;
+        int numUniqueRecords = state.second.first;
+        int numDuplicateRecords = state.second.second;
+        
         // Execute
         this.result = listener;
-        this.result.init(this.columns, maxKeyLength);
-        this.suda2(maxKeyLength, this.getItems().getItemList(), data.length);
+        this.result.init(this.columns, maxKeyLength, numUniqueRecords, numDuplicateRecords);
+        this.suda2(maxKeyLength, list, data.length);
     }
     
     /**
@@ -156,7 +162,15 @@ public class SUDA2 {
             return (SUDA2Statistics)this.result;
         }
         
-        this.suda2(maxKeyLength, this.getItems().getItemList(), data.length);
+        // Prepare
+        Pair<SUDA2ItemList, Pair<Integer, Integer>> state = getInitialState();
+        SUDA2ItemList list = state.first;
+        int numUniqueRecords = state.second.first;
+        int numDuplicateRecords = state.second.second;
+        
+        // Execute
+        this.result.init(this.columns, maxKeyLength, numUniqueRecords, numDuplicateRecords);
+        this.suda2(maxKeyLength, list, data.length);
         
         // Return
         return (SUDA2Statistics)this.result;
@@ -189,23 +203,26 @@ public class SUDA2 {
     }
     
     /**
-     * Returns all items
+     * Returns the initial state needed for executing the algorithm
      * @return
      */
-    private SUDA2IndexedItemSet getItems() {
+    private Pair<SUDA2ItemList, Pair<Integer, Integer>> getInitialState() {
 
         // Collect all items and their support rows
         SUDA2IndexedItemSet items = new SUDA2IndexedItemSet();
+        SUDA2Groupify groupify = new SUDA2Groupify(data.length);
         int index = 0;
         for (int[] row : data) {
-            for (int column = 0; column < columns; column++) {
-                int value = row[column];
-                SUDA2Item item = items.getOrCreateItem(column, value);
-                item.addRow(index);
+            if (!groupify.canBeIgnored(row)) {
+                for (int column = 0; column < columns; column++) {
+                    int value = row[column];
+                    SUDA2Item item = items.getOrCreateItem(column, value);
+                    item.addRow(index);
+                }
             }
             index++;
         }
-        return items;
+        return new Pair<>(items.getItemList(), new Pair<>(groupify.getNumUniqueRecords(), groupify.getNumDuplicateRecords()));
     }
 
     /**

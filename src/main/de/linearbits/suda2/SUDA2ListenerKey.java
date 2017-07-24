@@ -34,7 +34,7 @@ public abstract class SUDA2ListenerKey extends SUDA2Result {
     public abstract void keyFound(int row, int size);
 
     @Override
-    void init(int columns, int maxK) {
+    void init(int columns, int maxK, int numUniqueRecords, int numDuplicateRecords) {
         // Empty by design
     }
 
