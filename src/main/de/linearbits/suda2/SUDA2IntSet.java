@@ -152,9 +152,10 @@ public class SUDA2IntSet {
      * @return
      */
     private int hashcode(int value) {
+        value = value ^ seed;
         value = (value ^ (value >>> 16)) * 0x85ebca6b;
         value = (value ^ (value >>> 13)) * 0xc2b2ae35;
-        return (value ^ (value >>> 16)) ^ seed;
+        return (value ^ (value >>> 16));
     }
 
     /**
