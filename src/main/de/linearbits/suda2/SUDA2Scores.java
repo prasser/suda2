@@ -30,12 +30,12 @@ class SUDA2Scores {
     private static final double[] DIS = {0.028038903d, 0d, 0d, 0.005435918d, 0d, 0.011357785d, 0d, 0.005435918d, 0.009313862d, 0d, 0d};
 
     public static void main(String[] args) {
-        long numUniqueRecords = 6;
-        long numNonUniqueRecords = 4;
+        long numUniqueRecords = 5; // 5
+        long numDuplicateRecords = 6; // 6
         int columns = 4;
-        double disFraction = 0.5d;
+        double disFraction = 0.01d; // 0.01d;
         SUDA2Scores calc = new SUDA2Scores(4, 4, true);
-        System.out.println(Arrays.toString(calc.getScoreDIS(SCORES, numUniqueRecords, numNonUniqueRecords, columns, disFraction)));
+        System.out.println(Arrays.toString(calc.getScoreDIS(SCORES, numUniqueRecords, numDuplicateRecords, columns, disFraction)));
         System.out.println(Arrays.toString(DIS));
     }
     
@@ -61,9 +61,9 @@ class SUDA2Scores {
      * Returns SUDA DIS scores for the given scores
      * @param scores
      * @param numUniqueRecords Number of records in equivalence classes of size 1
-     * @param numNonUniqueRecords Number of records in equivalence classes of size > 1
+     * @param numDuplicateRecords Number of records in equivalence classes of size 2
      * @param columns
-     * @param disFraction Default: 0.5d
+     * @param disFraction Default: 0.01d
      * @return
      */
     private double[] getScoreDIS(double[] scores, 
