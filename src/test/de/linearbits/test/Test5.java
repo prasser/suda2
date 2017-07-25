@@ -41,10 +41,10 @@ public class Test5 extends AbstractTest{
         // Process
         long time = System.currentTimeMillis();
         SUDA2Result result1 = null;
-        for (int i=0; i<10; i++) {
+        for (int i=0; i<100; i++) {
             result1 = new SUDA2(data).getKeyStatistics(0, true);
         }
-        time = (long)((System.currentTimeMillis() - time) / 10d);
+        time = (long)((System.currentTimeMillis() - time) / 100d);
         System.out.println("Time: " + time);
         System.out.println(result1);
     }
