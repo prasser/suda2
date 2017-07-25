@@ -48,5 +48,10 @@ public class Test7 extends AbstractTest{
         time = (long)((System.currentTimeMillis() - time) / (double)REPETITIONS);
         System.out.println("Time: " + time);
         System.out.println(result1);
+        
+        // SDCM
+        // - Number of MSUs: 321406
+        // - Column key contributions
+        // - 34.16, 74.76, 21.95, 27.10 33.59, 25.29, 67.00, 52.42, 29.62
     }
 }
