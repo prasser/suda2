@@ -18,15 +18,16 @@ package de.linearbits.test;
 
 import java.io.IOException;
 
+import de.linearbits.suda2.SUDA2Kodo;
 import de.linearbits.suda2.SUDA2;
 import de.linearbits.suda2.SUDA2Result;
 
 /**
- * Test based on census data
+ * Test based on survey data data
  * 
  * @author Fabian Prasser
  */
-public class Test5 extends AbstractTest{
+public class Test8 extends AbstractTest{
 
     /**
      * Main entry point
@@ -36,10 +37,10 @@ public class Test5 extends AbstractTest{
     public static void main(String[] args) throws IOException {
        
         // As array
-        int[][] data = getData("data/test.csv");
+        int[][] data = getData("data/test3.csv");
         
         // Process
-        final int REPETITIONS = 100;
+        int REPETITIONS = 10;
         long time = System.currentTimeMillis();
         SUDA2Result result1 = null;
         for (int i=0; i<REPETITIONS; i++) {
@@ -48,5 +49,12 @@ public class Test5 extends AbstractTest{
         time = (long)((System.currentTimeMillis() - time) / (double)REPETITIONS);
         System.out.println("Time: " + time);
         System.out.println(result1);
+        
+        time = System.currentTimeMillis();
+        for (int i=0; i<REPETITIONS; i++) {
+            new SUDA2Kodo().run(data, data[0].length);
+        }
+        time = (long)((System.currentTimeMillis() - time) / (double)REPETITIONS);
+        System.out.println("Time: " + time);
     }
 }
