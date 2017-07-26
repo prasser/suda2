@@ -26,9 +26,18 @@ import java.util.Arrays;
  */
 class SUDA2Scores {
     
-    private static final double[] SCORES = {7d, 0d, 0d, 1.75d, 0d, 3.25d, 0d, 1.75d, 2.75d, 0d, 0d};
-    private static final double[] DIS = {0.028038903d, 0d, 0d, 0.005435918d, 0d, 0.011357785d, 0d, 0.005435918d, 0.009313862d, 0d, 0d};
+    /** Scores for testing */
+    private static final double[] SCORES = { 7d, 0d, 0d, 1.75d, 0d, 3.25d, 0d, 1.75d, 2.75d, 0d, 0d };
+    
+    /** Expected results for testing */
+    private static final double[] DIS    = { 0.028038903d, 0d, 0d,
+                                             0.005435918d, 0d, 0.011357785d,
+                                             0d, 0.005435918d, 0.009313862d, 0d, 0d};
 
+    /**
+     * Main method for testing
+     * @param args
+     */
     public static void main(String[] args) {
         long numUniqueRecords = 5; // 5
         long numDuplicateRecords = 6; // 6
