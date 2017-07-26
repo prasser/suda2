@@ -185,11 +185,11 @@ public class SUDA2Statistics extends SUDA2Result {
         builder.append(" - Number of keys: ").append(this.numKeys).append("\n");
         builder.append(" - Average size of keys: ").append(this.getAverageKeySize()).append("\n");
         builder.append(" - Column key contributions\n");
-        builder.append(toString("     ", columnKeyContributions, totalsContributions));
+        builder.append(toString("     ", columnKeyContributions, totalsContributions, 0));
         builder.append(" - Column key average size\n");
-        builder.append(toString("     ", columnKeyTotals, columnKeyCounts));
+        builder.append(toString("     ", columnKeyTotals, columnKeyCounts, 0));
         builder.append(" - Key size distribution\n");
-        builder.append(toString("     ", sizeDistribution, totalsSize));
+        builder.append(toString("     ", sizeDistribution, totalsSize, 1));
         return builder.toString();
     }
     
@@ -197,11 +197,11 @@ public class SUDA2Statistics extends SUDA2Result {
      * Renders a distribution
      * @param intent
      * @param array
+     * @param totals
      * @param offset
-     * @param absolute
      * @return
      */
-    private String toString(String intent, double[] array, double[] totals) {
+    private String toString(String intent, double[] array, double[] totals, int offset) {
         
         StringBuilder builder = new StringBuilder();
         DecimalFormat integerFormat = new DecimalFormat("#######");
@@ -209,7 +209,7 @@ public class SUDA2Statistics extends SUDA2Result {
         final int VALUE_WIDTH = 7;
         builder.append(intent).append("|");
         for (int index = 0; index < array.length; index++) {
-            builder.append(toString(integerFormat.format(index), VALUE_WIDTH)).append("|");
+            builder.append(toString(integerFormat.format(index + offset), VALUE_WIDTH)).append("|");
         }
         int width = builder.length() - intent.length();
         builder.append("\n");
