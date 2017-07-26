@@ -27,7 +27,8 @@ import java.util.Map;
 public class FileConverter {
 
     public static void main(String[] args) throws IOException {
-        write("data/test2.csv", null);
+        Iterator<String[]> iter = null;
+        write("data/test7.csv", iter);
     }
     
     private static void write(String file, Iterator<String[]> iterator) throws IOException {
@@ -45,6 +46,12 @@ public class FileConverter {
             }
         }
         writer.close();
+        
+        int distinct = 0;
+        for (Map<String, Integer> map : maps.values()) {
+            distinct+=map.size();
+        }
+        System.out.println("Distinct values: " + distinct);
     }
 
     private static int[] encode(Map<Integer, Map<String, Integer>> maps, String[] next) {
