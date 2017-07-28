@@ -38,8 +38,8 @@ public class Test9 extends AbstractTest{
         // As array
         // int[][] data = getData("data/test4.csv"); // FARS
         // int[][] data = getData("data/test5.csv"); // IHIS
-        // int[][] data = getData("data/test6.csv"); // SS13ACS
-        int[][] data = getData("data/test7.csv"); // CUP
+        int[][] data = getData("data/test6.csv"); // SS13ACS -> SDCM: 1.67 hours, This: 21.06 hours
+        // int[][] data = getData("data/test7.csv"); // CUP
         
         // Process
         int REPETITIONS = 1;
