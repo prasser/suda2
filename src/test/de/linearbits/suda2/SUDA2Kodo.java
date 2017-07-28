@@ -384,6 +384,7 @@ public class SUDA2Kodo {
                                 itemset.add(x);
                                 perfCorItems.put(h, itemset);
                             }
+                            System.out.println("Perfectly correlated: " + h + " -> " + x);
                             pccs.put(x, j);
                             // do not save it to the items list
                             break;
@@ -424,7 +425,8 @@ public class SUDA2Kodo {
                 if (totalFrequency == n) break;
             }
         }
-
+        
+        System.out.println("Size of item list: " + hs.size());
         return hs;
 
     }
