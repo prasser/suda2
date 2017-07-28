@@ -1,5 +1,7 @@
 package de.linearbits.suda2;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.carrotsearch.hppc.BitSet;
 import com.carrotsearch.hppc.IntArrayList;
@@ -29,24 +31,29 @@ public class SUDA2Kodo {
     private int n, m;
 
     // maximum size of MSU in the search
-    private int kmax = 23;
+    private int kmax = 0;
 
     public void run(int[][] data, int kMax) {
-
-//      // for visualvm profiler
-//      try {
-//          Thread.sleep(60000);
-//      } catch (InterruptedException e) {
-//          e.printStackTrace();
-//      }
 
         // build up a dataset
         X = data;
 
         // initialize n and m (at least the first line exists)
         n = data.length; m = data[0].length;
-        kmax = kMax;
-
+        kmax = kMax == 0 ? m : kMax;
+        
+        // TODO: FP: This is maybe needed because the algorithm may
+        //           require that the same integer id must not be used
+        //           in different columns. However, this seems to not help.
+        int offset = 0;
+        for (int column = 0; column < m; column++) {
+            Set<Integer> set = new HashSet<>();
+            for (int row = 0; row < n; row++) {
+                set.add(data[row][column]);
+                data[row][column] += offset;
+            }
+            offset += set.size();
+        }
 
         // create the mapping of perfectly correlated items
         IntObjectMap<IntArrayList> perfCorItems = new
