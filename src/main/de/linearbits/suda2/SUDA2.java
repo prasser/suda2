@@ -368,7 +368,7 @@ public class SUDA2 {
             @Override
             public int compare(SUDA2Item o1, SUDA2Item o2) {
                 int support1 = currentList.getItem(o1.getId()).getSupport();
-                int support2 = currentList.getItem(o1.getId()).getSupport();
+                int support2 = currentList.getItem(o2.getId()).getSupport();
                 return support1 < support2 ? -1 :
                        support1 > support2 ? +1 : 0;
             }
