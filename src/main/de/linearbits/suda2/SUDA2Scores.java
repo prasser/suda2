@@ -68,8 +68,7 @@ class SUDA2Scores {
 
     /**
      * Returns SUDA DIS scores for the given scores calculated as described in
-     * "Special Uniques Detection Algorithm - User Guide"
-     * (https://www.click2go.umip.com/i/s_w/suda.html)
+     * Mark Elliot, Special Uniques Detection Algorithm - User Guide, September 2004
      * @param scores
      * @param numUniqueRecords Number of records in equivalence classes of size 1
      * @param numDuplicateRecords Number of records in equivalence classes of size 2
