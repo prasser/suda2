@@ -67,7 +67,9 @@ class SUDA2Scores {
     }
 
     /**
-     * Returns SUDA DIS scores for the given scores
+     * Returns SUDA DIS scores for the given scores calculated as described in
+     * "Special Uniques Detection Algorithm - User Guide"
+     * (https://www.click2go.umip.com/i/s_w/suda.html)
      * @param scores
      * @param numUniqueRecords Number of records in equivalence classes of size 1
      * @param numDuplicateRecords Number of records in equivalence classes of size 2
@@ -76,14 +78,14 @@ class SUDA2Scores {
      * @return
      */
     private double[] getScoreDIS(double[] scores, 
-                                 long numUniqueRecords, long numNonUniqueRecords, 
+                                 long numUniqueRecords, long numDuplicateRecords, 
                                  int columns, double disFraction) {
         
         // Prepare
         double[] result = new double[scores.length];
         double parameterQ = 1.0d + (8.0d - (double) columns) / 20.0d;
         disFraction = (double)numUniqueRecords * disFraction / 
-                     ((double)numUniqueRecords * disFraction + (double)numNonUniqueRecords * (1.0d - disFraction));
+                     ((double)numUniqueRecords * disFraction + (double)numDuplicateRecords * (1.0d - disFraction));
 
         // Adjustment factor
         double adjustmentFactor = 0.0;
