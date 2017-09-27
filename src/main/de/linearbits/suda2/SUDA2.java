@@ -206,18 +206,6 @@ public class SUDA2 {
      */
     private Pair<SUDA2ItemList, Pair<Integer, Integer>> getInitialState() {
 
-        // Check and consider Uniform Support Property
-        boolean[] ignore = new boolean[columns];
-        Arrays.fill(ignore, true);
-        for (int column = 0; column < columns; column++) {
-            for (int row = 1; row < data.length; row++) {
-                if (data[row][column] != data[row-1][column]) {
-                    ignore[column] = false;
-                    break;
-                }
-            }    
-        }
-
         // Collect all items and their support rows
         SUDA2IndexedItemSet items = new SUDA2IndexedItemSet();
         SUDA2Groupify groupify = new SUDA2Groupify(data.length);
@@ -225,11 +213,9 @@ public class SUDA2 {
         for (int[] row : data) {
             if (!groupify.canBeIgnored(row)) {
                 for (int column = 0; column < columns; column++) {
-                    if (!ignore[column]) {
-                        int value = row[column];
-                        SUDA2Item item = items.getOrCreateItem(column, value);
-                        item.addRow(index);
-                    }
+                    int value = row[column];
+                    SUDA2Item item = items.getOrCreateItem(column, value);
+                    item.addRow(index);
                 }
             }
             index++;
