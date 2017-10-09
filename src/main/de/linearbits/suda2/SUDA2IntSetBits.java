@@ -124,10 +124,6 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         return true;
     }
     
-    public static int same = 0;
-    public static int different = 0;
-    
-
     @Override
     public SUDA2IntSet intersectWith(SUDA2IntSet other) {
 
