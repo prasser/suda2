@@ -22,7 +22,7 @@ package de.linearbits.suda2;
  * @author Fabian Prasser
  */
 public class SUDA2IntSetHash extends SUDA2IntSet {
-    
+
     /** Default */
     private static final float DEFAULT_LOAD_FACTOR      = 0.75f;
 
@@ -48,7 +48,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     private static final int getThreshold(int size) {
         return (int) Math.ceil(size * DEFAULT_LOAD_FACTOR);
     }
-    
+
     /** Seed */
     private final int seed = getSeed();
 
@@ -56,14 +56,17 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     private int       threshold;
 
     /** The entry array. */
-    private int[]      buckets;
+    private int[]     buckets;
 
     /** Current number of elements. */
-    private int        size;
-    
-    /** The last element added to this set */
-    private int        last;
-   
+    private int       size;
+
+    /** Min */
+    private int       min  = Integer.MAX_VALUE;
+
+    /** Max */
+    private int       max  = Integer.MIN_VALUE;
+
     /**
      * Creates a new instance
      */
@@ -77,7 +80,10 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
      */
     @Override
     public void add(int value) {
-        size += this.add(this.buckets, value, hashcode(value)) ? 1 : 0;
+        min = Math.min(value, min);
+        max = Math.max(value, max);
+        this.add(this.buckets, value, hashcode(value));
+        size++; // TODO: Hopefully, we never add the same value twice
         if (size == threshold) {
             this.rehash();
         }
@@ -133,32 +139,66 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     @Override
     public SUDA2IntSet intersectWith(SUDA2IntSet other) {
 
-        // Intersect support rows with those provided
-        SUDA2IntSetHash rows = new SUDA2IntSetHash();
-        for (int i = 0; i < buckets.length; i++) {
-            int row = buckets[i];
-            if (row != 0 && other.contains(row)) {
-                rows.add(row);
-            }
+        // No intersection
+        if (this.max < other.min() || other.max() < this.min) {
+            return new SUDA2IntSetSmall();
         }
+
+        // Intersect ranges
+//        int min = Math.max(this.min,  other.min());
+//        int max = Math.min(this.max,  other.max());
         
-        // We pack the set, if necessary
-        if (rows.size() <= SUDA2IntSetSmall.SIZE) {
-            SUDA2IntSetSmall small = new SUDA2IntSetSmall();
-            for (int i = 0; i < rows.buckets.length; i++) {
-                int row = rows.buckets[i];
-                if (row != 0) {
-                    small.add(row);
+        if (this.size > SUDA2IntSetSmall.SIZE) {
+            
+            // Bitset
+//            if (SUDA2IntSetBits.makesSense(min, max, this.size)) {
+//                
+//                // Intersect support rows with those provided
+//                SUDA2IntSetBits rows = new SUDA2IntSetBits(min, max);
+//                for (int i = 0; i < buckets.length; i++) {
+//                    int row = buckets[i];
+//                    if (row != 0 && other.contains(row)) {
+//                        rows.add(row);
+//                    }
+//                }
+//                return rows;
+//                
+//            // Hashset
+//            } else {
+//    
+                // Intersect support rows with those provided
+                SUDA2IntSetHash rows = new SUDA2IntSetHash();
+                for (int i = 0; i < buckets.length; i++) {
+                    int row = buckets[i];
+                    if (row != 0 && other.contains(row)) {
+                        rows.add(row);
+                    }
+                }
+                return rows;
+                
+//            }
+            
+        } else {
+    
+            // Intersect support rows with those provided
+            SUDA2IntSetSmall rows = new SUDA2IntSetSmall();
+            for (int i = 0; i < buckets.length; i++) {
+                int row = buckets[i];
+                if (row != 0 && other.contains(row)) {
+                    rows.add(row);
                 }
             }
-            return small;
-        } else {
             return rows;
         }
     }
     
     @Override
     public boolean isSupportRowPresent(SUDA2IntSet other) {
+
+        // No intersection
+        if (this.max < other.min() || other.max() < this.min) {
+            return false;
+        }
 
         boolean supportRowFound = false;
         for (int i = 0; i < buckets.length; i++) {
@@ -176,11 +216,6 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     }
 
     @Override
-    public int last() {
-        return last;
-    }
-
-    @Override
     public int size() {
         return size;
     }
@@ -192,27 +227,22 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
      * @param hash
      * @return
      */
-    private boolean add(int[] buckets, int value, int hash) {
+    private void add(int[] buckets, int value, int hash) {
         
-        this.last = value;
         final int mask = buckets.length - 1;
         final int slot = hash & mask;
         
         for (int i = slot; i < buckets.length; i ++) {
-            if (buckets[i] == value) {
-                return false;
-            } else if (buckets[i] == 0) {
+            if (buckets[i] == value || buckets[i] == 0) {
                 buckets[i] = value;
-                return true;
+                return;
             }
         }
 
         for (int i = 0; i < slot; i ++) {
-            if (buckets[i] == value) {
-                return false;
-            } else if (buckets[i] == 0) {
+            if (buckets[i] == value || buckets[i] == 0) {
                 buckets[i] = value;
-                return true;
+                return;
             }
         }
         
@@ -248,5 +278,20 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         
         this.buckets = _buckets;
         this.threshold = _threshold;
+    }
+
+    @Override
+    public int min() {
+        return min;
+    }
+
+    @Override
+    public int max() {
+        return max;
+    }
+
+    @Override
+    public boolean isBitSet() {
+        return false;
     }
 }

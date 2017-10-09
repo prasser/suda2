@@ -24,21 +24,6 @@ package de.linearbits.suda2;
 public abstract class SUDA2IntSet {
 
     /**
-     * Returns the smallest power of two larger than the given size
-     * @param size
-     * @return
-     */
-    private static final int getCapacity(int size) {
-        --size;
-        size |= size >> 1;
-        size |= size >> 2;
-        size |= size >> 4;
-        size |= size >> 8;
-        size |= size >> 16;
-        return size + 1;
-    }
-
-    /**
      * Adds a new value to the set
      * @param value
      */
@@ -52,16 +37,27 @@ public abstract class SUDA2IntSet {
     public abstract boolean contains(int value);
 
     /**
-     * Returns the last element added to the set
+     * Returns whether the special row is contained in this set
+     * @param items 
+     * @param referenceItem
+     * @param data
      * @return
      */
-    public abstract int last();
+    public abstract boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[][] data);
     
     /**
-     * Returns the size of the set
+     * Returns a new set that contains only elements contained in both sets
+     * 
+     * @param other
      * @return
      */
-    public abstract int size();
+    public abstract SUDA2IntSet intersectWith(SUDA2IntSet other);
+    
+    /**
+     * Returns whether the set is a bit set
+     * @return
+     */
+    public abstract boolean isBitSet();
     
     /**
      * Searches for exactly one support row
@@ -71,19 +67,20 @@ public abstract class SUDA2IntSet {
     public abstract boolean isSupportRowPresent(SUDA2IntSet other);
 
     /**
-     * Returns a new set that contains only elements contained in both sets
-     * 
-     * @param other
+     * Return min
      * @return
      */
-    public abstract SUDA2IntSet intersectWith(SUDA2IntSet other);
+    public abstract int max();
 
     /**
-     * Returns whether the special row is contained in this set
-     * @param items 
-     * @param referenceItem
-     * @param data
+     * Return max
      * @return
      */
-    public abstract boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[][] data);
+    public abstract int min();
+    
+    /**
+     * Returns the size of the set
+     * @return
+     */
+    public abstract int size();
 }

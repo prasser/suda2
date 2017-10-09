@@ -19,6 +19,8 @@ package de.linearbits.test;
 import java.io.IOException;
 
 import de.linearbits.suda2.SUDA2;
+import de.linearbits.suda2.SUDA2IntSetBits;
+import de.linearbits.suda2.SUDA2IntSetHash;
 import de.linearbits.suda2.SUDA2Result;
 
 /**
@@ -36,10 +38,18 @@ public class Test9 extends AbstractTest{
     public static void main(String[] args) throws IOException {
        
         // As array
+        
+        
+        //THATSIT!!! int[][] data = getData("data/test3.csv"); // Whatever
+        
+        
+        // int[][] data = getData("data/test2.csv"); // Whatever
         // int[][] data = getData("data/test4.csv"); // FARS
-        // int[][] data = getData("data/test5.csv"); // IHIS
-        int[][] data = getData("data/test6.csv"); // SS13ACS -> SDCM: 1.67 hours, This: 21.06 hours
+         int[][] data = getData("data/test5.csv"); // IHIS
+        //int[][] data = getData("data/test6.csv"); // SS13ACS -> SDCM: 1.67 hours, This: 21.06 hours
         // int[][] data = getData("data/test7.csv"); // CUP
+        
+        System.out.println("Num. records: " + data.length);
         
         // Process
         int REPETITIONS = 1;

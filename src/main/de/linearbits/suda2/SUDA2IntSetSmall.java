@@ -46,8 +46,15 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
     /** Size*/
     private int size;
 
+    /** Min */
+    private int       min  = Integer.MAX_VALUE;
+    /** Max */
+    private int       max  = Integer.MIN_VALUE;
+    
     @Override
     public void add(int value) {
+        min = Math.min(value, min);
+        max = Math.max(value, max);
         switch(size) {
         case 0: int0 = value; break;
         case 1: int1 = value; break;
@@ -58,7 +65,7 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         case 6: int6 = value; break;
         case 7: int7 = value; break;
         }
-        size++;
+        size++; // TODO: Hopefully, we never add the same value twice
     }
 
     @Override
@@ -96,6 +103,11 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
     @Override
     public SUDA2IntSet intersectWith(SUDA2IntSet other) {
 
+        // No intersection
+        if (this.max < other.min() || other.max() < this.min) {
+            return new SUDA2IntSetSmall();
+        }
+
         // Intersect support rows with those provided
         SUDA2IntSetSmall rows = new SUDA2IntSetSmall();
         switch (size) {
@@ -116,6 +128,11 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
     @Override
     public boolean isSupportRowPresent(SUDA2IntSet other) {
 
+        // No intersection
+        if (this.max < other.min() || other.max() < this.min) {
+            return false;
+        }
+
         int rows = 0;
         switch (size) {
         case 8: rows += other.contains(int7) ? 1 : 0;
@@ -131,8 +148,13 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
     }
 
     @Override
-    public int last() {
-        return int0;
+    public int min() {
+        return min;
+    }
+
+    @Override
+    public int max() {
+        return max;
     }
 
     @Override
@@ -157,5 +179,10 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean isBitSet() {
+        return false;
     }
 }
