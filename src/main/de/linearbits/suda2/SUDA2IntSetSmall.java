@@ -16,6 +16,7 @@
  */
 package de.linearbits.suda2;
 
+
 /**
  * A very basic integer set
  * 
@@ -184,5 +185,10 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
     @Override
     public boolean isBitSet() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Size=" + size + " elements=" + int0 + ", " + int1 + ", " + int2 + ", " + int3 + ", " + int4 + ", " + int5 + ", " + int6 + ", " + int7;
     }
 }

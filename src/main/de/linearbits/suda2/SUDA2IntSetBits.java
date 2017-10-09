@@ -1,5 +1,7 @@
 package de.linearbits.suda2;
 
+import java.util.Arrays;
+
 /**
  * A set of rows.
  *
@@ -230,4 +232,10 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
     public boolean isBitSet() {
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Size=" + size + " offset=" + offset + " array=" + Arrays.toString(array);
+    }
+    
 }

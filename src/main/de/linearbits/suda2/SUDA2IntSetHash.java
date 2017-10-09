@@ -16,6 +16,8 @@
  */
 package de.linearbits.suda2;
 
+import java.util.Arrays;
+
 /**
  * A very basic integer set using murmur hashing and linear probing.
  * 
@@ -291,5 +293,10 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     @Override
     public boolean isBitSet() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Size=" + size + " array=" + Arrays.toString(buckets);
     }
 }

@@ -16,6 +16,8 @@
  */
 package de.linearbits.suda2;
 
+import java.util.Arrays;
+
 /**
  * A very basic integer set
  * 
@@ -154,5 +156,10 @@ public class SUDA2IntSetSmall2 extends SUDA2IntSet {
     @Override
     public boolean isBitSet() {
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Size=" + size + " array=" + Arrays.toString(buckets);
     }
 }

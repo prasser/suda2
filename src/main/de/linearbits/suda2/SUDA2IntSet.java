@@ -83,4 +83,9 @@ public abstract class SUDA2IntSet {
      * @return
      */
     public abstract int size();
+    
+    /**
+     * To string
+     */
+    public abstract String toString();
 }
