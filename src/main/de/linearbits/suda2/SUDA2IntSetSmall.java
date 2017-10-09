@@ -132,18 +132,7 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
 
     @Override
     public int last() {
-        // TODO: Maybe this could be improved (no jump table, is "last" really needed? The one contained element may be sufficient!)
-        switch(size) {
-        case 1: return int0;
-        case 2: return int1;
-        case 3: return int2;
-        case 4: return int3;
-        case 5: return int4;
-        case 6: return int5;
-        case 7: return int6;
-        case 8: return int7;
-        }
-        return -1;
+        return int0;
     }
 
     @Override
