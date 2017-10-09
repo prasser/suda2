@@ -162,7 +162,9 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             
             // Pairwise logical and
             while (resultIndex < result.array.length && index < array.length && _index < _other.array.length) {
-                result.array[resultIndex++] = array[index++] & _other.array[_index++];
+                long element = array[index++] & _other.array[_index++];
+                result.size += Long.bitCount(element);
+                result.array[resultIndex++] = element;
             }
 
             // Return the result
