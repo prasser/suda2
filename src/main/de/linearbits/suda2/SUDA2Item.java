@@ -93,6 +93,11 @@ public class SUDA2Item {
      * @return
      */
     public SUDA2Item get1MSU(SUDA2IntSet otherRows) {
+        
+        // Range intersection
+        if (this.rows.max < otherRows.min || otherRows.max < this.rows.min) {
+            return null;
+        }
 
         // Smaller set is rows1
         int size1 = this.rows.size;
@@ -142,6 +147,15 @@ public class SUDA2Item {
      */
     public SUDA2Item getProjection(SUDA2IntSet otherRows) {
 
+        // Range intersection
+        if (this.rows.max < otherRows.min || otherRows.max < this.rows.min) {
+            return null;
+        }
+
+        // Range elimination
+        int max = Math.min(this.rows.max, otherRows.max);
+        int min = Math.max(this.rows.min, otherRows.min);
+        
         // Smaller set is set 1
         int size1 = this.rows.size;
         int size2 = otherRows.size;
@@ -153,7 +167,7 @@ public class SUDA2Item {
         final int[] buckets = rows1.buckets;
         for (int i = 0; i < buckets.length; i++) {
             int row = buckets[i];
-            if (row != 0 && rows2.contains(row)) {
+            if (row != 0 && row >= min && row <= max && rows2.contains(row)) {
                 rows.add(row);
             }
         }

@@ -58,11 +58,14 @@ public class SUDA2IntSet {
     /** The entry array. */
     public int[]      buckets;
 
-    /** Current number of elements. */
+    /** Minimum. */
+    public int        min  = Integer.MAX_VALUE;
+
+    /** Maximum. */
+    public int        max  = Integer.MIN_VALUE;
+
+    /** Size */
     public int        size;
-    
-    /** The last element added to this set */
-    public int        last;
    
     /**
      * Creates a new instance
@@ -77,6 +80,8 @@ public class SUDA2IntSet {
      * @param value
      */
     public void add(int value) {
+        this.min = Math.min(this.min, value);
+        this.max = Math.max(this.max, value);
         this.add(this.buckets, value, hashcode(value));
         size++; // We never add the same value more than once
         if (size == threshold) {
@@ -122,7 +127,6 @@ public class SUDA2IntSet {
      */
     private void add(int[] buckets, int value, int hash) {
         
-        this.last = value;
         final int mask = buckets.length - 1;
         final int slot = hash & mask;
         
