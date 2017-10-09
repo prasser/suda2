@@ -8,6 +8,9 @@ import java.util.Arrays;
  * @author Fabian Prasser
  */
 public class SUDA2IntSetBits extends SUDA2IntSet {
+    
+    // TODO: This won't work for multiple instances, so fix it
+    public static int dataSize = 0;
 
     /** Bits per unit */
     private static final int ADDRESS_BITS_PER_UNIT = 6;
@@ -23,7 +26,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
      */
     public static boolean makesSense(int minimum, int maximum, int size) {
         // TODO: There has to be a more efficient way of doing this
-        return (getCapacity(size) << 5) >= maximum - minimum;
+        return size > (dataSize * 0.1d) && (getCapacity(size) << 5) >= maximum - minimum;
     }
 
     /**
