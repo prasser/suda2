@@ -121,6 +121,10 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         }
         return true;
     }
+    
+    public static int same = 0;
+    public static int different = 0;
+    
 
     @Override
     public SUDA2IntSet intersectWith(SUDA2IntSet other) {
@@ -130,23 +134,41 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             return new SUDA2IntSetSmall();
         }
 
+        // Intersect two bitsets
         if (other.isBitSet()) {
-            SUDA2IntSetBits _other = (SUDA2IntSetBits)other;
-            int index = (offset > _other.offset) ? ((offset - _other.offset) / 64) : 0;
-            int _index = (_other.offset > offset) ? ((_other.offset - offset) / 64) : 0;
             
+            // Convert and prepare
+            SUDA2IntSetBits _other = (SUDA2IntSetBits)other;
             int min = Math.max(this.min, _other.min);
             int max = Math.min(this.max, _other.max);
+            
+            // Result
             SUDA2IntSetBits result = new SUDA2IntSetBits(min, max);
             result.min = min; // Just an approximation
             result.max = max; // Just an approximation
-            int resultIndex = 0;
+            
+            // Offsets
+            int index = offset / 64;
+            int _index = _other.offset / 64;
+            int resultIndex = result.offset / 64;
+            
+            // Shift to start at index describing the same offset
+            int maxIndex = Math.max(index, Math.max(_index, resultIndex));
+            index = maxIndex - index;
+            _index = maxIndex - _index;
+            resultIndex = maxIndex - resultIndex;
+            
+            // Pairwise logical and
             while (resultIndex < result.array.length && index < array.length && _index < _other.array.length) {
                 result.array[resultIndex++] = array[index++] & _other.array[_index++];
             }
 
+            // Return the result
             return result;
+            
+        // Let the other set probe this set
         } else {
+            
             return other.intersectWith(this);
         }
     }
@@ -159,15 +181,31 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             return false;
         }
 
+        // Intersect two bitsets
         if (other.isBitSet()) {
+            
+            // Prepare
             SUDA2IntSetBits _other = (SUDA2IntSetBits)other;
+
+            // Offsets
+            int index = offset / 64;
+            int _index = _other.offset / 64;
+            
+            // Shift to start at index describing the same offset
+            int maxIndex = Math.max(index, _index);
+            index = maxIndex - index;
+            _index = maxIndex - _index;
+                   
+            // And count identical bits
             int count = 0;
-            int index = (offset > _other.offset) ? ((offset - _other.offset) / 64) : 0;
-            int _index = (_other.offset > offset) ? ((_other.offset - offset) / 64) : 0;
             while (count <= 1 && index < array.length && _index < _other.array.length) {
                 count += Long.bitCount(array[index++] & _other.array[_index++]);
             }
+            
+            // Return if we found exactly one such row
             return count == 1;
+
+            // Let the other set probe this set
         } else {
             return other.isSupportRowPresent(this);
         }

@@ -145,29 +145,16 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         }
 
         // Intersect ranges
-//        int min = Math.max(this.min,  other.min());
-//        int max = Math.min(this.max,  other.max());
+        int min = Math.max(this.min,  other.min());
+        int max = Math.min(this.max,  other.max());
         
         if (this.size > SUDA2IntSetSmall.SIZE) {
             
             // Bitset
-//            if (SUDA2IntSetBits.makesSense(min, max, this.size)) {
-//                
-//                // Intersect support rows with those provided
-//                SUDA2IntSetBits rows = new SUDA2IntSetBits(min, max);
-//                for (int i = 0; i < buckets.length; i++) {
-//                    int row = buckets[i];
-//                    if (row != 0 && other.contains(row)) {
-//                        rows.add(row);
-//                    }
-//                }
-//                return rows;
-//                
-//            // Hashset
-//            } else {
-//    
+            if (SUDA2IntSetBits.makesSense(min, max, this.size)) {
+                
                 // Intersect support rows with those provided
-                SUDA2IntSetHash rows = new SUDA2IntSetHash();
+                SUDA2IntSetBits rows = new SUDA2IntSetBits(min, max);
                 for (int i = 0; i < buckets.length; i++) {
                     int row = buckets[i];
                     if (row != 0 && other.contains(row)) {
@@ -176,7 +163,20 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                 }
                 return rows;
                 
-//            }
+            // Hashset
+            } else {
+    
+                // Intersect support rows with those provided
+                SUDA2IntSetHash rows = new SUDA2IntSetHash();
+                for (int i = 0; i < buckets.length; i++) {
+                    int row = buckets[i];
+                    if (row != 0 && row >= min && row <= max && other.contains(row)) {
+                        rows.add(row);
+                    }
+                }
+                return rows;
+                
+            }
             
         } else {
     
@@ -184,7 +184,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             SUDA2IntSetSmall rows = new SUDA2IntSetSmall();
             for (int i = 0; i < buckets.length; i++) {
                 int row = buckets[i];
-                if (row != 0 && other.contains(row)) {
+                if (row != 0 && row >= min && row <= max && other.contains(row)) {
                     rows.add(row);
                 }
             }
@@ -200,10 +200,14 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             return false;
         }
 
+        // Intersect ranges
+        int min = Math.max(this.min,  other.min());
+        int max = Math.min(this.max,  other.max());
+        
         boolean supportRowFound = false;
         for (int i = 0; i < buckets.length; i++) {
             int row = buckets[i];
-            if (row != 0 && other.contains(row)) {
+            if (row != 0 && row >= min && row <= max && other.contains(row)) {
                 if (supportRowFound) {
                     // More than one support row
                     return false;
