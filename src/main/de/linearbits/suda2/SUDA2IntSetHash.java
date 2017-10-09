@@ -157,7 +157,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                 SUDA2IntSetBits rows = new SUDA2IntSetBits(min, max);
                 for (int i = 0; i < buckets.length; i++) {
                     int row = buckets[i];
-                    if (row != 0 && other.contains(row)) {
+                    if (row != 0 && row >= min && row <= max && other.contains(row)) {
                         rows.add(row);
                     }
                 }
