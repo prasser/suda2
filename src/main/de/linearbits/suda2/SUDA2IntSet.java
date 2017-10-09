@@ -77,7 +77,8 @@ public class SUDA2IntSet {
      * @param value
      */
     public void add(int value) {
-        size += this.add(this.buckets, value, hashcode(value)) ? 1 : 0;
+        this.add(this.buckets, value, hashcode(value));
+        size++; // We never add the same value more than once
         if (size == threshold) {
             this.rehash();
         }
@@ -119,7 +120,7 @@ public class SUDA2IntSet {
      * @param hash
      * @return
      */
-    private boolean add(int[] buckets, int value, int hash) {
+    private void add(int[] buckets, int value, int hash) {
         
         this.last = value;
         final int mask = buckets.length - 1;
@@ -127,19 +128,19 @@ public class SUDA2IntSet {
         
         for (int i = slot; i < buckets.length; i ++) {
             if (buckets[i] == value) {
-                return false;
+                return;
             } else if (buckets[i] == 0) {
                 buckets[i] = value;
-                return true;
+                return;
             }
         }
 
         for (int i = 0; i < slot; i ++) {
             if (buckets[i] == value) {
-                return false;
+                return;
             } else if (buckets[i] == 0) {
                 buckets[i] = value;
-                return true;
+                return;
             }
         }
         
