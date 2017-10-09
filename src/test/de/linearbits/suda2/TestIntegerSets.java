@@ -33,7 +33,7 @@ public class TestIntegerSets {
         Random random = new Random(0xDEADBEEF);
         long time = System.currentTimeMillis();
         for (int r=0; r<100; r++) {
-            SUDA2IntSet set = new SUDA2IntSet();
+            SUDA2IntSet set = new SUDA2IntSetHash();
             for (int k=0; k<1000000; k++) {
                 set.add(random.nextInt() + 1);
             }
@@ -54,7 +54,7 @@ public class TestIntegerSets {
         random = new Random(0xDEADBEEF);
         time = System.currentTimeMillis();
         for (int r=0; r<100000; r++) {
-            SUDA2IntSet set = new SUDA2IntSet();
+            SUDA2IntSet set = new SUDA2IntSetHash();
             for (int k=0; k<1000; k++) {
                 set.add(random.nextInt() + 1);
             }
