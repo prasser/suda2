@@ -75,9 +75,6 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         this.threshold = getThreshold(this.buckets.length);
     }
 
-    /* (non-Javadoc)
-     * @see de.linearbits.suda2.SUDA2IntSet#add(int)
-     */
     @Override
     public void add(int value) {
         min = Math.min(value, min);
@@ -89,9 +86,6 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         }
     }
 
-    /* (non-Javadoc)
-     * @see de.linearbits.suda2.SUDA2IntSet#contains(int)
-     */
     @Override
     public boolean contains(int value) {
         
