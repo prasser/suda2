@@ -75,7 +75,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     public SUDA2IntSetHash() {
         this.buckets = new int[DEFAULT_INITIAL_CAPACITY];
         this.threshold = getThreshold(this.buckets.length);
-        instance(Timeable.TYPE_INT_SET_HASH);
+        instance(TYPE_INT_SET_HASH);
     }
 
     @Override
@@ -116,6 +116,9 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     
     @Override
     public boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[][] data) {
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
         outer: for (int i = 0; i < buckets.length; i++) {
             if (buckets[i] != 0) {
                 int[] row = data[buckets[i] - 1];
@@ -127,9 +130,15 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                 if (referenceItem.isContained(row)) {
                     continue;
                 }
+                // ----------------------------------------------------- //
+                endSpecialRowTiming(TYPE_INT_SET_HASH);
+                // ----------------------------------------------------- //
                 return true;
             }
         }
+        // ----------------------------------------------------- //
+        endSpecialRowTiming(TYPE_INT_SET_HASH);
+        // ----------------------------------------------------- //
         return false;
     }
     
@@ -164,7 +173,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                 }
                 
                 // ----------------------------------------------------- //
-                endTiming(Timeable.TYPE_INT_SET_HASH, size);
+                endIntersectionTiming(TYPE_INT_SET_HASH, size);
                 // ----------------------------------------------------- //
                 
                 return rows;
@@ -182,7 +191,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                 }
                 
                 // ----------------------------------------------------- //
-                endTiming(Timeable.TYPE_INT_SET_HASH, size);
+                endIntersectionTiming(TYPE_INT_SET_HASH, size);
                 // ----------------------------------------------------- //
                 
                 return rows;
@@ -200,7 +209,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             }
             
             // ----------------------------------------------------- //
-            endTiming(Timeable.TYPE_INT_SET_HASH, size);
+            endIntersectionTiming(TYPE_INT_SET_HASH, size);
             // ----------------------------------------------------- //
             
             return rows;
@@ -214,6 +223,10 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         if (this.max < other.min() || other.max() < this.min) {
             return false;
         }
+        
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
 
         // Intersect ranges
         int min = Math.max(this.min,  other.min());
@@ -224,6 +237,9 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             int row = buckets[i];
             if (row != 0 && row >= min && row <= max && other.contains(row)) {
                 if (supportRowFound) {
+                    // ----------------------------------------------------- //
+                    endSupportRowTiming(TYPE_INT_SET_HASH);
+                    // ----------------------------------------------------- //
                     // More than one support row
                     return false;
                 } else {
@@ -231,6 +247,9 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                 }
             }
         }
+        // ----------------------------------------------------- //
+        endSupportRowTiming(TYPE_INT_SET_HASH);
+        // ----------------------------------------------------- //
         return supportRowFound;
     }
 

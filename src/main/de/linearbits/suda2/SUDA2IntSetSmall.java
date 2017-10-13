@@ -56,7 +56,7 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
      * Creates a new instance
      */
     public SUDA2IntSetSmall() {
-        instance(Timeable.TYPE_INT_SET_SMALL);
+        instance(TYPE_INT_SET_SMALL);
     }
     
     @Override
@@ -95,6 +95,10 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
     @Override
     public boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[][] data) {
         
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
+        
         switch(size) {
         case 8: if (containsSpecialRow(items, referenceItem, data[int7 - 1])) { return true; }
         case 7: if (containsSpecialRow(items, referenceItem, data[int6 - 1])) { return true; }
@@ -105,6 +109,9 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         case 2: if (containsSpecialRow(items, referenceItem, data[int1 - 1])) { return true; }
         case 1: if (containsSpecialRow(items, referenceItem, data[int0 - 1])) { return true; }
         }
+        // ----------------------------------------------------- //
+        endSpecialRowTiming(TYPE_INT_SET_SMALL);
+        // ----------------------------------------------------- //
         return false;
     }
 
@@ -134,7 +141,7 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         }
         
         // ----------------------------------------------------- //
-        endTiming(Timeable.TYPE_INT_SET_SMALL, size);
+        endIntersectionTiming(TYPE_INT_SET_SMALL, size);
         // ----------------------------------------------------- //
 
         // Return
@@ -148,6 +155,10 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         if (this.max < other.min() || other.max() < this.min) {
             return false;
         }
+        
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
 
         int rows = 0;
         switch (size) {
@@ -160,6 +171,9 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         case 2: rows += other.contains(int1) ? 1 : 0;
         case 1: rows += other.contains(int0) ? 1 : 0;
         }
+        // ----------------------------------------------------- //
+        endSupportRowTiming(TYPE_INT_SET_SMALL);
+        // ----------------------------------------------------- //
         return rows == 1;
     }
 

@@ -7,6 +7,8 @@ package de.linearbits.suda2;
  */
 public abstract class Timeable {
     
+    /** TODO make timing of methods in various types generic via additional indices */
+    
     /** Whether timing is enabled */
     private static final boolean ENABLED                 = true;
 
@@ -27,6 +29,14 @@ public abstract class Timeable {
     public static long[]         intersectionTime        = new long[TYPE_COUNT];
 
     public static long[]         intersectionCount       = new long[TYPE_COUNT];
+
+    public static long[]         specialRowTime          = new long[TYPE_COUNT];
+
+    public static long[]         specialRowCount         = new long[TYPE_COUNT];
+
+    public static long[]         supportRowTime          = new long[TYPE_COUNT];
+
+    public static long[]         supportRowCount         = new long[TYPE_COUNT];
 
     public static long[]         instanceCount           = new long[TYPE_COUNT];
 
@@ -72,7 +82,7 @@ public abstract class Timeable {
      * @param type
      * @param size
      */
-    protected void endTiming(int type, int size) {
+    protected void endIntersectionTiming(int type, int size) {
         if (ENABLED) {
             long endTime = System.nanoTime() - time;
             intersectionTime[type] += endTime;
@@ -80,6 +90,32 @@ public abstract class Timeable {
             int bucket = getIntersectionBucketIndex(size);
             intersectionSizeBuckets[type][bucket]++;
             intersectionTimeBuckets[type][bucket] += endTime;
+        }
+    }
+    
+    /**
+     * End timing of support rows
+     * @param type
+     * @param size
+     */
+    protected void endSupportRowTiming(int type) {
+        if (ENABLED) {
+            long endTime = System.nanoTime() - time;
+            supportRowTime[type] += endTime;
+            supportRowCount[type]++;
+        }
+    }
+    
+    /**
+     * End timing of special rows
+     * @param type
+     * @param size
+     */
+    protected void endSpecialRowTiming(int type) {
+        if (ENABLED) {
+            long endTime = System.nanoTime() - time;
+            specialRowTime[type] += endTime;
+            specialRowCount[type]++;
         }
     }
 

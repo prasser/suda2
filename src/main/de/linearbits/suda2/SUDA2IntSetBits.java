@@ -70,7 +70,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         // Multiple of 64 less than or equal to min
         this.offset = min & (~0x3f);
         this.array = new long[(int) (Math.ceil((double) (max - offset + 1) / 64d))];
-        instance(Timeable.TYPE_INT_SET_BITS);
+        instance(TYPE_INT_SET_BITS);
     }
 
     @Override
@@ -93,12 +93,18 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
 
     @Override
     public boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[][] data) {
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
         int index = this.offset;
         int value = 0;
         for (int offset = 0; offset < this.array.length; offset++) {
             for (int i = 0; i < 64; i++) {
                 if (((array[offset] & (1L << (value & BIT_INDEX_MASK))) != 0)) {
-                    if (containsSpecialRow(items, referenceItem, data[index - 1])) { 
+                    if (containsSpecialRow(items, referenceItem, data[index - 1])) {
+                        // ----------------------------------------------------- //
+                        endSpecialRowTiming(TYPE_INT_SET_BITS);
+                        // ----------------------------------------------------- //
                         return true; 
                     }
                 }
@@ -106,6 +112,9 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
                 index ++;
             }
         }
+        // ----------------------------------------------------- //
+        endSpecialRowTiming(TYPE_INT_SET_BITS);
+        // ----------------------------------------------------- //
         return false;
     }
 
@@ -172,7 +181,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             }
 
             // ----------------------------------------------------- //
-            endTiming(TYPE_INT_SET_BITS, size);
+            endIntersectionTiming(TYPE_INT_SET_BITS, size);
             // ----------------------------------------------------- //
             
             return result;
@@ -191,6 +200,10 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         if (this.max < other.min() || other.max() < this.min) {
             return false;
         }
+        
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
 
         // Intersect two bitsets
         if (other.isBitSet()) {
@@ -213,11 +226,18 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
                 count += Long.bitCount(array[index++] & _other.array[_index++]);
             }
             
+            // ----------------------------------------------------- //
+            endSupportRowTiming(TYPE_INT_SET_BITS);
+            // ----------------------------------------------------- //
+            
             // Return if we found exactly one such row
             return count == 1;
 
             // Let the other set probe this set
         } else {
+            // ----------------------------------------------------- //
+            endSupportRowTiming(TYPE_INT_SET_BITS);
+            // ----------------------------------------------------- //
             return other.isSupportRowPresent(this);
         }
     }
