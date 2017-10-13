@@ -72,6 +72,7 @@ public class SUDA2 {
         this.check(data);
         this.data = data;
         this.columns = data.length == 0 ? 0 : data[0].length;
+        SUDA2IntSetBits.dataSize = data.length;
     }
 
     /**
@@ -349,7 +350,7 @@ public class SUDA2 {
         for (int i = 0; i < candidateSize; i++) {
             SUDA2Item item = candidate.get(i);
             SUDA2IntSet _rows = currentList.getItem(item.getId()).getRows();
-            if (rows == null || _rows.size < rows.size) {
+            if (rows == null || _rows.size() < rows.size()) {
                 rows = _rows;
                 pivot = item;
             }
@@ -375,22 +376,7 @@ public class SUDA2 {
         });
         
         // And search for the special row
-        final int [] buckets = rows.buckets;
-        outer: for (int i = 0; i < buckets.length; i++) {
-            if (buckets[i] != 0) {
-                int[] row = data[buckets[i] - 1];
-                for (SUDA2Item item : items) {
-                    if (!item.isContained(row)) {
-                        continue outer;
-                    }
-                }
-                if (referenceItem.isContained(row)) {
-                    continue;
-                }
-                return true;
-            }
-        }
-        return false;
+        return rows.containsSpecialRow(items, referenceItem, data);
     }
 
     /**
@@ -451,7 +437,7 @@ public class SUDA2 {
             if (upperLimit > 1) {
                 msus_i = suda2(upperLimit,
                                getItems(currentList, referenceItem, index).getItemList(),
-                               referenceItem.getRows().size);
+                               referenceItem.getRows().size());
             } else {
                 msus_i = getMSUs(currentList, referenceItem, index);
             }
