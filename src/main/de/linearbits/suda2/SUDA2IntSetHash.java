@@ -24,7 +24,7 @@ import java.util.Arrays;
  * @author Fabian Prasser
  */
 public class SUDA2IntSetHash extends SUDA2IntSet {
-    
+
     /** Default */
     private static final float DEFAULT_LOAD_FACTOR      = 0.75f;
 
@@ -206,8 +206,6 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             return rows;
         }
     }
-
-    
 
     @Override
     public boolean isSupportRowPresent(SUDA2IntSet other) {

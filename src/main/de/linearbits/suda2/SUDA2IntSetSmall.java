@@ -23,7 +23,7 @@ package de.linearbits.suda2;
  * @author Fabian Prasser
  */
 public class SUDA2IntSetSmall extends SUDA2IntSet {
-    
+
     /** Size*/
     public static final int SIZE = 8;
 
@@ -136,7 +136,7 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         // ----------------------------------------------------- //
         endTiming(Timeable.TYPE_INT_SET_SMALL, size);
         // ----------------------------------------------------- //
-        
+
         // Return
         return rows;
     }
