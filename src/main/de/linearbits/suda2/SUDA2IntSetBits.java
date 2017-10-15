@@ -70,6 +70,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         // Multiple of 64 less than or equal to min
         this.offset = min & (~0x3f);
         this.array = new long[(int) (Math.ceil((double) (max - offset + 1) / 64d))];
+        instance(TYPE_INT_SET_BITS);
     }
 
     @Override
@@ -92,12 +93,18 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
 
     @Override
     public boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[][] data) {
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
         int index = this.offset;
         int value = 0;
         for (int offset = 0; offset < this.array.length; offset++) {
             for (int i = 0; i < 64; i++) {
                 if (((array[offset] & (1L << (value & BIT_INDEX_MASK))) != 0)) {
-                    if (containsSpecialRow(items, referenceItem, data[index - 1])) { 
+                    if (containsSpecialRow(items, referenceItem, data[index - 1])) {
+                        // ----------------------------------------------------- //
+                        endTypeMethodTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SPECIALROW, size);
+                        // ----------------------------------------------------- //
                         return true; 
                     }
                 }
@@ -105,6 +112,9 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
                 index ++;
             }
         }
+        // ----------------------------------------------------- //
+        endTypeMethodTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SPECIALROW, size);
+        // ----------------------------------------------------- //
         return false;
     }
 
@@ -134,9 +144,13 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         if (this.max < other.min() || other.max() < this.min) {
             return new SUDA2IntSetSmall();
         }
-
+        
         // Intersect two bitsets
         if (other.isBitSet()) {
+            
+            // ----------------------------------------------------- //
+            startTiming();
+            // ----------------------------------------------------- //
             
             // Convert and prepare
             SUDA2IntSetBits _other = (SUDA2IntSetBits)other;
@@ -166,7 +180,10 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
                 result.array[resultIndex++] = element;
             }
 
-            // Return the result
+            // ----------------------------------------------------- //
+            endTypeMethodTiming(TYPE_INT_SET_BITS, TYPE_METHOD_INTERSECTION, size);
+            // ----------------------------------------------------- //
+            
             return result;
             
         // Let the other set probe this set
@@ -183,6 +200,10 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         if (this.max < other.min() || other.max() < this.min) {
             return false;
         }
+        
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
 
         // Intersect two bitsets
         if (other.isBitSet()) {
@@ -205,11 +226,18 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
                 count += Long.bitCount(array[index++] & _other.array[_index++]);
             }
             
+            // ----------------------------------------------------- //
+            endTypeMethodTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SUPPORTROW, size);
+            // ----------------------------------------------------- //
+            
             // Return if we found exactly one such row
             return count == 1;
 
             // Let the other set probe this set
         } else {
+            // ----------------------------------------------------- //
+            endTypeMethodTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SUPPORTROW, size);
+            // ----------------------------------------------------- //
             return other.isSupportRowPresent(this);
         }
     }

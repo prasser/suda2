@@ -21,7 +21,7 @@ package de.linearbits.suda2;
  * 
  * @author Fabian Prasser
  */
-public abstract class SUDA2IntSet {
+public abstract class SUDA2IntSet extends Timeable {
 
     /**
      * Adds a new value to the set

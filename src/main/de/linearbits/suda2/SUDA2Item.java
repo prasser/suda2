@@ -21,8 +21,8 @@ package de.linearbits.suda2;
  * 
  * @author Fabian Prasser
  */
-public class SUDA2Item {
-
+public class SUDA2Item extends Timeable {
+    
     /**
      * Packs column and value into a long to be used as a key
      * @param column
@@ -127,6 +127,8 @@ public class SUDA2Item {
      * @return
      */
     public SUDA2Item getProjection(SUDA2IntSet otherRows) {
+        
+        startTiming();
 
         // Smaller set is rows1
         int size1 = this.rows.size();
@@ -137,6 +139,8 @@ public class SUDA2Item {
         // Intersect
         SUDA2IntSet rows = rows1.intersectWith(rows2);
         
+        endMethodTiming(METHOD_PROJECTION);
+
         // Return
         return rows.size() == 0 ? null : new SUDA2Item(this.column, this.value, this.id, rows);
     }

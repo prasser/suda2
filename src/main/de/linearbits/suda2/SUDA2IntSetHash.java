@@ -75,6 +75,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     public SUDA2IntSetHash() {
         this.buckets = new int[DEFAULT_INITIAL_CAPACITY];
         this.threshold = getThreshold(this.buckets.length);
+        instance(TYPE_INT_SET_HASH);
     }
 
     @Override
@@ -115,6 +116,9 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     
     @Override
     public boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[][] data) {
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
         outer: for (int i = 0; i < buckets.length; i++) {
             if (buckets[i] != 0) {
                 int[] row = data[buckets[i] - 1];
@@ -126,9 +130,15 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                 if (referenceItem.isContained(row)) {
                     continue;
                 }
+                // ----------------------------------------------------- //
+                endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_SPECIALROW, size);
+                // ----------------------------------------------------- //
                 return true;
             }
         }
+        // ----------------------------------------------------- //
+        endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_SPECIALROW, size);
+        // ----------------------------------------------------- //
         return false;
     }
     
@@ -140,15 +150,19 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             return new SUDA2IntSetSmall();
         }
 
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
+        
         // Intersect ranges
         int min = Math.max(this.min,  other.min());
         int max = Math.min(this.max,  other.max());
         
         if (this.size > SUDA2IntSetSmall.SIZE) {
-            
+
             // Bitset
             if (SUDA2IntSetBits.makesSense(min, max, this.size)) {
-                
+
                 // Intersect support rows with those provided
                 SUDA2IntSetBits rows = new SUDA2IntSetBits(min, max);
                 for (int i = 0; i < buckets.length; i++) {
@@ -157,11 +171,16 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                         rows.add(row);
                     }
                 }
-                return rows;
                 
-            // Hashset
+                // ----------------------------------------------------- //
+                endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION, size);
+                // ----------------------------------------------------- //
+                
+                return rows;
+
+                // Hashset
             } else {
-    
+
                 // Intersect support rows with those provided
                 SUDA2IntSetHash rows = new SUDA2IntSetHash();
                 for (int i = 0; i < buckets.length; i++) {
@@ -170,12 +189,16 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                         rows.add(row);
                     }
                 }
-                return rows;
                 
+                // ----------------------------------------------------- //
+                endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION, size);
+                // ----------------------------------------------------- //
+                
+                return rows;
             }
-            
+
         } else {
-    
+
             // Intersect support rows with those provided
             SUDA2IntSetSmall rows = new SUDA2IntSetSmall();
             for (int i = 0; i < buckets.length; i++) {
@@ -184,10 +207,15 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                     rows.add(row);
                 }
             }
+            
+            // ----------------------------------------------------- //
+            endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION, size);
+            // ----------------------------------------------------- //
+            
             return rows;
         }
     }
-    
+
     @Override
     public boolean isSupportRowPresent(SUDA2IntSet other) {
 
@@ -195,6 +223,10 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         if (this.max < other.min() || other.max() < this.min) {
             return false;
         }
+        
+        // ----------------------------------------------------- //
+        startTiming();
+        // ----------------------------------------------------- //
 
         // Intersect ranges
         int min = Math.max(this.min,  other.min());
@@ -205,6 +237,9 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             int row = buckets[i];
             if (row != 0 && row >= min && row <= max && other.contains(row)) {
                 if (supportRowFound) {
+                    // ----------------------------------------------------- //
+                    endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_SUPPORTROW, size);
+                    // ----------------------------------------------------- //
                     // More than one support row
                     return false;
                 } else {
@@ -212,6 +247,9 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                 }
             }
         }
+        // ----------------------------------------------------- //
+        endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_SUPPORTROW, size);
+        // ----------------------------------------------------- //
         return supportRowFound;
     }
 
