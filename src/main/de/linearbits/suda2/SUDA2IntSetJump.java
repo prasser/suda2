@@ -16,16 +16,12 @@
  */
 package de.linearbits.suda2;
 
-
 /**
  * A very basic integer set
  * 
  * @author Fabian Prasser
  */
-public class SUDA2IntSetSmall extends SUDA2IntSet {
-
-    /** Size*/
-    public static final int SIZE = 8;
+public class SUDA2IntSetJump extends SUDA2IntSet {
 
     /** Bucket*/
     private int int0;
@@ -55,7 +51,7 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
     /**
      * Creates a new instance
      */
-    public SUDA2IntSetSmall() {
+    public SUDA2IntSetJump() {
         instance(TYPE_INT_SET_SMALL);
     }
     
@@ -116,11 +112,16 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
     }
 
     @Override
+    public Type getType() {
+        return Type.JUMP;
+    }
+
+    @Override
     public SUDA2IntSet intersectWith(SUDA2IntSet other) {
 
         // No intersection
-        if (this.max < other.min() || other.max() < this.min) {
-            return new SUDA2IntSetSmall();
+        if (this.size == 0 || this.max < other.min() || other.max() < this.min) {
+            return SUDA2IntSet.EMPTY_SET;
         }
         
         // ----------------------------------------------------- //
@@ -128,16 +129,16 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         // ----------------------------------------------------- //
 
         // Intersect support rows with those provided
-        SUDA2IntSetSmall rows = new SUDA2IntSetSmall();
+        SUDA2IntSetJump result = new SUDA2IntSetJump();
         switch (size) {
-        case 8: if (other.contains(int7)) { rows.add(int7); }
-        case 7: if (other.contains(int6)) { rows.add(int6); }
-        case 6: if (other.contains(int5)) { rows.add(int5); }
-        case 5: if (other.contains(int4)) { rows.add(int4); }
-        case 4: if (other.contains(int3)) { rows.add(int3); }
-        case 3: if (other.contains(int2)) { rows.add(int2); }
-        case 2: if (other.contains(int1)) { rows.add(int1); }
-        case 1: if (other.contains(int0)) { rows.add(int0); }
+        case 8: if (other.contains(int7)) { result.add(int7); }
+        case 7: if (other.contains(int6)) { result.add(int6); }
+        case 6: if (other.contains(int5)) { result.add(int5); }
+        case 5: if (other.contains(int4)) { result.add(int4); }
+        case 4: if (other.contains(int3)) { result.add(int3); }
+        case 3: if (other.contains(int2)) { result.add(int2); }
+        case 2: if (other.contains(int1)) { result.add(int1); }
+        case 1: if (other.contains(int0)) { result.add(int0); }
         }
         
         // ----------------------------------------------------- //
@@ -145,7 +146,7 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         // ----------------------------------------------------- //
 
         // Return
-        return rows;
+        return result;
     }
 
     @Override
@@ -178,18 +179,23 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
     }
 
     @Override
-    public int min() {
-        return min;
-    }
-
-    @Override
     public int max() {
         return max;
     }
 
     @Override
+    public int min() {
+        return min;
+    }
+
+    @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public String toString() {
+        return "Size=" + size + " elements=" + int0 + ", " + int1 + ", " + int2 + ", " + int3 + ", " + int4 + ", " + int5 + ", " + int6 + ", " + int7;
     }
 
     /**
@@ -209,15 +215,5 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public boolean isBitSet() {
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Size=" + size + " elements=" + int0 + ", " + int1 + ", " + int2 + ", " + int3 + ", " + int4 + ", " + int5 + ", " + int6 + ", " + int7;
     }
 }
