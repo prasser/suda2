@@ -110,7 +110,7 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         case 1: if (containsSpecialRow(items, referenceItem, data[int0 - 1])) { return true; }
         }
         // ----------------------------------------------------- //
-        endSpecialRowTiming(TYPE_INT_SET_SMALL);
+        endTypeMethodTiming(TYPE_INT_SET_SMALL, TYPE_METHOD_SPECIALROW, size);
         // ----------------------------------------------------- //
         return false;
     }
@@ -141,7 +141,7 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         }
         
         // ----------------------------------------------------- //
-        endIntersectionTiming(TYPE_INT_SET_SMALL, size);
+        endTypeMethodTiming(TYPE_INT_SET_SMALL, TYPE_METHOD_INTERSECTION, size);
         // ----------------------------------------------------- //
 
         // Return
@@ -172,7 +172,7 @@ public class SUDA2IntSetSmall extends SUDA2IntSet {
         case 1: rows += other.contains(int0) ? 1 : 0;
         }
         // ----------------------------------------------------- //
-        endSupportRowTiming(TYPE_INT_SET_SMALL);
+        endTypeMethodTiming(TYPE_INT_SET_SMALL, TYPE_METHOD_SUPPORTROW, size);
         // ----------------------------------------------------- //
         return rows == 1;
     }

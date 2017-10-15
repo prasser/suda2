@@ -131,13 +131,13 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                     continue;
                 }
                 // ----------------------------------------------------- //
-                endSpecialRowTiming(TYPE_INT_SET_HASH);
+                endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_SPECIALROW, size);
                 // ----------------------------------------------------- //
                 return true;
             }
         }
         // ----------------------------------------------------- //
-        endSpecialRowTiming(TYPE_INT_SET_HASH);
+        endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_SPECIALROW, size);
         // ----------------------------------------------------- //
         return false;
     }
@@ -173,7 +173,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                 }
                 
                 // ----------------------------------------------------- //
-                endIntersectionTiming(TYPE_INT_SET_HASH, size);
+                endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION, size);
                 // ----------------------------------------------------- //
                 
                 return rows;
@@ -191,7 +191,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
                 }
                 
                 // ----------------------------------------------------- //
-                endIntersectionTiming(TYPE_INT_SET_HASH, size);
+                endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION, size);
                 // ----------------------------------------------------- //
                 
                 return rows;
@@ -209,7 +209,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             }
             
             // ----------------------------------------------------- //
-            endIntersectionTiming(TYPE_INT_SET_HASH, size);
+            endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION, size);
             // ----------------------------------------------------- //
             
             return rows;
@@ -238,7 +238,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             if (row != 0 && row >= min && row <= max && other.contains(row)) {
                 if (supportRowFound) {
                     // ----------------------------------------------------- //
-                    endSupportRowTiming(TYPE_INT_SET_HASH);
+                    endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_SUPPORTROW, size);
                     // ----------------------------------------------------- //
                     // More than one support row
                     return false;
@@ -248,7 +248,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             }
         }
         // ----------------------------------------------------- //
-        endSupportRowTiming(TYPE_INT_SET_HASH);
+        endTypeMethodTiming(TYPE_INT_SET_HASH, TYPE_METHOD_SUPPORTROW, size);
         // ----------------------------------------------------- //
         return supportRowFound;
     }

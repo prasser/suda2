@@ -103,7 +103,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
                 if (((array[offset] & (1L << (value & BIT_INDEX_MASK))) != 0)) {
                     if (containsSpecialRow(items, referenceItem, data[index - 1])) {
                         // ----------------------------------------------------- //
-                        endSpecialRowTiming(TYPE_INT_SET_BITS);
+                        endTypeMethodTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SPECIALROW, size);
                         // ----------------------------------------------------- //
                         return true; 
                     }
@@ -113,7 +113,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             }
         }
         // ----------------------------------------------------- //
-        endSpecialRowTiming(TYPE_INT_SET_BITS);
+        endTypeMethodTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SPECIALROW, size);
         // ----------------------------------------------------- //
         return false;
     }
@@ -181,7 +181,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             }
 
             // ----------------------------------------------------- //
-            endIntersectionTiming(TYPE_INT_SET_BITS, size);
+            endTypeMethodTiming(TYPE_INT_SET_BITS, TYPE_METHOD_INTERSECTION, size);
             // ----------------------------------------------------- //
             
             return result;
@@ -227,7 +227,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             }
             
             // ----------------------------------------------------- //
-            endSupportRowTiming(TYPE_INT_SET_BITS);
+            endTypeMethodTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SUPPORTROW, size);
             // ----------------------------------------------------- //
             
             // Return if we found exactly one such row
@@ -236,7 +236,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             // Let the other set probe this set
         } else {
             // ----------------------------------------------------- //
-            endSupportRowTiming(TYPE_INT_SET_BITS);
+            endTypeMethodTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SUPPORTROW, size);
             // ----------------------------------------------------- //
             return other.isSupportRowPresent(this);
         }
