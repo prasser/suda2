@@ -60,12 +60,13 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         // ----------------------------------------------------- //
         startTiming();
         // ----------------------------------------------------- //
-        int index = this.offset;
-        for (int offset = 0; offset < this.array.length; offset++) {
+        int index = this.offset - 1;
+        final int bound = this.array.length;
+        for (int offset = 0; offset < bound; offset++) {
             if (array[offset] != 0L) {
                 for (int i = 0; i < 64; i++) {
                     if (((array[offset] & (1L << i)) != 0)) {
-                        if (containsSpecialRow(items, referenceItem, data[index - 1])) {
+                        if (containsSpecialRow(items, referenceItem, data[index])) {
                             // ----------------------------------------------------- //
                             endTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SPECIALROW, size);
                             // ----------------------------------------------------- //
