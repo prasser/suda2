@@ -62,16 +62,20 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         // ----------------------------------------------------- //
         int index = this.offset;
         for (int offset = 0; offset < this.array.length; offset++) {
-            for (int i = 0; i < 64; i++) {
-                if (((array[offset] & (1L << i)) != 0)) {
-                    if (containsSpecialRow(items, referenceItem, data[index - 1])) {
-                        // ----------------------------------------------------- //
-                        endTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SPECIALROW, size);
-                        // ----------------------------------------------------- //
-                        return true; 
+            if (array[offset] != 0L) {
+                for (int i = 0; i < 64; i++) {
+                    if (((array[offset] & (1L << i)) != 0)) {
+                        if (containsSpecialRow(items, referenceItem, data[index - 1])) {
+                            // ----------------------------------------------------- //
+                            endTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SPECIALROW, size);
+                            // ----------------------------------------------------- //
+                            return true; 
+                        }
                     }
+                    index ++;
                 }
-                index ++;
+            } else {
+                index += 64;
             }
         }
         // ----------------------------------------------------- //
@@ -79,7 +83,6 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         // ----------------------------------------------------- //
         return false;
     }
-
     /**
      * Searches for the special row
      * @param items
