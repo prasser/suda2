@@ -8,12 +8,41 @@ import java.util.Arrays;
  * @author Fabian Prasser
  */
 public class SUDA2IntSetBits extends SUDA2IntSet {
+    
+    // TODO: This won't work for multiple instances, so fix it
+    public static int dataSize = 0;
 
     /** Bits per unit */
     private static final int ADDRESS_BITS_PER_UNIT = 6;
 
     /** Index mask */
     private static final int BIT_INDEX_MASK        = 63;
+    
+    /**
+     * Returns whether a bitset makes sense
+     * @param minimum
+     * @param maximum
+     * @param size
+     */
+    public static boolean makesSense(int minimum, int maximum, int size) {
+        // TODO: There has to be a more efficient way of doing this
+        return size > (dataSize * 0.1d) && (getCapacity(size) << 5) >= maximum - minimum;
+    }
+
+    /**
+     * Returns the smallest power of two larger than the given size
+     * @param size
+     * @return
+     */
+    private static final int getCapacity(int size) {
+        --size;
+        size |= size >> 1;
+        size |= size >> 2;
+        size |= size >> 4;
+        size |= size >> 8;
+        size |= size >> 16;
+        return size + 1;
+    }
 
     /** Array */
     private final long[]     array;
@@ -68,9 +97,10 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         startTiming();
         // ----------------------------------------------------- //
         int index = this.offset;
+        int value = 0;
         for (int offset = 0; offset < this.array.length; offset++) {
             for (int i = 0; i < 64; i++) {
-                if (((array[offset] & (1L << (i & BIT_INDEX_MASK))) != 0)) {
+                if (((array[offset] & (1L << (value & BIT_INDEX_MASK))) != 0)) {
                     if (containsSpecialRow(items, referenceItem, data[index - 1])) {
                         // ----------------------------------------------------- //
                         endTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SPECIALROW, size);
@@ -78,6 +108,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
                         return true; 
                     }
                 }
+                value ++;
                 index ++;
             }
         }
@@ -87,21 +118,35 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         return false;
     }
 
-    @Override
-    public Type getType() {
-        return Type.BITS;
+    /**
+     * Searches for the special row
+     * @param items
+     * @param referenceItem
+     * @param row
+     * @return
+     */
+    private boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[] row) {
+        for (SUDA2Item item : items) {
+            if (!item.isContained(row)) {
+                return false;
+            }
+        }
+        if (referenceItem.isContained(row)) {
+            return false;
+        }
+        return true;
     }
     
     @Override
     public SUDA2IntSet intersectWith(SUDA2IntSet other) {
 
         // No intersection
-        if (this.size == 0 || this.max < other.min() || other.max() < this.min) {
-            return new SUDA2IntSetEmpty();
+        if (this.max < other.min() || other.max() < this.min) {
+            return new SUDA2IntSetJump();
         }
         
         // Intersect two bitsets
-        if (other.getType() == Type.BITS) {
+        if (other.isBitSet()) {
             
             // ----------------------------------------------------- //
             startTiming();
@@ -114,8 +159,8 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             
             // Result
             SUDA2IntSetBits result = new SUDA2IntSetBits(min, max);
-            result.min = min; // TODO: FIXME: Just an approximation
-            result.max = max; // TODO: FIXME: Just an approximation
+            result.min = min; // Just an approximation
+            result.max = max; // Just an approximation
             
             // Offsets
             int index = offset / 64;
@@ -135,42 +180,12 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
                 result.array[resultIndex++] = element;
             }
 
-            if (result.size == 0) {
-
-                // ----------------------------------------------------- //
-                endTiming(TYPE_INT_SET_BITS, TYPE_METHOD_INTERSECTION, size);
-                // ----------------------------------------------------- //
-                
-                // Shrink
-                return SUDA2IntSet.EMPTY_SET;
-                
-            } else if (result.size > 8) {
-
-                // ----------------------------------------------------- //
-                endTiming(TYPE_INT_SET_BITS, TYPE_METHOD_INTERSECTION, size);
-                // ----------------------------------------------------- //
-                
-                return result;
-            } else {
-                
-                // Shrink
-                SUDA2IntSetJump small = new SUDA2IntSetJump();
-                index = this.offset;
-                for (int offset = 0; offset < this.array.length; offset++) {
-                    for (int i = 0; i < 64; i++) {
-                        if (((array[offset] & (1L << (i & BIT_INDEX_MASK))) != 0)) {
-                            small.add(index);
-                        }
-                        index ++;
-                    }
-                }
-
-                // ----------------------------------------------------- //
-                endTiming(TYPE_INT_SET_BITS, TYPE_METHOD_INTERSECTION, size);
-                // ----------------------------------------------------- //
-                
-                return small;
-            }
+            // ----------------------------------------------------- //
+            endTiming(TYPE_INT_SET_BITS, TYPE_METHOD_INTERSECTION, size);
+            // ----------------------------------------------------- //
+            
+            return result;
+            
         // Let the other set probe this set
         } else {
             
@@ -191,7 +206,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         // ----------------------------------------------------- //
 
         // Intersect two bitsets
-        if (other.getType() == Type.BITS) {
+        if (other.isBitSet()) {
             
             // Prepare
             SUDA2IntSetBits _other = (SUDA2IntSetBits)other;
@@ -243,26 +258,13 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
     }
 
     @Override
+    public boolean isBitSet() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "Size=" + size + " offset=" + offset + " array=" + Arrays.toString(array);
     }
-
-    /**
-     * Searches for the special row
-     * @param items
-     * @param referenceItem
-     * @param row
-     * @return
-     */
-    private boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[] row) {
-        for (SUDA2Item item : items) {
-            if (!item.isContained(row)) {
-                return false;
-            }
-        }
-        if (referenceItem.isContained(row)) {
-            return false;
-        }
-        return true;
-    }
+    
 }

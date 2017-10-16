@@ -22,68 +22,6 @@ package de.linearbits.suda2;
  * @author Fabian Prasser
  */
 public abstract class SUDA2IntSet extends Timeable {
-    
-    /**
-     * The different types of sets available
-     * 
-     * @author Fabian Prasser
-     */
-    public static enum Type {
-        HASH,
-        BITS,
-        JUMP,
-        EMPTY
-    }
-    
-    /** Empty set */
-    public static SUDA2IntSet EMPTY_SET = new SUDA2IntSetEmpty();
-    
-    /**
-     * Tries to guess the best type of set to use for output data for a specific intersection operation
-     * @param size
-     * @param min1
-     * @param max1
-     * @param min2
-     * @param max2
-     * @return
-     */
-    public static SUDA2IntSet getResultSet(int size, int min1, int max1, int min2, int max2) {
-
-        // No output, empty set
-        if (size == 0 || max1 < min2 || max2 < min1) {
-            return EMPTY_SET;
-        }
-            
-        // Intersect
-        int overlapMin = Math.max(min1,  min2);
-        int overlapMax = Math.min(max1,  max2);
-        
-        
-        // Very small set
-        if (size <= 8) {
-            return new SUDA2IntSetJump();
-        }
-        
-        // Estimate size assuming uniform distribution
-        int estimatedSize = (int)((double)size * (double)(overlapMax - overlapMin) / (double)(max1 - min1));
-
-        // Calculate capacity needed for hash set of estimates size
-        int capacity = estimatedSize - 1;
-        capacity |= capacity >> 1;
-        capacity |= capacity >> 2;
-        capacity |= capacity >> 4;
-        capacity |= capacity >> 8;
-        capacity |= capacity >> 16;
-        capacity++;
-        
-        // If it saves space, use a bit set
-        if ((capacity << 5) >= overlapMax - overlapMin) {
-            return new SUDA2IntSetBits(overlapMin, overlapMax);
-        }
-        
-        // Fall back to hash set
-        return new SUDA2IntSetHash(capacity);
-    }
 
     /**
      * Adds a new value to the set
@@ -108,18 +46,18 @@ public abstract class SUDA2IntSet extends Timeable {
     public abstract boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[][] data);
     
     /**
-     * Returns whether the set is a bit set
-     * @return
-     */
-    public abstract Type getType();
-    
-    /**
      * Returns a new set that contains only elements contained in both sets
      * 
      * @param other
      * @return
      */
     public abstract SUDA2IntSet intersectWith(SUDA2IntSet other);
+    
+    /**
+     * Returns whether the set is a bit set
+     * @return
+     */
+    public abstract boolean isBitSet();
     
     /**
      * Searches for exactly one support row
