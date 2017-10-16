@@ -11,12 +11,6 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
     
     // TODO: This won't work for multiple instances, so fix it
     public static int dataSize = 0;
-
-    /** Bits per unit */
-    private static final int ADDRESS_BITS_PER_UNIT = 6;
-
-    /** Index mask */
-    private static final int BIT_INDEX_MASK        = 63;
     
     /**
      * Returns whether a bitset makes sense
@@ -67,8 +61,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
      */
     public SUDA2IntSetBits(int min, int max) {
         
-        // Multiple of 64 less than or equal to min
-        this.offset = min & (~0x3f);
+        this.offset = min & (~0x3f); // Multiple of 64 less than or equal to min
         this.array = new long[(int) (Math.ceil((double) (max - offset + 1) / 64d))];
         instance(TYPE_INT_SET_BITS);
     }
@@ -78,8 +71,8 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         min = Math.min(value, min);
         max = Math.max(value, max);
         value -= offset;
-        int offset = value >> ADDRESS_BITS_PER_UNIT;
-        this.array[offset] |= 1L << (value & BIT_INDEX_MASK);
+        int offset = value >> 6; // Divide by 64
+        this.array[offset] |= 1L << (value & 63); // x % y = (x & (y - 1))
         this.size ++; // TODO: Hopefully, we never add the same value twice
     }
     
@@ -87,8 +80,8 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
     @Override
     public boolean contains(int value) {
         value -= this.offset;
-        int offset = value >> ADDRESS_BITS_PER_UNIT;
-        return (value < 0 || offset >= array.length) ? false : ((array[offset] & (1L << (value & BIT_INDEX_MASK))) != 0);
+        int offset = value >> 6; // Divide by 64
+        return (value < 0 || offset >= array.length) ? false : ((array[offset] & (1L << (value & 63))) != 0); // x % y = (x & (y - 1))
     }
 
     @Override
@@ -97,10 +90,9 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         startTiming();
         // ----------------------------------------------------- //
         int index = this.offset;
-        int value = 0;
         for (int offset = 0; offset < this.array.length; offset++) {
             for (int i = 0; i < 64; i++) {
-                if (((array[offset] & (1L << (value & BIT_INDEX_MASK))) != 0)) {
+                if (((array[offset] & (1L << i)) != 0)) {
                     if (containsSpecialRow(items, referenceItem, data[index - 1])) {
                         // ----------------------------------------------------- //
                         endTiming(TYPE_INT_SET_BITS, TYPE_METHOD_SPECIALROW, size);
@@ -108,7 +100,6 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
                         return true; 
                     }
                 }
-                value ++;
                 index ++;
             }
         }
@@ -265,6 +256,5 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
     @Override
     public String toString() {
         return "Size=" + size + " offset=" + offset + " array=" + Arrays.toString(array);
-    }
-    
+    }   
 }
