@@ -8,36 +8,7 @@ import java.util.Arrays;
  * @author Fabian Prasser
  */
 public class SUDA2IntSetBits extends SUDA2IntSet {
-    
-    // TODO: This won't work for multiple instances, so fix it
-    public static int dataSize = 0;
-    
-    /**
-     * Returns whether a bitset makes sense
-     * @param minimum
-     * @param maximum
-     * @param size
-     */
-    public static boolean makesSense(int minimum, int maximum, int size) {
-        // TODO: There has to be a more efficient way of doing this
-        return size > (dataSize * 0.1d) && (getCapacity(size) << 5) >= maximum - minimum;
-    }
-
-    /**
-     * Returns the smallest power of two larger than the given size
-     * @param size
-     * @return
-     */
-    private static final int getCapacity(int size) {
-        --size;
-        size |= size >> 1;
-        size |= size >> 2;
-        size |= size >> 4;
-        size |= size >> 8;
-        size |= size >> 16;
-        return size + 1;
-    }
-
+   
     /** Array */
     private final long[]     array;
 

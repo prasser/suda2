@@ -73,11 +73,19 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
      * Creates a new instance
      */
     public SUDA2IntSetHash() {
+        this(DEFAULT_INITIAL_CAPACITY);
+    }
+
+    /**
+     * Creates a new instance
+     * @param capacity
+     */
+    public SUDA2IntSetHash(int capacity) {
         this.buckets = new int[DEFAULT_INITIAL_CAPACITY];
         this.threshold = getThreshold(this.buckets.length);
         instance(TYPE_INT_SET_HASH);
     }
-
+    
     @Override
     public void add(int value) {
         min = Math.min(value, min);
@@ -116,19 +124,21 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     
     @Override
     public boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[][] data) {
+        
         // ----------------------------------------------------- //
         startTiming();
         // ----------------------------------------------------- //
+        
         outer: for (int i = 0; i < buckets.length; i++) {
             if (buckets[i] != 0) {
                 int[] row = data[buckets[i] - 1];
+                if (referenceItem.isContained(row)) {
+                    continue;
+                }
                 for (SUDA2Item item : items) {
                     if (!item.isContained(row)) {
                         continue outer;
                     }
-                }
-                if (referenceItem.isContained(row)) {
-                    continue;
                 }
                 // ----------------------------------------------------- //
                 endTiming(TYPE_INT_SET_HASH, TYPE_METHOD_SPECIALROW, size);
@@ -142,11 +152,13 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         return false;
     }
     
+    public static double dataSize;
+    
     @Override
     public SUDA2IntSet intersectWith(SUDA2IntSet other) {
 
-        // No intersection
-        if (this.max < other.min() || other.max() < this.min) {
+        // No output, empty set
+        if (size == 0 || this.max < other.min() || other.max() < this.min) {
             return new SUDA2IntSetJump();
         }
 
@@ -154,66 +166,55 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         startTiming();
         // ----------------------------------------------------- //
         
+        // Prepare
+        SUDA2IntSet result = null;
+        
         // Intersect ranges
         int min = Math.max(this.min,  other.min());
         int max = Math.min(this.max,  other.max());
         
-        if (this.size > SUDA2IntSetJump.SIZE) {
-
-            // Bitset
-            if (SUDA2IntSetBits.makesSense(min, max, this.size)) {
-
-                // Intersect support rows with those provided
-                SUDA2IntSetBits rows = new SUDA2IntSetBits(min, max);
-                for (int i = 0; i < buckets.length; i++) {
-                    int row = buckets[i];
-                    if (row != 0 && row >= min && row <= max && other.contains(row)) {
-                        rows.add(row);
-                    }
-                }
-                
-                // ----------------------------------------------------- //
-                endTiming(TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION, size);
-                // ----------------------------------------------------- //
-                
-                return rows;
-
-                // Hashset
-            } else {
-
-                // Intersect support rows with those provided
-                SUDA2IntSetHash rows = new SUDA2IntSetHash();
-                for (int i = 0; i < buckets.length; i++) {
-                    int row = buckets[i];
-                    if (row != 0 && row >= min && row <= max && other.contains(row)) {
-                        rows.add(row);
-                    }
-                }
-                
-                // ----------------------------------------------------- //
-                endTiming(TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION, size);
-                // ----------------------------------------------------- //
-                
-                return rows;
-            }
-
+        
+        // Very small set
+        if (size <= 8) {
+            result = new SUDA2IntSetJump();
+            
+        // Hash or bitset
         } else {
-
-            // Intersect support rows with those provided
-            SUDA2IntSetJump rows = new SUDA2IntSetJump();
-            for (int i = 0; i < buckets.length; i++) {
-                int row = buckets[i];
-                if (row != 0 && row >= min && row <= max && other.contains(row)) {
-                    rows.add(row);
-                }
+            
+            // Estimate size assuming uniform distribution
+            int estimatedSize = (int)((double)size * (double)(max - min) / (double)(this.max - this.min)) + 1;
+    
+            // Calculate capacity needed for hash set of estimates size
+            int capacity = estimatedSize - 1;
+            capacity |= capacity >> 1;
+            capacity |= capacity >> 2;
+            capacity |= capacity >> 4;
+            capacity |= capacity >> 8;
+            capacity |= capacity >> 16;
+            capacity++;
+            
+            // If it saves space, use a bit set
+            if (size > (dataSize * 0.1d) && (capacity << 5) >= max - min) {
+                result = new SUDA2IntSetBits(min, max);
+            } else {
+                // Fall back to hash set
+                result = new SUDA2IntSetHash(capacity);                
             }
-            
-            // ----------------------------------------------------- //
-            endTiming(TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION, size);
-            // ----------------------------------------------------- //
-            
-            return rows;
         }
+
+        // Intersect support rows with those provided
+        for (int i = 0; i < buckets.length; i++) {
+            int row = buckets[i];
+            if (row != 0 && row >= min && row <= max && other.contains(row)) {
+                result.add(row);
+            }
+        }
+
+        // ----------------------------------------------------- //
+        endTiming(TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION, size);
+        // ----------------------------------------------------- //
+
+        return result;
     }
 
     @Override

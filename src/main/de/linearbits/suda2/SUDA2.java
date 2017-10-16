@@ -72,7 +72,7 @@ public class SUDA2 {
         this.check(data);
         this.data = data;
         this.columns = data.length == 0 ? 0 : data[0].length;
-        SUDA2IntSetBits.dataSize = data.length;
+        SUDA2IntSetHash.dataSize = data.length;
     }
 
     /**
