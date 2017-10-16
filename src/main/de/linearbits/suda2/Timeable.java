@@ -39,13 +39,13 @@ public abstract class Timeable {
     /** Data */
     public static long[]         methodCallCount            = new long[METHOD_COUNT];
     /** Data */
-    public static long[][]       typeMethodCallTime         = new long[TYPE_COUNT][METHOD_COUNT];
+    public static long[][]       typeMethodCallTime         = new long[TYPE_COUNT][TYPE_METHOD_COUNT];
     /** Data */
-    public static long[][]       typeMethodCallCount        = new long[TYPE_COUNT][METHOD_COUNT];
+    public static long[][]       typeMethodCallCount        = new long[TYPE_COUNT][TYPE_METHOD_COUNT];
     /** Data */
-    public static long[][][]     typeMethodSizeCountBuckets = new long[TYPE_COUNT][METHOD_COUNT][7];
+    public static long[][][]     typeMethodSizeCountBuckets = new long[TYPE_COUNT][TYPE_METHOD_COUNT][7];
     /** Data */
-    public static long[][][]     typeMethodSizeTimeBuckets  = new long[TYPE_COUNT][METHOD_COUNT][7];
+    public static long[][][]     typeMethodSizeTimeBuckets  = new long[TYPE_COUNT][TYPE_METHOD_COUNT][7];
     
     /**
      * Resets all timers
