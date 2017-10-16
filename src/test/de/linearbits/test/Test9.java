@@ -37,11 +37,11 @@ public class Test9 extends AbstractTest{
        
         // As array
         String[] files = new String[]{
-//            "data/test.csv",    // Adult
-//            "data/test2.csv",   // Whatever
-//            "data/test3.csv",   // Whatever
-//            "data/test4.csv",   // FARS
-//            "data/test7.csv",   // CUP
+            "data/test.csv",    // Adult
+            "data/test2.csv",   // Whatever
+            "data/test3.csv",   // Whatever
+            "data/test4.csv",   // FARS
+            "data/test7.csv",   // CUP
             "data/test5.csv",   // IHIS
             "data/test6.csv"    // SS13ACS
         };

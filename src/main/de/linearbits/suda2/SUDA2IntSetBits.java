@@ -112,27 +112,28 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         }
         
         // Result is very small
-        if (this.size <=8) {
-            
-            SUDA2IntSetJump result = new SUDA2IntSetJump();
-            int index = this.offset;
-            final int bound = this.array.length;
-            for (int offset = 0; offset < bound; offset++) {
-                if (array[offset] != 0L) {
-                    for (int i = 0; i < 64; i++) {
-                        if (((array[offset] & (1L << i)) != 0)) {
-                            result.add(index);
-                        }
-                        index ++;
-                    }
-                } else {
-                    index += 64;
-                }
-            }
-            return result;
-
-        // Intersect two bitsets
-        } else if(other.isBitSet()) {
+//        if (this.size <=8) {
+//            
+//            SUDA2IntSetJump result = new SUDA2IntSetJump();
+//            int index = this.offset;
+//            final int bound = this.array.length;
+//            for (int offset = 0; offset < bound; offset++) {
+//                if (array[offset] != 0L) {
+//                    for (int i = 0; i < 64; i++) {
+//                        if (((array[offset] & (1L << i)) != 0)) {
+//                            result.add(index);
+//                        }
+//                        index ++;
+//                    }
+//                } else {
+//                    index += 64;
+//                }
+//            }
+//            return result;
+//
+//        // Intersect two bitsets
+//        } else 
+            if(other.isBitSet()) {
             
             // ----------------------------------------------------- //
             startTiming();
