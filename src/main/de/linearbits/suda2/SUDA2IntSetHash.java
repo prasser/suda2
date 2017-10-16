@@ -134,13 +134,13 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         outer: for (int i = 0; i < length; i++) {
             if (buckets[i] != 0) {
                 int[] row = data[buckets[i] - 1];
-                if (referenceItem.isContained(row)) {
-                    continue;
-                }
                 for (int j=0; j<numItems; j++) {
                     if (!items[j].isContained(row)) {
                         continue outer;
                     }
+                }
+                if (referenceItem.isContained(row)) {
+                    continue;
                 }
                 // ----------------------------------------------------- //
                 endTiming(TYPE_INT_SET_HASH, TYPE_METHOD_SPECIALROW, size);
