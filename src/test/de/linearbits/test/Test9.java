@@ -20,6 +20,7 @@ import java.io.IOException;
 
 import de.linearbits.suda2.SUDA2;
 import de.linearbits.suda2.SUDA2Statistics;
+import de.linearbits.suda2.Timeable;
 
 /**
  * Test based on survey data data
@@ -54,11 +55,13 @@ public class Test9 extends AbstractTest{
             long time = System.currentTimeMillis();
             for (int i=0; i<REPETITIONS; i++) {
                 long time2 = System.currentTimeMillis();
+                Timeable.reset();
                 SUDA2Statistics stats = new SUDA2(dataset).getKeyStatistics(0, true);
                 System.out.println(" Run: " + (System.currentTimeMillis() - time2) + " MSUs: " + stats.getNumKeys());
             }
             time = (long)((System.currentTimeMillis() - time) / (double)REPETITIONS);
             System.out.println(" - Average time: " + time);
+            Timeable.printOverview();
         }
     }
 }

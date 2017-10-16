@@ -48,16 +48,40 @@ public abstract class Timeable {
     public static long[][][]     typeMethodSizeTimeBuckets  = new long[TYPE_COUNT][TYPE_METHOD_COUNT][7];
     
     /**
+     * Timing overview
+     */
+    public static void printOverview() {
+        System.out.println(" - Hash");
+        printTypeMethodOverview("Intersection", TYPE_INT_SET_HASH, TYPE_METHOD_INTERSECTION);
+        printTypeMethodOverview("SpecialRow", TYPE_INT_SET_HASH, TYPE_METHOD_SPECIALROW);
+        System.out.println(" - Bits");
+        printTypeMethodOverview("Intersection", TYPE_INT_SET_BITS, TYPE_METHOD_INTERSECTION);
+        printTypeMethodOverview("SpecialRow", TYPE_INT_SET_BITS, TYPE_METHOD_SPECIALROW);
+        System.out.println(" - Jump");
+        printTypeMethodOverview("Intersection", TYPE_INT_SET_SMALL, TYPE_METHOD_INTERSECTION);
+        printTypeMethodOverview("SpecialRow", TYPE_INT_SET_SMALL, TYPE_METHOD_SPECIALROW);
+    }
+    
+    /**
+     * Timing overview
+     */
+    private static void printTypeMethodOverview(String label, int type, int method) {
+        double ops = typeMethodCallCount[type][method] == 0d ? 0d : typeMethodCallTime[type][method] / typeMethodCallCount[type][method];
+        double tmTime = (int)(typeMethodCallTime[type][method] / 1000000d);
+        System.out.println("   * " + label+ ": " + tmTime +" ms, " + typeMethodCallCount[type][method] + " ops (" + ops +" ns / op)");
+    }
+
+    /**
      * Resets all timers
      */
     public static void reset() {
         instanceCount              = new long[TYPE_COUNT];
         methodCallTime             = new long[METHOD_COUNT];
         methodCallCount            = new long[METHOD_COUNT];
-        typeMethodCallTime         = new long[TYPE_COUNT][METHOD_COUNT];
-        typeMethodCallCount        = new long[TYPE_COUNT][METHOD_COUNT];
-        typeMethodSizeCountBuckets = new long[TYPE_COUNT][METHOD_COUNT][7];
-        typeMethodSizeTimeBuckets  = new long[TYPE_COUNT][METHOD_COUNT][7];
+        typeMethodCallTime         = new long[TYPE_COUNT][TYPE_METHOD_COUNT];
+        typeMethodCallCount        = new long[TYPE_COUNT][TYPE_METHOD_COUNT];
+        typeMethodSizeCountBuckets = new long[TYPE_COUNT][TYPE_METHOD_COUNT][7];
+        typeMethodSizeTimeBuckets  = new long[TYPE_COUNT][TYPE_METHOD_COUNT][7];
     }
     
     /** Time stamp*/
