@@ -129,14 +129,16 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         startTiming();
         // ----------------------------------------------------- //
         
-        outer: for (int i = 0; i < buckets.length; i++) {
+        final int length = buckets.length;
+        final int numItems = items.length;
+        outer: for (int i = 0; i < length; i++) {
             if (buckets[i] != 0) {
                 int[] row = data[buckets[i] - 1];
                 if (referenceItem.isContained(row)) {
                     continue;
                 }
-                for (SUDA2Item item : items) {
-                    if (!item.isContained(row)) {
+                for (int j=0; j<numItems; j++) {
+                    if (!items[j].isContained(row)) {
                         continue outer;
                     }
                 }
@@ -151,8 +153,6 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
         // ----------------------------------------------------- //
         return false;
     }
-    
-    public static double dataSize;
     
     @Override
     public SUDA2IntSet intersectWith(SUDA2IntSet other) {
@@ -194,7 +194,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
             capacity++;
             
             // If it saves space, use a bit set
-            if (size > (dataSize * 0.1d) && (capacity << 5) >= max - min) {
+            if ((capacity << 5) >= max - min) {
                 result = new SUDA2IntSetBits(min, max);
             } else {
                 // Fall back to hash set
