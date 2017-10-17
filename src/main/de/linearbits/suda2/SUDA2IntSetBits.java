@@ -110,30 +110,9 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         if (this.max < other.min() || other.max() < this.min) {
             return new SUDA2IntSetJump();
         }
-        
-        // Result is very small
-//        if (this.size <=8) {
-//            
-//            SUDA2IntSetJump result = new SUDA2IntSetJump();
-//            int index = this.offset;
-//            final int bound = this.array.length;
-//            for (int offset = 0; offset < bound; offset++) {
-//                if (array[offset] != 0L) {
-//                    for (int i = 0; i < 64; i++) {
-//                        if (((array[offset] & (1L << i)) != 0)) {
-//                            result.add(index);
-//                        }
-//                        index ++;
-//                    }
-//                } else {
-//                    index += 64;
-//                }
-//            }
-//            return result;
-//
-//        // Intersect two bitsets
-//        } else 
-            if(other.isBitSet()) {
+
+        // Intersect two bitsets
+        if (other.isBitSet()) {
             
             // ----------------------------------------------------- //
             startTiming();
