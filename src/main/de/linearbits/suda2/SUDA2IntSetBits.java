@@ -125,9 +125,7 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             
             // Result
             SUDA2IntSetBits result = new SUDA2IntSetBits(min, max);
-            result.min = min; // Just an approximation
-            result.max = max; // Just an approximation
-            
+
             // Offsets
             int index = offset / 64;
             int _index = _other.offset / 64;
@@ -139,11 +137,29 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             _index = maxIndex - _index;
             resultIndex = maxIndex - resultIndex;
             
+            // Reset min and max
+            min = Integer.MAX_VALUE;
+            max = Integer.MIN_VALUE;
+
             // Pairwise logical and
             while (resultIndex < result.array.length && index < array.length && _index < _other.array.length) {
                 long element = array[index++] & _other.array[_index++];
-                result.size += Long.bitCount(element);
-                result.array[resultIndex++] = element;
+                if (element != 0) {
+                    result.size += Long.bitCount(element);
+                    result.array[resultIndex] = element;
+                    min = Math.min((resultIndex << 6) + Long.numberOfLeadingZeros(element), min);
+                    max = Math.max((resultIndex << 6) + 63 - Long.numberOfTrailingZeros(element), max);
+                }
+                resultIndex++;
+            }
+            
+            // Set min and max
+            if (result.size == 0) {
+                result.min = 0;
+                result.max = 0;
+            } else {
+                result.min = result.offset + min;
+                result.max = result.offset + max;
             }
 
             // ----------------------------------------------------- //
