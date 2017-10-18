@@ -233,7 +233,7 @@ public class SUDA2IntSetHash extends SUDA2IntSet {
     }
 
     /**
-     * Murmur hash
+     * Not murmur hash
      * @param value
      * @return
      */

@@ -61,7 +61,7 @@ public class Test9 extends AbstractTest{
             }
             time = (long)((System.currentTimeMillis() - time) / (double)REPETITIONS);
             System.out.println(" - Average time: " + time);
-            Timeable.printOverview();
+//            Timeable.printOverview();
         }
     }
 }
