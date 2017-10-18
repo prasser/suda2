@@ -128,7 +128,7 @@ public class SUDA2Item extends Timeable {
      */
     public SUDA2Item getProjection(SUDA2IntSet otherRows) {
         
-        startTiming();
+        long startTime = System.nanoTime();
 
         // Smaller set is rows1
         int size1 = this.rows.size();
@@ -139,7 +139,7 @@ public class SUDA2Item extends Timeable {
         // Intersect
         SUDA2IntSet rows = rows1.intersectWith(rows2);
         
-        endTiming(METHOD_PROJECTION);
+        endTiming(METHOD_PROJECTION, startTime);
 
         // Return
         return rows.size() == 0 ? null : new SUDA2Item(this.column, this.value, this.id, rows);
