@@ -19,7 +19,8 @@ package de.linearbits.test;
 import java.io.IOException;
 
 import de.linearbits.suda2.SUDA2;
-import de.linearbits.suda2.SUDA2Result;
+import de.linearbits.suda2.SUDA2Statistics;
+import de.linearbits.suda2.Timeable;
 
 /**
  * Test based on survey data data
@@ -36,20 +37,31 @@ public class Test9 extends AbstractTest{
     public static void main(String[] args) throws IOException {
        
         // As array
-        // int[][] data = getData("data/test4.csv"); // FARS
-        // int[][] data = getData("data/test5.csv"); // IHIS
-        int[][] data = getData("data/test6.csv"); // SS13ACS -> SDCM: 1.67 hours, This: 21.06 hours
-        // int[][] data = getData("data/test7.csv"); // CUP
+        String[] files = new String[]{
+            "data/test.csv",    // Adult
+            "data/test2.csv",   // Whatever
+            "data/test3.csv",   // Whatever
+            "data/test4.csv",   // FARS
+            "data/test7.csv",   // CUP
+            "data/test5.csv",   // IHIS
+            "data/test6.csv"    // SS13ACS
+        };
         
-        // Process
-        int REPETITIONS = 1;
-        long time = System.currentTimeMillis();
-        SUDA2Result result1 = null;
-        for (int i=0; i<REPETITIONS; i++) {
-            result1 = new SUDA2(data).getKeyStatistics(0, true);
+        for (String file : files) {
+            int[][] dataset = getData(file);
+            System.out.println("Dataset: " + file + " length: " + dataset.length);
+            // Process
+            int REPETITIONS = 5;
+            long time = System.currentTimeMillis();
+            for (int i=0; i<REPETITIONS; i++) {
+                long time2 = System.currentTimeMillis();
+                Timeable.reset();
+                SUDA2Statistics stats = new SUDA2(dataset).getKeyStatistics(0, true);
+                System.out.println(" Run: " + (System.currentTimeMillis() - time2) + " MSUs: " + stats.getNumKeys());
+            }
+            time = (long)((System.currentTimeMillis() - time) / (double)REPETITIONS);
+            System.out.println(" - Average time: " + time);
+            Timeable.printOverview();
         }
-        time = (long)((System.currentTimeMillis() - time) / (double)REPETITIONS);
-        System.out.println("Time: " + time);
-        System.out.println(result1);
     }
 }

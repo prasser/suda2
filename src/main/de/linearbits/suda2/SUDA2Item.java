@@ -21,8 +21,8 @@ package de.linearbits.suda2;
  * 
  * @author Fabian Prasser
  */
-public class SUDA2Item {
-
+public class SUDA2Item extends Timeable {
+    
     /**
      * Packs column and value into a long to be used as a key
      * @param column
@@ -52,7 +52,7 @@ public class SUDA2Item {
         this.column = column;
         this.value = value;
         this.id = id;
-        this.rows = new SUDA2IntSet();
+        this.rows = new SUDA2IntSetHash();
     }
     
     /**
@@ -95,28 +95,14 @@ public class SUDA2Item {
     public SUDA2Item get1MSU(SUDA2IntSet otherRows) {
 
         // Smaller set is rows1
-        int size1 = this.rows.size;
-        int size2 = otherRows.size;
+        int size1 = this.rows.size();
+        int size2 = otherRows.size();
         SUDA2IntSet rows1 = size1 < size2 ? this.rows : otherRows;
         SUDA2IntSet rows2 = size1 < size2 ? otherRows : this.rows;
         
         // Check if they intersect with exactly one support row
-        boolean supportRowFound = false;
-        int[] buckets = rows1.buckets;
-        for (int i = 0; i < buckets.length; i++) {
-            int row = buckets[i];
-            if (row != 0 && rows2.contains(row)) {
-                // More than one support row
-                if (supportRowFound) {
-                    return null;
-                } else {
-                    supportRowFound = true;
-                }
-            }
-        }
-        
         // Check whether the item is a 1-MSU
-        return supportRowFound ? this : null;
+        return rows1.isSupportRowPresent(rows2) ? this : null;
     }
 
     /**
@@ -141,25 +127,22 @@ public class SUDA2Item {
      * @return
      */
     public SUDA2Item getProjection(SUDA2IntSet otherRows) {
+        
+        startTiming();
 
-        // Smaller set is set 1
-        int size1 = this.rows.size;
-        int size2 = otherRows.size;
+        // Smaller set is rows1
+        int size1 = this.rows.size();
+        int size2 = otherRows.size();
         SUDA2IntSet rows1 = size1 < size2 ? this.rows : otherRows;
         SUDA2IntSet rows2 = size1 < size2 ? otherRows : this.rows;
         
-        // Intersect support rows with those provided
-        SUDA2IntSet rows = new SUDA2IntSet();
-        final int[] buckets = rows1.buckets;
-        for (int i = 0; i < buckets.length; i++) {
-            int row = buckets[i];
-            if (row != 0 && rows2.contains(row)) {
-                rows.add(row);
-            }
-        }
+        // Intersect
+        SUDA2IntSet rows = rows1.intersectWith(rows2);
         
+        endTiming(METHOD_PROJECTION);
+
         // Return
-        return rows.size == 0 ? null : new SUDA2Item(this.column, this.value, this.id, rows);
+        return rows.size() == 0 ? null : new SUDA2Item(this.column, this.value, this.id, rows);
     }
 
     /**
@@ -175,7 +158,7 @@ public class SUDA2Item {
      * @return
      */
     public int getSupport() {
-        return this.rows.size;
+        return this.rows.size();
     }
 
     /**
