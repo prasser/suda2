@@ -147,19 +147,19 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
                 if (element != 0) {
                     result.size += Long.bitCount(element);
                     result.array[resultIndex] = element;
-                    min = Math.min((resultIndex << 6) + Long.numberOfLeadingZeros(element), min);
-                    max = Math.max((resultIndex << 6) + 63 - Long.numberOfTrailingZeros(element), max);
+                    min = Math.min((resultIndex << 6) + Long.numberOfTrailingZeros(element), min);
+                    max = Math.max((resultIndex << 6) - Long.numberOfLeadingZeros(element), max);
                 }
                 resultIndex++;
             }
-            
-            // Set min and max
+
+         // Set min and max
             if (result.size == 0) {
                 result.min = 0;
                 result.max = 0;
             } else {
                 result.min = result.offset + min;
-                result.max = result.offset + max;
+                result.max = result.offset + max + 63;
             }
 
             // ----------------------------------------------------- //
