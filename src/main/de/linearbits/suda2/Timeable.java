@@ -104,10 +104,11 @@ public abstract class Timeable {
     /**
      * End timing of a method invocation
      * @param method
+     * @param startTime
      */
-    protected void endTiming(int method) {
+    protected void endTiming(int method, long startTime) {
         if (ENABLED) {
-            methodCallTime[method] = System.nanoTime() - time;
+            methodCallTime[method] += System.nanoTime() - startTime;
             methodCallCount[method]++;
         }
     }
