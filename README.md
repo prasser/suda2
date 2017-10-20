@@ -13,7 +13,7 @@ The according Javadoc is available for download [here](https://rawgithub.com/pra
 
 Online documentation can be found [here](https://rawgithub.com/prasser/suda2/master/doc/index.html).
 
-## SWT Tiles in action
+## SUDA2 in action
 
 Too see SUDA2 in action, take a look at [ARX](https://github.com/arx-deidentifier/arx).
 
