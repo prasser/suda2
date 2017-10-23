@@ -17,7 +17,7 @@
 package de.linearbits.suda2;
 
 /**
- * Each itemset is a concrete value for a concrete attribute
+ * Each item is a concrete value for a concrete attribute
  * 
  * @author Fabian Prasser
  */
