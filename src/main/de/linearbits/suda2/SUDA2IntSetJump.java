@@ -149,6 +149,11 @@ public class SUDA2IntSetJump extends SUDA2IntSet {
     }
 
     @Override
+    public boolean isBitSet() {
+        return false;
+    }
+
+    @Override
     public boolean isSupportRowPresent(SUDA2IntSet other) {
 
         // No intersection
@@ -178,18 +183,23 @@ public class SUDA2IntSetJump extends SUDA2IntSet {
     }
 
     @Override
-    public int min() {
-        return min;
-    }
-
-    @Override
     public int max() {
         return max;
     }
 
     @Override
+    public int min() {
+        return min;
+    }
+
+    @Override
     public int size() {
         return size;
+    }
+
+    @Override
+    public String toString() {
+        return "Size=" + size + " elements=" + int0 + ", " + int1 + ", " + int2 + ", " + int3 + ", " + int4 + ", " + int5 + ", " + int6 + ", " + int7;
     }
 
     /**
@@ -209,15 +219,5 @@ public class SUDA2IntSetJump extends SUDA2IntSet {
             return false;
         }
         return true;
-    }
-
-    @Override
-    public boolean isBitSet() {
-        return false;
-    }
-
-    @Override
-    public String toString() {
-        return "Size=" + size + " elements=" + int0 + ", " + int1 + ", " + int2 + ", " + int3 + ", " + int4 + ", " + int5 + ", " + int6 + ", " + int7;
     }
 }

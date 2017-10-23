@@ -63,15 +63,6 @@ public abstract class Timeable {
     }
     
     /**
-     * Timing overview
-     */
-    private static void printTypeMethodOverview(String label, int type, int method) {
-        double ops = typeMethodCallCount[type][method] == 0d ? 0d : typeMethodCallTime[type][method] / typeMethodCallCount[type][method];
-        double tmTime = (int)(typeMethodCallTime[type][method] / 1000000d);
-        System.out.println("   * " + label+ ": " + tmTime +" ms, " + typeMethodCallCount[type][method] + " ops (" + ops +" ns / op)");
-    }
-
-    /**
      * Resets all timers
      */
     public static void reset() {
@@ -82,6 +73,15 @@ public abstract class Timeable {
         typeMethodCallCount        = new long[TYPE_COUNT][TYPE_METHOD_COUNT];
         typeMethodSizeCountBuckets = new long[TYPE_COUNT][TYPE_METHOD_COUNT][7];
         typeMethodSizeTimeBuckets  = new long[TYPE_COUNT][TYPE_METHOD_COUNT][7];
+    }
+
+    /**
+     * Timing overview
+     */
+    private static void printTypeMethodOverview(String label, int type, int method) {
+        double ops = typeMethodCallCount[type][method] == 0d ? 0d : typeMethodCallTime[type][method] / typeMethodCallCount[type][method];
+        double tmTime = (int)(typeMethodCallTime[type][method] / 1000000d);
+        System.out.println("   * " + label+ ": " + tmTime +" ms, " + typeMethodCallCount[type][method] + " ops (" + ops +" ns / op)");
     }
     
     /** Time stamp*/

@@ -84,25 +84,6 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
         // ----------------------------------------------------- //
         return false;
     }
-    /**
-     * Searches for the special row
-     * @param items
-     * @param referenceItem
-     * @param row
-     * @return
-     */
-    private boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[] row) {
-        for (SUDA2Item item : items) {
-            if (!item.isContained(row)) {
-                return false;
-            }
-        }
-        if (referenceItem.isContained(row)) {
-            return false;
-        }
-        return true;
-    }
-    
     @Override
     public SUDA2IntSet intersectWith(SUDA2IntSet other) {
 
@@ -174,6 +155,11 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
             return other.intersectWith(this);
         }
     }
+    
+    @Override
+    public boolean isBitSet() {
+        return true;
+    }
 
     @Override
     public boolean isSupportRowPresent(SUDA2IntSet other) {
@@ -240,12 +226,26 @@ public class SUDA2IntSetBits extends SUDA2IntSet {
     }
 
     @Override
-    public boolean isBitSet() {
-        return true;
-    }
-
-    @Override
     public String toString() {
         return "Size=" + size + " offset=" + offset + " array=" + Arrays.toString(array);
+    }
+
+    /**
+     * Searches for the special row
+     * @param items
+     * @param referenceItem
+     * @param row
+     * @return
+     */
+    private boolean containsSpecialRow(SUDA2Item[] items, SUDA2Item referenceItem, int[] row) {
+        for (SUDA2Item item : items) {
+            if (!item.isContained(row)) {
+                return false;
+            }
+        }
+        if (referenceItem.isContained(row)) {
+            return false;
+        }
+        return true;
     }   
 }
