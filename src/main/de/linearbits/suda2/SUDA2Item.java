@@ -93,7 +93,7 @@ public class SUDA2Item extends Timeable {
      * @return
      */
     public SUDA2Item get1MSU(SUDA2IntSet otherRows) {
-
+        
         // Smaller set is rows1
         int size1 = this.rows.size();
         int size2 = otherRows.size();
