@@ -64,7 +64,6 @@ public class SUDA2Statistics extends SUDA2Result {
         this.columnKeyCounts = new double[columns];
         this.sizeDistribution = new double[maxK];
         this.intermediateScores = new SUDA2Scores(columns, maxK, sdcMicroScores).getIntermediateScores();
-
     }
     
     @Override
