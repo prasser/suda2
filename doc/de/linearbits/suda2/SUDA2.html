@@ -141,33 +141,22 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2.html#getKeys(de.linearbits.suda2.SUDA2ListenerKey)">getKeys</a></strong>(<a href="../../../de/linearbits/suda2/SUDA2ListenerKey.html" title="class in de.linearbits.suda2">SUDA2ListenerKey</a>&nbsp;listener)</code>
-<div class="block">Executes the SUDA2 algorithm, calls the callback for each key found</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code><a href="../../../de/linearbits/suda2/SUDA2Statistics.html" title="class in de.linearbits.suda2">SUDA2Statistics</a></code></td>
-<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2.html#getKeyStatistics()">getKeyStatistics</a></strong>()</code>
-<div class="block">Executes the SUDA2 algorithm.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../../de/linearbits/suda2/SUDA2Statistics.html" title="class in de.linearbits.suda2">SUDA2Statistics</a></code></td>
-<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2.html#getKeyStatistics(boolean)">getKeyStatistics</a></strong>(boolean&nbsp;sdcMicroScores)</code>
+<td class="colFirst"><code><a href="../../../de/linearbits/suda2/SUDA2StatisticsColumns.html" title="class in de.linearbits.suda2">SUDA2StatisticsColumns</a></code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2.html#getStatisticsColumns(int,%20boolean)">getStatisticsColumns</a></strong>(int&nbsp;maxKeyLength,
+                    boolean&nbsp;sdcMicroScores)</code>
 <div class="block">Executes the SUDA2 algorithm.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code><a href="../../../de/linearbits/suda2/SUDA2Statistics.html" title="class in de.linearbits.suda2">SUDA2Statistics</a></code></td>
-<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2.html#getKeyStatistics(int)">getKeyStatistics</a></strong>(int&nbsp;maxKeyLength)</code>
+<td class="colFirst"><code><a href="../../../de/linearbits/suda2/SUDA2StatisticsKeys.html" title="class in de.linearbits.suda2">SUDA2StatisticsKeys</a></code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2.html#getStatisticsKeys(int)">getStatisticsKeys</a></strong>(int&nbsp;maxKeyLength)</code>
 <div class="block">Executes the SUDA2 algorithm.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code><a href="../../../de/linearbits/suda2/SUDA2Statistics.html" title="class in de.linearbits.suda2">SUDA2Statistics</a></code></td>
-<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2.html#getKeyStatistics(int,%20boolean)">getKeyStatistics</a></strong>(int&nbsp;maxKeyLength,
-                boolean&nbsp;sdcMicroScores)</code>
+<td class="colFirst"><code><a href="../../../de/linearbits/suda2/SUDA2StatisticsScores.html" title="class in de.linearbits.suda2">SUDA2StatisticsScores</a></code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2.html#getStatisticsScores(int,%20boolean)">getStatisticsScores</a></strong>(int&nbsp;maxKeyLength,
+                   boolean&nbsp;sdcMicroScores)</code>
 <div class="block">Executes the SUDA2 algorithm.</div>
 </td>
 </tr>
@@ -236,61 +225,41 @@ extends java.lang.Object</pre>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>maxKeyLength</code> - If maxKeyLength <= 0, maxKeyLength will be set to the number of columns</dd></dl>
 </li>
 </ul>
-<a name="getKeys(de.linearbits.suda2.SUDA2ListenerKey)">
+<a name="getStatisticsKeys(int)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getKeys</h4>
-<pre>public&nbsp;void&nbsp;getKeys(<a href="../../../de/linearbits/suda2/SUDA2ListenerKey.html" title="class in de.linearbits.suda2">SUDA2ListenerKey</a>&nbsp;listener)</pre>
-<div class="block">Executes the SUDA2 algorithm, calls the callback for each key found</div>
-</li>
-</ul>
-<a name="getKeyStatistics()">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getKeyStatistics</h4>
-<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2Statistics.html" title="class in de.linearbits.suda2">SUDA2Statistics</a>&nbsp;getKeyStatistics()</pre>
-<div class="block">Executes the SUDA2 algorithm.</div>
-<dl><dt><span class="strong">Returns:</span></dt><dd></dd></dl>
-</li>
-</ul>
-<a name="getKeyStatistics(boolean)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getKeyStatistics</h4>
-<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2Statistics.html" title="class in de.linearbits.suda2">SUDA2Statistics</a>&nbsp;getKeyStatistics(boolean&nbsp;sdcMicroScores)</pre>
-<div class="block">Executes the SUDA2 algorithm.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>sdcMicroScores</code> - Calculate SUDA scores analogously to sdcMicro</dd>
-<dt><span class="strong">Returns:</span></dt><dd></dd></dl>
-</li>
-</ul>
-<a name="getKeyStatistics(int)">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getKeyStatistics</h4>
-<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2Statistics.html" title="class in de.linearbits.suda2">SUDA2Statistics</a>&nbsp;getKeyStatistics(int&nbsp;maxKeyLength)</pre>
+<h4>getStatisticsKeys</h4>
+<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2StatisticsKeys.html" title="class in de.linearbits.suda2">SUDA2StatisticsKeys</a>&nbsp;getStatisticsKeys(int&nbsp;maxKeyLength)</pre>
 <div class="block">Executes the SUDA2 algorithm.</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>maxKeyLength</code> - If maxKeyLength <= 0, maxKeyLength will be set to the number of columns</dd>
 <dt><span class="strong">Returns:</span></dt><dd></dd></dl>
 </li>
 </ul>
-<a name="getKeyStatistics(int, boolean)">
+<a name="getStatisticsColumns(int, boolean)">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getKeyStatistics</h4>
-<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2Statistics.html" title="class in de.linearbits.suda2">SUDA2Statistics</a>&nbsp;getKeyStatistics(int&nbsp;maxKeyLength,
-                               boolean&nbsp;sdcMicroScores)</pre>
+<h4>getStatisticsColumns</h4>
+<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2StatisticsColumns.html" title="class in de.linearbits.suda2">SUDA2StatisticsColumns</a>&nbsp;getStatisticsColumns(int&nbsp;maxKeyLength,
+                                          boolean&nbsp;sdcMicroScores)</pre>
 <div class="block">Executes the SUDA2 algorithm.</div>
-<dl><dt><span class="strong">Parameters:</span></dt><dd><code>maxKeyLength</code> - If maxKeyLength <= 0, maxKeyLength will be set to the number of columns</dd><dd><code>sdcMicroScores</code> - Calculate SUDA scores analogously to sdcMicro</dd>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>maxKeyLength</code> - If maxKeyLength <= 0, maxKeyLength will be set to the number of columns</dd><dd><code>sdcMicroScores</code> - Whether to mimic sdcMicro or use original definition by Elliot</dd>
+<dt><span class="strong">Returns:</span></dt><dd></dd></dl>
+</li>
+</ul>
+<a name="getStatisticsScores(int, boolean)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getStatisticsScores</h4>
+<pre>public&nbsp;<a href="../../../de/linearbits/suda2/SUDA2StatisticsScores.html" title="class in de.linearbits.suda2">SUDA2StatisticsScores</a>&nbsp;getStatisticsScores(int&nbsp;maxKeyLength,
+                                        boolean&nbsp;sdcMicroScores)</pre>
+<div class="block">Executes the SUDA2 algorithm.</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>maxKeyLength</code> - If maxKeyLength <= 0, maxKeyLength will be set to the number of columns</dd><dd><code>sdcMicroScores</code> - Whether to mimic sdcMicro or use original definition by Elliot</dd>
 <dt><span class="strong">Returns:</span></dt><dd></dd></dl>
 </li>
 </ul>
