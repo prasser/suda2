@@ -79,7 +79,7 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]</code></td>
-<td class="colLast"><span class="strong">SUDA2ItemIndex.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemIndex.html#values">values</a></strong></code>
+<td class="colLast"><span class="strong">SUDA2ItemRegistry.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemRegistry.html#values">values</a></strong></code>
 <div class="block">The entry array.</div>
 </td>
 </tr>
@@ -100,7 +100,9 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></code></td>
-<td class="colLast"><span class="strong">SUDA2ItemIndex.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemIndex.html#get(long)">get</a></strong>(long&nbsp;key)</code>&nbsp;</td>
+<td class="colLast"><span class="strong">SUDA2ItemRegistry.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemRegistry.html#get(long)">get</a></strong>(long&nbsp;key)</code>
+<div class="block">Returns the item for a given key</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></code></td>
@@ -111,27 +113,15 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></code></td>
-<td class="colLast"><span class="strong">SUDA2IndexedItemSet.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IndexedItemSet.html#getItem(long)">getItem</a></strong>(long&nbsp;id)</code>
-<div class="block">Returns item for the given id</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></code></td>
-<td class="colLast"><span class="strong">SUDA2ItemList.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemList.html#getItem(long)">getItem</a></strong>(long&nbsp;id)</code>
-<div class="block">Returns the item with the given id.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></code></td>
-<td class="colLast"><span class="strong">SUDA2IndexedItemSet.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IndexedItemSet.html#getOrCreateItem(int,%20int)">getOrCreateItem</a></strong>(int&nbsp;column,
-               int&nbsp;value)</code>
-<div class="block">Either returns an existing entry or creates a new one</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></code></td>
 <td class="colLast"><span class="strong">SUDA2Item.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2Item.html#getProjection(de.linearbits.suda2.SUDA2IntSet)">getProjection</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;otherRows)</code>
 <div class="block">Returns an instance of this item projected to the given rows</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></code></td>
+<td class="colLast"><span class="strong">SUDA2ItemRegistry.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemRegistry.html#register(int,%20int)">register</a></strong>(int&nbsp;column,
+        int&nbsp;value)</code>
+<div class="block">Either returns an existing entry or creates a new one</div>
 </td>
 </tr>
 </tbody>
@@ -145,7 +135,9 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&gt;</code></td>
-<td class="colLast"><span class="strong">SUDA2ItemList.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemList.html#getList()">getList</a></strong>()</code>&nbsp;</td>
+<td class="colLast"><span class="strong">SUDA2ItemRegistry.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemRegistry.html#getSortedItemList()">getSortedItemList</a></strong>()</code>
+<div class="block">Returns a list containing items sorted by rank</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -158,30 +150,67 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><code>void</code></td>
+<td class="colLast"><span class="strong">SUDA2ItemRegistry.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemRegistry.html#add(de.linearbits.suda2.SUDA2Item)">add</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;item)</code>
+<div class="block">Adds an item to this index</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>void</code></td>
 <td class="colLast"><span class="strong">SUDA2ItemSet.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemSet.html#add(de.linearbits.suda2.SUDA2Item)">add</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;item)</code>
 <div class="block">Adds an item</div>
 </td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetBits.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetBits.html#containsSpecialRow(de.linearbits.suda2.SUDA2Item[],%20de.linearbits.suda2.SUDA2Item,%20int[][])">containsSpecialRow</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]&nbsp;items,
+                  <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;referenceItem,
+                  int[][]&nbsp;data)</code>&nbsp;</td>
+</tr>
 <tr class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><span class="strong">SUDA2IndexedItemSet.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IndexedItemSet.html#addItem(de.linearbits.suda2.SUDA2Item)">addItem</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;item)</code>
-<div class="block">Adds an item</div>
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetBits.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetBits.html#containsSpecialRow(de.linearbits.suda2.SUDA2Item[],%20de.linearbits.suda2.SUDA2Item,%20int[][])">containsSpecialRow</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]&nbsp;items,
+                  <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;referenceItem,
+                  int[][]&nbsp;data)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>abstract boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSet.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html#containsSpecialRow(de.linearbits.suda2.SUDA2Item[],%20de.linearbits.suda2.SUDA2Item,%20int[][])">containsSpecialRow</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]&nbsp;items,
+                  <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;referenceItem,
+                  int[][]&nbsp;data)</code>
+<div class="block">Returns whether the special row is contained in this set</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSet.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html#containsSpecialRow(de.linearbits.suda2.SUDA2Item[],%20de.linearbits.suda2.SUDA2Item,%20int[][])">containsSpecialRow</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]&nbsp;items,
+                  <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;referenceItem,
+                  int[][]&nbsp;data)</code>
+<div class="block">Returns whether the special row is contained in this set</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><span class="strong">SUDA2ItemIndex.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemIndex.html#put(long,%20de.linearbits.suda2.SUDA2Item)">put</a></strong>(long&nbsp;key,
-   <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;value)</code>
-<div class="block">Adds a new value to the set</div>
-</td>
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetHash.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetHash.html#containsSpecialRow(de.linearbits.suda2.SUDA2Item[],%20de.linearbits.suda2.SUDA2Item,%20int[][])">containsSpecialRow</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]&nbsp;items,
+                  <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;referenceItem,
+                  int[][]&nbsp;data)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><span class="strong">SUDA2ItemIndex.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemIndex.html#putSlot(long,%20int,%20de.linearbits.suda2.SUDA2Item)">putSlot</a></strong>(long&nbsp;key,
-       int&nbsp;slot,
-       <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;value)</code>
-<div class="block">Inserts a value into the given slot</div>
-</td>
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetHash.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetHash.html#containsSpecialRow(de.linearbits.suda2.SUDA2Item[],%20de.linearbits.suda2.SUDA2Item,%20int[][])">containsSpecialRow</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]&nbsp;items,
+                  <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;referenceItem,
+                  int[][]&nbsp;data)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetJump.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetJump.html#containsSpecialRow(de.linearbits.suda2.SUDA2Item[],%20de.linearbits.suda2.SUDA2Item,%20int[][])">containsSpecialRow</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]&nbsp;items,
+                  <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;referenceItem,
+                  int[][]&nbsp;data)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetJump.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetJump.html#containsSpecialRow(de.linearbits.suda2.SUDA2Item[],%20de.linearbits.suda2.SUDA2Item,%20int[][])">containsSpecialRow</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]&nbsp;items,
+                  <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;referenceItem,
+                  int[][]&nbsp;data)</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -194,19 +223,6 @@
 <tr class="altColor">
 <td class="colLast"><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemSet.html#SUDA2ItemSet(de.linearbits.suda2.SUDA2Item)">SUDA2ItemSet</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;item)</code>
 <div class="block">Creates a merged item set</div>
-</td>
-</tr>
-</tbody>
-</table>
-<table border="0" cellpadding="3" cellspacing="0" summary="Use table, listing constructors, and an explanation">
-<caption><span>Constructor parameters in <a href="../../../../de/linearbits/suda2/package-summary.html">de.linearbits.suda2</a> with type arguments of type <a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tbody>
-<tr class="altColor">
-<td class="colLast"><code><strong><a href="../../../../de/linearbits/suda2/SUDA2ItemList.html#SUDA2ItemList(java.util.List)">SUDA2ItemList</a></strong>(java.util.List&lt;<a href="../../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&gt;&nbsp;list)</code>
-<div class="block">Creates a new instance</div>
 </td>
 </tr>
 </tbody>

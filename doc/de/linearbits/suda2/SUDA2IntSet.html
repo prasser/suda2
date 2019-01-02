@@ -33,8 +33,8 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../de/linearbits/suda2/SUDA2IndexedItemSet.html" title="class in de.linearbits.suda2"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../de/linearbits/suda2/SUDA2Groupify.html" title="class in de.linearbits.suda2"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../de/linearbits/suda2/SUDA2IntSetBits.html" title="class in de.linearbits.suda2"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?de/linearbits/suda2/SUDA2IntSet.html" target="_top">Frames</a></li>
@@ -59,13 +59,13 @@
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#fields_inherited_from_class_de.linearbits.suda2.Timeable">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method_summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method_detail">Method</a></li>
 </ul>
@@ -84,18 +84,27 @@
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../de/linearbits/suda2/Timeable.html" title="class in de.linearbits.suda2">de.linearbits.suda2.Timeable</a></li>
+<li>
+<ul class="inheritance">
 <li>de.linearbits.suda2.SUDA2IntSet</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="../../../de/linearbits/suda2/SUDA2IntSetBits.html" title="class in de.linearbits.suda2">SUDA2IntSetBits</a>, <a href="../../../de/linearbits/suda2/SUDA2IntSetHash.html" title="class in de.linearbits.suda2">SUDA2IntSetHash</a>, <a href="../../../de/linearbits/suda2/SUDA2IntSetJump.html" title="class in de.linearbits.suda2">SUDA2IntSetJump</a></dd>
+</dl>
 <hr>
 <br>
-<pre>public class <span class="strong">SUDA2IntSet</span>
-extends java.lang.Object</pre>
-<div class="block">A very basic integer set using murmur hashing and linear probing.</div>
+<pre>public abstract class <span class="strong">SUDA2IntSet</span>
+extends <a href="../../../de/linearbits/suda2/Timeable.html" title="class in de.linearbits.suda2">Timeable</a></pre>
+<div class="block">Abstract int set</div>
 </li>
 </ul>
 </div>
@@ -108,31 +117,13 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Field Summary</h3>
-<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
-<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Field and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>int[]</code></td>
-<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#buckets">buckets</a></strong></code>
-<div class="block">The entry array.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#last">last</a></strong></code>
-<div class="block">The last element added to this set</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#size">size</a></strong></code>
-<div class="block">Current number of elements.</div>
-</td>
-</tr>
-</table>
+<ul class="blockList">
+<li class="blockList"><a name="fields_inherited_from_class_de.linearbits.suda2.Timeable">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;de.linearbits.suda2.<a href="../../../de/linearbits/suda2/Timeable.html" title="class in de.linearbits.suda2">Timeable</a></h3>
+<code><a href="../../../de/linearbits/suda2/Timeable.html#instanceCount">instanceCount</a>, <a href="../../../de/linearbits/suda2/Timeable.html#METHOD_COUNT">METHOD_COUNT</a>, <a href="../../../de/linearbits/suda2/Timeable.html#METHOD_PROJECTION">METHOD_PROJECTION</a>, <a href="../../../de/linearbits/suda2/Timeable.html#methodCallCount">methodCallCount</a>, <a href="../../../de/linearbits/suda2/Timeable.html#methodCallTime">methodCallTime</a>, <a href="../../../de/linearbits/suda2/Timeable.html#TYPE_COUNT">TYPE_COUNT</a>, <a href="../../../de/linearbits/suda2/Timeable.html#TYPE_INT_SET_BITS">TYPE_INT_SET_BITS</a>, <a href="../../../de/linearbits/suda2/Timeable.html#TYPE_INT_SET_HASH">TYPE_INT_SET_HASH</a>, <a href="../../../de/linearbits/suda2/Timeable.html#TYPE_INT_SET_SMALL">TYPE_INT_SET_SMALL</a>, <a href="../../../de/linearbits/suda2/Timeable.html#TYPE_METHOD_COUNT">TYPE_METHOD_COUNT</a>, <a href="../../../de/linearbits/suda2/Timeable.html#TYPE_METHOD_INTERSECTION">TYPE_METHOD_INTERSECTION</a>, <a href="../../../de/linearbits/suda2/Timeable.html#TYPE_METHOD_SPECIALROW">TYPE_METHOD_SPECIALROW</a>, <a href="../../../de/linearbits/suda2/Timeable.html#TYPE_METHOD_SUPPORTROW">TYPE_METHOD_SUPPORTROW</a>, <a href="../../../de/linearbits/suda2/Timeable.html#typeMethodCallCount">typeMethodCallCount</a>, <a href="../../../de/linearbits/suda2/Timeable.html#typeMethodCallTime">typeMethodCallTime</a>, <a href="../../../de/linearbits/suda2/Timeable.html#typeMethodSizeCountBuckets">typeMethodSizeCountBuckets</a>, <a href="../../../de/linearbits/suda2/Timeable.html#typeMethodSizeTimeBuckets">typeMethodSizeTimeBuckets</a></code></li>
+</ul>
 </li>
 </ul>
 <!-- ======== CONSTRUCTOR SUMMARY ======== -->
@@ -147,9 +138,7 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#SUDA2IntSet()">SUDA2IntSet</a></strong>()</code>
-<div class="block">Creates a new instance</div>
-</td>
+<td class="colOne"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#SUDA2IntSet()">SUDA2IntSet</a></strong>()</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -167,24 +156,81 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>void</code></td>
+<td class="colFirst"><code>abstract void</code></td>
 <td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#add(int)">add</a></strong>(int&nbsp;value)</code>
 <div class="block">Adds a new value to the set</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
+<td class="colFirst"><code>abstract boolean</code></td>
 <td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#contains(int)">contains</a></strong>(int&nbsp;value)</code>
 <div class="block">Returns whether the given value is contained</div>
 </td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><code>abstract boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#containsSpecialRow(de.linearbits.suda2.SUDA2Item[],%20de.linearbits.suda2.SUDA2Item,%20int[][])">containsSpecialRow</a></strong>(<a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]&nbsp;items,
+                  <a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;referenceItem,
+                  int[][]&nbsp;data)</code>
+<div class="block">Returns whether the special row is contained in this set</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract <a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#intersectWith(de.linearbits.suda2.SUDA2IntSet)">intersectWith</a></strong>(<a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>
+<div class="block">Returns a new set that contains only elements contained in both sets</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>abstract boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#isBitSet()">isBitSet</a></strong>()</code>
+<div class="block">Returns whether the set is a bit set</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract boolean</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#isSupportRowPresent(de.linearbits.suda2.SUDA2IntSet)">isSupportRowPresent</a></strong>(<a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>
+<div class="block">Searches for exactly one support row</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>abstract int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#max()">max</a></strong>()</code>
+<div class="block">Return min</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#min()">min</a></strong>()</code>
+<div class="block">Return max</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>abstract int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#size()">size</a></strong>()</code>
+<div class="block">Returns the size of the set</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract java.lang.String</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/SUDA2IntSet.html#toString()">toString</a></strong>()</code>
+<div class="block">To string</div>
+</td>
+</tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_de.linearbits.suda2.Timeable">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;de.linearbits.suda2.<a href="../../../de/linearbits/suda2/Timeable.html" title="class in de.linearbits.suda2">Timeable</a></h3>
+<code><a href="../../../de/linearbits/suda2/Timeable.html#printOverview()">printOverview</a>, <a href="../../../de/linearbits/suda2/Timeable.html#reset()">reset</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+<code>equals, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -194,44 +240,6 @@ extends java.lang.Object</pre>
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ============ FIELD DETAIL =========== -->
-<ul class="blockList">
-<li class="blockList"><a name="field_detail">
-<!--   -->
-</a>
-<h3>Field Detail</h3>
-<a name="buckets">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>buckets</h4>
-<pre>public&nbsp;int[] buckets</pre>
-<div class="block">The entry array.</div>
-</li>
-</ul>
-<a name="size">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>size</h4>
-<pre>public&nbsp;int size</pre>
-<div class="block">Current number of elements.</div>
-</li>
-</ul>
-<a name="last">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>last</h4>
-<pre>public&nbsp;int last</pre>
-<div class="block">The last element added to this set</div>
-</li>
-</ul>
-</li>
-</ul>
 <!-- ========= CONSTRUCTOR DETAIL ======== -->
 <ul class="blockList">
 <li class="blockList"><a name="constructor_detail">
@@ -245,7 +253,6 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>SUDA2IntSet</h4>
 <pre>public&nbsp;SUDA2IntSet()</pre>
-<div class="block">Creates a new instance</div>
 </li>
 </ul>
 </li>
@@ -262,7 +269,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>add</h4>
-<pre>public&nbsp;void&nbsp;add(int&nbsp;value)</pre>
+<pre>public abstract&nbsp;void&nbsp;add(int&nbsp;value)</pre>
 <div class="block">Adds a new value to the set</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>value</code> - </dd></dl>
 </li>
@@ -270,13 +277,109 @@ extends java.lang.Object</pre>
 <a name="contains(int)">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>contains</h4>
-<pre>public&nbsp;boolean&nbsp;contains(int&nbsp;value)</pre>
+<pre>public abstract&nbsp;boolean&nbsp;contains(int&nbsp;value)</pre>
 <div class="block">Returns whether the given value is contained</div>
 <dl><dt><span class="strong">Parameters:</span></dt><dd><code>value</code> - </dd>
 <dt><span class="strong">Returns:</span></dt><dd></dd></dl>
+</li>
+</ul>
+<a name="containsSpecialRow(de.linearbits.suda2.SUDA2Item[], de.linearbits.suda2.SUDA2Item, int[][])">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>containsSpecialRow</h4>
+<pre>public abstract&nbsp;boolean&nbsp;containsSpecialRow(<a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>[]&nbsp;items,
+                         <a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a>&nbsp;referenceItem,
+                         int[][]&nbsp;data)</pre>
+<div class="block">Returns whether the special row is contained in this set</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>items</code> - </dd><dd><code>referenceItem</code> - </dd><dd><code>data</code> - </dd>
+<dt><span class="strong">Returns:</span></dt><dd></dd></dl>
+</li>
+</ul>
+<a name="intersectWith(de.linearbits.suda2.SUDA2IntSet)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>intersectWith</h4>
+<pre>public abstract&nbsp;<a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;intersectWith(<a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</pre>
+<div class="block">Returns a new set that contains only elements contained in both sets</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>other</code> - </dd>
+<dt><span class="strong">Returns:</span></dt><dd></dd></dl>
+</li>
+</ul>
+<a name="isBitSet()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isBitSet</h4>
+<pre>public abstract&nbsp;boolean&nbsp;isBitSet()</pre>
+<div class="block">Returns whether the set is a bit set</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd></dd></dl>
+</li>
+</ul>
+<a name="isSupportRowPresent(de.linearbits.suda2.SUDA2IntSet)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isSupportRowPresent</h4>
+<pre>public abstract&nbsp;boolean&nbsp;isSupportRowPresent(<a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</pre>
+<div class="block">Searches for exactly one support row</div>
+<dl><dt><span class="strong">Parameters:</span></dt><dd><code>other</code> - </dd>
+<dt><span class="strong">Returns:</span></dt><dd></dd></dl>
+</li>
+</ul>
+<a name="max()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>max</h4>
+<pre>public abstract&nbsp;int&nbsp;max()</pre>
+<div class="block">Return min</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd></dd></dl>
+</li>
+</ul>
+<a name="min()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>min</h4>
+<pre>public abstract&nbsp;int&nbsp;min()</pre>
+<div class="block">Return max</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd></dd></dl>
+</li>
+</ul>
+<a name="size()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>size</h4>
+<pre>public abstract&nbsp;int&nbsp;size()</pre>
+<div class="block">Returns the size of the set</div>
+<dl><dt><span class="strong">Returns:</span></dt><dd></dd></dl>
+</li>
+</ul>
+<a name="toString()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>toString</h4>
+<pre>public abstract&nbsp;java.lang.String&nbsp;toString()</pre>
+<div class="block">To string</div>
+<dl>
+<dt><strong>Overrides:</strong></dt>
+<dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -304,8 +407,8 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../de/linearbits/suda2/SUDA2IndexedItemSet.html" title="class in de.linearbits.suda2"><span class="strong">Prev Class</span></a></li>
-<li><a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2"><span class="strong">Next Class</span></a></li>
+<li><a href="../../../de/linearbits/suda2/SUDA2Groupify.html" title="class in de.linearbits.suda2"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../de/linearbits/suda2/SUDA2IntSetBits.html" title="class in de.linearbits.suda2"><span class="strong">Next Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../index.html?de/linearbits/suda2/SUDA2IntSet.html" target="_top">Frames</a></li>
@@ -330,13 +433,13 @@ extends java.lang.Object</pre>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#fields_inherited_from_class_de.linearbits.suda2.Timeable">Field</a>&nbsp;|&nbsp;</li>
 <li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method_summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
+<li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method_detail">Method</a></li>
 </ul>

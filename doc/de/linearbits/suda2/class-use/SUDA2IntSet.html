@@ -70,6 +70,33 @@
 <!--   -->
 </a>
 <h3>Uses of <a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a> in <a href="../../../../de/linearbits/suda2/package-summary.html">de.linearbits.suda2</a></h3>
+<table border="0" cellpadding="3" cellspacing="0" summary="Use table, listing subclasses, and an explanation">
+<caption><span>Subclasses of <a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a> in <a href="../../../../de/linearbits/suda2/package-summary.html">de.linearbits.suda2</a></span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Class and Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetBits.html" title="class in de.linearbits.suda2">SUDA2IntSetBits</a></strong></code>
+<div class="block">A set of rows.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetHash.html" title="class in de.linearbits.suda2">SUDA2IntSetHash</a></strong></code>
+<div class="block">A very basic integer set using murmur hashing and linear probing.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>class&nbsp;</code></td>
+<td class="colLast"><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetJump.html" title="class in de.linearbits.suda2">SUDA2IntSetJump</a></strong></code>
+<div class="block">A very basic integer set</div>
+</td>
+</tr>
+</tbody>
+</table>
 <table border="0" cellpadding="3" cellspacing="0" summary="Use table, listing methods, and an explanation">
 <caption><span>Methods in <a href="../../../../de/linearbits/suda2/package-summary.html">de.linearbits.suda2</a> that return <a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
@@ -82,6 +109,24 @@
 <td class="colLast"><span class="strong">SUDA2Item.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2Item.html#getRows()">getRows</a></strong>()</code>
 <div class="block">Returns the rows in which this item is located</div>
 </td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetBits.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetBits.html#intersectWith(de.linearbits.suda2.SUDA2IntSet)">intersectWith</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>abstract <a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></code></td>
+<td class="colLast"><span class="strong">SUDA2IntSet.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html#intersectWith(de.linearbits.suda2.SUDA2IntSet)">intersectWith</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>
+<div class="block">Returns a new set that contains only elements contained in both sets</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetHash.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetHash.html#intersectWith(de.linearbits.suda2.SUDA2IntSet)">intersectWith</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetJump.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetJump.html#intersectWith(de.linearbits.suda2.SUDA2IntSet)">intersectWith</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -104,6 +149,42 @@
 <td class="colLast"><span class="strong">SUDA2Item.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2Item.html#getProjection(de.linearbits.suda2.SUDA2IntSet)">getProjection</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;otherRows)</code>
 <div class="block">Returns an instance of this item projected to the given rows</div>
 </td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetBits.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetBits.html#intersectWith(de.linearbits.suda2.SUDA2IntSet)">intersectWith</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract <a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></code></td>
+<td class="colLast"><span class="strong">SUDA2IntSet.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html#intersectWith(de.linearbits.suda2.SUDA2IntSet)">intersectWith</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>
+<div class="block">Returns a new set that contains only elements contained in both sets</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetHash.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetHash.html#intersectWith(de.linearbits.suda2.SUDA2IntSet)">intersectWith</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a></code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetJump.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetJump.html#intersectWith(de.linearbits.suda2.SUDA2IntSet)">intersectWith</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetBits.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetBits.html#isSupportRowPresent(de.linearbits.suda2.SUDA2IntSet)">isSupportRowPresent</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>abstract boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSet.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSet.html#isSupportRowPresent(de.linearbits.suda2.SUDA2IntSet)">isSupportRowPresent</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>
+<div class="block">Searches for exactly one support row</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetHash.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetHash.html#isSupportRowPresent(de.linearbits.suda2.SUDA2IntSet)">isSupportRowPresent</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><span class="strong">SUDA2IntSetJump.</span><code><strong><a href="../../../../de/linearbits/suda2/SUDA2IntSetJump.html#isSupportRowPresent(de.linearbits.suda2.SUDA2IntSet)">isSupportRowPresent</a></strong>(<a href="../../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>&nbsp;other)</code>&nbsp;</td>
 </tr>
 </tbody>
 </table>
