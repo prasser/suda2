@@ -19,7 +19,7 @@ package de.linearbits.test;
 import java.io.IOException;
 
 import de.linearbits.suda2.SUDA2;
-import de.linearbits.suda2.SUDA2Statistics;
+import de.linearbits.suda2.SUDA2StatisticsKeys;
 import de.linearbits.suda2.Timeable;
 
 /**
@@ -56,7 +56,7 @@ public class Test9 extends AbstractTest{
             for (int i=0; i<REPETITIONS; i++) {
                 long time2 = System.currentTimeMillis();
                 Timeable.reset();
-                SUDA2Statistics stats = new SUDA2(dataset).getKeyStatistics(0, true);
+                SUDA2StatisticsKeys stats = new SUDA2(dataset).getStatisticsKeys(0);
                 System.out.println(" Run: " + (System.currentTimeMillis() - time2) + " MSUs: " + stats.getNumKeys());
             }
             time = (long)((System.currentTimeMillis() - time) / (double)REPETITIONS);

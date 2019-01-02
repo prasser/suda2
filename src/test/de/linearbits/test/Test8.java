@@ -44,7 +44,7 @@ public class Test8 extends AbstractTest{
         long time = System.currentTimeMillis();
         SUDA2Result result1 = null;
         for (int i=0; i<REPETITIONS; i++) {
-            result1 = new SUDA2(data).getKeyStatistics(0, true);
+            result1 = new SUDA2(data).getStatisticsKeys(0);
         }
         time = (long)((System.currentTimeMillis() - time) / (double)REPETITIONS);
         System.out.println("Time: " + time);

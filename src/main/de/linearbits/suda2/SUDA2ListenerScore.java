@@ -57,6 +57,10 @@ public abstract class SUDA2ListenerScore extends SUDA2ListenerKey {
 
     @Override
     void init(int columns, int maxK, int numUniqueRecords, int numDuplicateRecords) {
-        this.intermediateScores = new SUDA2Scores(columns, maxK, sdcMicroScores).getIntermediateScores();
+        if (sdcMicroScores) {
+            this.intermediateScores = SUDA2StatisticsScores.getScoresSDCMicro(columns, maxK);
+        } else {
+            this.intermediateScores = SUDA2StatisticsScores.getScoresElliot(columns, maxK);
+        }
     }
 }

@@ -25,26 +25,22 @@ import java.util.Set;
  * 
  * @author Fabian Prasser
  */
-public class SUDA2Statistics extends SUDA2Result {
+public class SUDA2StatisticsColumns extends SUDA2Result {
 
     /** Intermediate scores */
     private final double[] intermediateScores;
-    /** Num. columns */
-    private final int      columns;
-    /** Maximal size of an MSU considered */
+    /** MaxK */
     private final int      maxK;
-    /** The number of MSUs */
-    private long           numKeys      = 0;
     /** The total size of MSUs */
     private long           totalKeySize = 0;
+    /** Columns */
+    private final int      columns;
     /** Contributions of each column */
     private final double[] columnKeyContributions;
     /** Contributions of each column */
     private final double[] columnKeyTotals;
     /** Contributions of each column */
     private final double[] columnKeyCounts;
-    /** Distribution of sizes of MSUs */
-    private final double[] sizeDistribution;
     /** Risk distribution */
     private double         totalScore   = 0d;
 
@@ -54,7 +50,7 @@ public class SUDA2Statistics extends SUDA2Result {
      * @param sdcMicroScores
      * @param maxK
      */
-    SUDA2Statistics(int rows, int columns, int maxK, boolean sdcMicroScores) {
+    SUDA2StatisticsColumns(int rows, int columns, int maxK, boolean sdcMicroScores) {
         
         // Init
         this.columns = columns;
@@ -62,8 +58,11 @@ public class SUDA2Statistics extends SUDA2Result {
         this.columnKeyContributions = new double[columns];
         this.columnKeyTotals = new double[columns];
         this.columnKeyCounts = new double[columns];
-        this.sizeDistribution = new double[maxK];
-        this.intermediateScores = new SUDA2Scores(columns, maxK, sdcMicroScores).getIntermediateScores();
+        if (sdcMicroScores) {
+            this.intermediateScores = SUDA2StatisticsScores.getScoresSDCMicro(columns, maxK);
+        } else {
+            this.intermediateScores = SUDA2StatisticsScores.getScoresElliot(columns, maxK);
+        }
     }
     
     @Override
@@ -71,24 +70,13 @@ public class SUDA2Statistics extends SUDA2Result {
         if (this == obj) return true;
         if (obj == null) return false;
         if (getClass() != obj.getClass()) return false;
-        SUDA2Statistics other = (SUDA2Statistics) obj;
+        SUDA2StatisticsColumns other = (SUDA2StatisticsColumns) obj;
         if (!Arrays.equals(columnKeyContributions, other.columnKeyContributions)) return false;
         if (!Arrays.equals(columnKeyCounts, other.columnKeyCounts)) return false;
         if (!Arrays.equals(columnKeyTotals, other.columnKeyTotals)) return false;
-        if (maxK != other.maxK) return false;
-        if (numKeys != other.numKeys) return false;
-        if (!Arrays.equals(sizeDistribution, other.sizeDistribution)) return false;
         if (totalKeySize != other.totalKeySize) return false;
         if (Double.doubleToLongBits(totalScore) != Double.doubleToLongBits(other.totalScore)) return false;
         return true;
-    }
-    
-    /**
-     * Returns the average key size
-     * @return
-     */
-    public double getAverageKeySize() {
-        return (double)this.totalKeySize / (double)this.numKeys;
     }
     
     /**
@@ -114,41 +102,13 @@ public class SUDA2Statistics extends SUDA2Result {
         }
         return result;
     }
-
-    /**
-     * Returns the distribution of the sizes of MSUs
-     * @return
-     */
-    public double[] getKeySizeDistribution() {
-        double[] result = new double[this.sizeDistribution.length];
-        for (int i = 0; i < result.length; i++) {
-            result[i] = (double)this.sizeDistribution[i] / (double)this.numKeys;
-        }
-        return result;
-    }
-
+    
     /**
      * Returns the maximal size which has been searched for
      * @return
      */
-    public int getMaxKeyLength() {
+    public int getMaxKeyLengthConsidered() {
         return this.maxK;
-    }
-    
-    /**
-     * Returns the number of columns considered
-     * @return
-     */
-    public int getNumColumns() {
-        return this.columns;
-    }
-    
-    /**
-     * Returns the number of MSUs found
-     * @return
-     */
-    public long getNumKeys() {
-        return this.numKeys;
     }
     
     @Override
@@ -158,9 +118,6 @@ public class SUDA2Statistics extends SUDA2Result {
         result = prime * result + Arrays.hashCode(columnKeyContributions);
         result = prime * result + Arrays.hashCode(columnKeyCounts);
         result = prime * result + Arrays.hashCode(columnKeyTotals);
-        result = prime * result + maxK;
-        result = prime * result + (int) (numKeys ^ (numKeys >>> 32));
-        result = prime * result + Arrays.hashCode(sizeDistribution);
         result = prime * result + (int) (totalKeySize ^ (totalKeySize >>> 32));
         long temp;
         temp = Double.doubleToLongBits(totalScore);
@@ -174,21 +131,15 @@ public class SUDA2Statistics extends SUDA2Result {
         // Prepare
         double[] totalsContributions = new double[columns];
         Arrays.fill(totalsContributions, totalScore);        
-        double[] totalsSize = new double[maxK];
-        Arrays.fill(totalsSize, numKeys);
-        
+    
         // Render
         StringBuilder builder = new StringBuilder();
         builder.append("Minimal Sample Uniques\n");
         builder.append(" - Number of columns: ").append(this.columns).append("\n");
-        builder.append(" - Number of keys: ").append(this.numKeys).append("\n");
-        builder.append(" - Average size of keys: ").append(this.getAverageKeySize()).append("\n");
         builder.append(" - Column key contributions\n");
         builder.append(toString("     ", columnKeyContributions, totalsContributions, 0));
         builder.append(" - Column key average size\n");
         builder.append(toString("     ", columnKeyTotals, columnKeyCounts, 0));
-        builder.append(" - Key size distribution\n");
-        builder.append(toString("     ", sizeDistribution, totalsSize, 1));
         return builder.toString();
     }
     
@@ -250,9 +201,7 @@ public class SUDA2Statistics extends SUDA2Result {
 
     @Override
     void registerKey(Set<SUDA2Item> set) {
-        this.numKeys++;
         this.totalKeySize += set.size();
-        this.sizeDistribution[set.size() - 1]++;
         double score = intermediateScores[set.size() - 1];
         this.totalScore += score;
         for (SUDA2Item item : set) {
@@ -265,13 +214,10 @@ public class SUDA2Statistics extends SUDA2Result {
 
     @Override
     void registerKey(SUDA2Item item, SUDA2ItemSet set) {
-        this.numKeys++;
         this.totalKeySize += set.size() + 1;
-        this.sizeDistribution[set.size()]++;
-        int size = set.size();
-        double score = intermediateScores[size];
+        double score = intermediateScores[set.size()];
         this.totalScore += score;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < set.size(); i++) {
             int column = set.get(i).getColumn();
             this.columnKeyContributions[column] += score;
             this.columnKeyTotals[column] += set.size() + 1;
@@ -284,9 +230,7 @@ public class SUDA2Statistics extends SUDA2Result {
 
     @Override
     void registerKey(SUDA2ItemSet set) {
-        this.numKeys++;
         this.totalKeySize += set.size();
-        this.sizeDistribution[set.size() - 1]++;
         int size = set.size();
         double score = intermediateScores[size - 1];
         this.totalScore += score;

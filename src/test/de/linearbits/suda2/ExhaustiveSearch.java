@@ -29,7 +29,7 @@ import java.util.Set;
  * 
  * @author Fabian Prasser
  */
-public class ExhaustiveSearch extends SUDA2Statistics{
+public class ExhaustiveSearch {
 
     /**
      * Generates the power set
@@ -66,7 +66,6 @@ public class ExhaustiveSearch extends SUDA2Statistics{
      * @param data
      */
     public ExhaustiveSearch(int[][] data) {
-        super(data.length, data[0].length, 2, true);
         this.data = data;
         this.columns = data[0].length;
     }
@@ -141,7 +140,7 @@ public class ExhaustiveSearch extends SUDA2Statistics{
             list.addAll(result);
         }
 
-        SUDA2Result _result = new SUDA2Statistics(this.data.length, this.columns, this.columns, false);
+        SUDA2Result _result = new SUDA2StatisticsKeys(this.data.length, this.columns, this.columns);
         for (Set<SUDA2Item> msu : result) {
             _result.registerKey(msu);
         }

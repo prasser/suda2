@@ -46,7 +46,7 @@ public class Test3 extends AbstractTest{
         };
         print(data);
         System.out.println("\n-----\n"); 
-        SUDA2Result result1 = new SUDA2(data).getKeyStatistics(5);
+        SUDA2Result result1 = new SUDA2(data).getStatisticsKeys(5);
         System.out.println(result1.toString());
         System.out.println("\n-----\n");
         SUDA2Result result2 = new ExhaustiveSearch(data).getKeyStatistics();

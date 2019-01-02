@@ -17,7 +17,7 @@
 package de.linearbits.test;
 
 import de.linearbits.suda2.SUDA2;
-import de.linearbits.suda2.SUDA2Statistics;
+import de.linearbits.suda2.SUDA2StatisticsKeys;
 
 /**
  * Test class
@@ -42,7 +42,7 @@ public class Test1 extends AbstractTest {
                 new int[] { 1, 2, 1, 0, 2 }  // 5
         };
 
-        SUDA2Statistics result = new SUDA2(data).getKeyStatistics(0);
+        SUDA2StatisticsKeys result = new SUDA2(data).getStatisticsKeys(0);
         System.out.println(result.toString());
     }
 }
