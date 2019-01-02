@@ -1,0 +1,581 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- NewPage -->
+<html lang="en">
+<head>
+<title>Timeable (SUDA2)</title>
+<link rel="stylesheet" type="text/css" href="../../../stylesheet.css" title="Style">
+</head>
+<body>
+<script type="text/javascript"><!--
+    if (location.href.indexOf('is-external=true') == -1) {
+        parent.document.title="Timeable (SUDA2)";
+    }
+//-->
+</script>
+<noscript>
+<div>JavaScript is disabled on your browser.</div>
+</noscript>
+<!-- ========= START OF TOP NAVBAR ======= -->
+<div class="topNav"><a name="navbar_top">
+<!--   -->
+</a><a href="#skip-navbar_top" title="Skip navigation links"></a><a name="navbar_top_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../de/linearbits/suda2/package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/Timeable.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../index-files/index-1.html">Index</a></li>
+<li><a href="../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../de/linearbits/suda2/SUDA2Statistics.html" title="class in de.linearbits.suda2"><span class="strong">Prev Class</span></a></li>
+<li>Next Class</li>
+</ul>
+<ul class="navList">
+<li><a href="../../../index.html?de/linearbits/suda2/Timeable.html" target="_top">Frames</a></li>
+<li><a href="Timeable.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_top">
+<li><a href="../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_top");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_top">
+<!--   -->
+</a></div>
+<!-- ========= END OF TOP NAVBAR ========= -->
+<!-- ======== START OF CLASS DATA ======== -->
+<div class="header">
+<div class="subTitle">de.linearbits.suda2</div>
+<h2 title="Class Timeable" class="title">Class Timeable</h2>
+</div>
+<div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>de.linearbits.suda2.Timeable</li>
+</ul>
+</li>
+</ul>
+<div class="description">
+<ul class="blockList">
+<li class="blockList">
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="../../../de/linearbits/suda2/SUDA2IntSet.html" title="class in de.linearbits.suda2">SUDA2IntSet</a>, <a href="../../../de/linearbits/suda2/SUDA2Item.html" title="class in de.linearbits.suda2">SUDA2Item</a></dd>
+</dl>
+<hr>
+<br>
+<pre>public abstract class <span class="strong">Timeable</span>
+extends java.lang.Object</pre>
+<div class="block">Abstract base class providing rudimentary timing methods</div>
+</li>
+</ul>
+</div>
+<div class="summary">
+<ul class="blockList">
+<li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static long[]</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#instanceCount">instanceCount</a></strong></code>
+<div class="block">Data</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#METHOD_COUNT">METHOD_COUNT</a></strong></code>
+<div class="block">Index</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#METHOD_PROJECTION">METHOD_PROJECTION</a></strong></code>
+<div class="block">Index</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static long[]</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#methodCallCount">methodCallCount</a></strong></code>
+<div class="block">Data</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static long[]</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#methodCallTime">methodCallTime</a></strong></code>
+<div class="block">Data</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#TYPE_COUNT">TYPE_COUNT</a></strong></code>
+<div class="block">Index</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#TYPE_INT_SET_BITS">TYPE_INT_SET_BITS</a></strong></code>
+<div class="block">Index</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#TYPE_INT_SET_HASH">TYPE_INT_SET_HASH</a></strong></code>
+<div class="block">Index</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#TYPE_INT_SET_SMALL">TYPE_INT_SET_SMALL</a></strong></code>
+<div class="block">Index</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#TYPE_METHOD_COUNT">TYPE_METHOD_COUNT</a></strong></code>
+<div class="block">Index</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#TYPE_METHOD_INTERSECTION">TYPE_METHOD_INTERSECTION</a></strong></code>
+<div class="block">Index</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#TYPE_METHOD_SPECIALROW">TYPE_METHOD_SPECIALROW</a></strong></code>
+<div class="block">Index</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static int</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#TYPE_METHOD_SUPPORTROW">TYPE_METHOD_SUPPORTROW</a></strong></code>
+<div class="block">Index</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static long[][]</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#typeMethodCallCount">typeMethodCallCount</a></strong></code>
+<div class="block">Data</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static long[][]</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#typeMethodCallTime">typeMethodCallTime</a></strong></code>
+<div class="block">Data</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static long[][][]</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#typeMethodSizeCountBuckets">typeMethodSizeCountBuckets</a></strong></code>
+<div class="block">Data</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static long[][][]</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#typeMethodSizeTimeBuckets">typeMethodSizeTimeBuckets</a></strong></code>
+<div class="block">Data</div>
+</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#Timeable()">Timeable</a></strong>()</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
+<!-- ========== METHOD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_summary">
+<!--   -->
+</a>
+<h3>Method Summary</h3>
+<table class="overviewSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span>Methods</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#printOverview()">printOverview</a></strong>()</code>
+<div class="block">Timing overview</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static void</code></td>
+<td class="colLast"><code><strong><a href="../../../de/linearbits/suda2/Timeable.html#reset()">reset</a></strong>()</code>
+<div class="block">Resets all timers</div>
+</td>
+</tr>
+</table>
+<ul class="blockList">
+<li class="blockList"><a name="methods_inherited_from_class_java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>equals, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field_detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="TYPE_INT_SET_BITS">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>TYPE_INT_SET_BITS</h4>
+<pre>public static final&nbsp;int TYPE_INT_SET_BITS</pre>
+<div class="block">Index</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#de.linearbits.suda2.Timeable.TYPE_INT_SET_BITS">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="TYPE_INT_SET_HASH">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>TYPE_INT_SET_HASH</h4>
+<pre>public static final&nbsp;int TYPE_INT_SET_HASH</pre>
+<div class="block">Index</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#de.linearbits.suda2.Timeable.TYPE_INT_SET_HASH">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="TYPE_INT_SET_SMALL">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>TYPE_INT_SET_SMALL</h4>
+<pre>public static final&nbsp;int TYPE_INT_SET_SMALL</pre>
+<div class="block">Index</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#de.linearbits.suda2.Timeable.TYPE_INT_SET_SMALL">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="TYPE_COUNT">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>TYPE_COUNT</h4>
+<pre>public static final&nbsp;int TYPE_COUNT</pre>
+<div class="block">Index</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#de.linearbits.suda2.Timeable.TYPE_COUNT">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="METHOD_PROJECTION">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>METHOD_PROJECTION</h4>
+<pre>public static final&nbsp;int METHOD_PROJECTION</pre>
+<div class="block">Index</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#de.linearbits.suda2.Timeable.METHOD_PROJECTION">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="METHOD_COUNT">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>METHOD_COUNT</h4>
+<pre>public static final&nbsp;int METHOD_COUNT</pre>
+<div class="block">Index</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#de.linearbits.suda2.Timeable.METHOD_COUNT">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="TYPE_METHOD_SPECIALROW">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>TYPE_METHOD_SPECIALROW</h4>
+<pre>public static final&nbsp;int TYPE_METHOD_SPECIALROW</pre>
+<div class="block">Index</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#de.linearbits.suda2.Timeable.TYPE_METHOD_SPECIALROW">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="TYPE_METHOD_SUPPORTROW">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>TYPE_METHOD_SUPPORTROW</h4>
+<pre>public static final&nbsp;int TYPE_METHOD_SUPPORTROW</pre>
+<div class="block">Index</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#de.linearbits.suda2.Timeable.TYPE_METHOD_SUPPORTROW">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="TYPE_METHOD_INTERSECTION">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>TYPE_METHOD_INTERSECTION</h4>
+<pre>public static final&nbsp;int TYPE_METHOD_INTERSECTION</pre>
+<div class="block">Index</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#de.linearbits.suda2.Timeable.TYPE_METHOD_INTERSECTION">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="TYPE_METHOD_COUNT">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>TYPE_METHOD_COUNT</h4>
+<pre>public static final&nbsp;int TYPE_METHOD_COUNT</pre>
+<div class="block">Index</div>
+<dl><dt><span class="strong">See Also:</span></dt><dd><a href="../../../constant-values.html#de.linearbits.suda2.Timeable.TYPE_METHOD_COUNT">Constant Field Values</a></dd></dl>
+</li>
+</ul>
+<a name="instanceCount">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>instanceCount</h4>
+<pre>public static&nbsp;long[] instanceCount</pre>
+<div class="block">Data</div>
+</li>
+</ul>
+<a name="methodCallTime">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>methodCallTime</h4>
+<pre>public static&nbsp;long[] methodCallTime</pre>
+<div class="block">Data</div>
+</li>
+</ul>
+<a name="methodCallCount">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>methodCallCount</h4>
+<pre>public static&nbsp;long[] methodCallCount</pre>
+<div class="block">Data</div>
+</li>
+</ul>
+<a name="typeMethodCallTime">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>typeMethodCallTime</h4>
+<pre>public static&nbsp;long[][] typeMethodCallTime</pre>
+<div class="block">Data</div>
+</li>
+</ul>
+<a name="typeMethodCallCount">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>typeMethodCallCount</h4>
+<pre>public static&nbsp;long[][] typeMethodCallCount</pre>
+<div class="block">Data</div>
+</li>
+</ul>
+<a name="typeMethodSizeCountBuckets">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>typeMethodSizeCountBuckets</h4>
+<pre>public static&nbsp;long[][][] typeMethodSizeCountBuckets</pre>
+<div class="block">Data</div>
+</li>
+</ul>
+<a name="typeMethodSizeTimeBuckets">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>typeMethodSizeTimeBuckets</h4>
+<pre>public static&nbsp;long[][][] typeMethodSizeTimeBuckets</pre>
+<div class="block">Data</div>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor_detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="Timeable()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>Timeable</h4>
+<pre>public&nbsp;Timeable()</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method_detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="printOverview()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>printOverview</h4>
+<pre>public static&nbsp;void&nbsp;printOverview()</pre>
+<div class="block">Timing overview</div>
+</li>
+</ul>
+<a name="reset()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>reset</h4>
+<pre>public static&nbsp;void&nbsp;reset()</pre>
+<div class="block">Resets all timers</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<!-- ========= END OF CLASS DATA ========= -->
+<!-- ======= START OF BOTTOM NAVBAR ====== -->
+<div class="bottomNav"><a name="navbar_bottom">
+<!--   -->
+</a><a href="#skip-navbar_bottom" title="Skip navigation links"></a><a name="navbar_bottom_firstrow">
+<!--   -->
+</a>
+<ul class="navList" title="Navigation">
+<li><a href="../../../de/linearbits/suda2/package-summary.html">Package</a></li>
+<li class="navBarCell1Rev">Class</li>
+<li><a href="class-use/Timeable.html">Use</a></li>
+<li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../deprecated-list.html">Deprecated</a></li>
+<li><a href="../../../index-files/index-1.html">Index</a></li>
+<li><a href="../../../help-doc.html">Help</a></li>
+</ul>
+</div>
+<div class="subNav">
+<ul class="navList">
+<li><a href="../../../de/linearbits/suda2/SUDA2Statistics.html" title="class in de.linearbits.suda2"><span class="strong">Prev Class</span></a></li>
+<li>Next Class</li>
+</ul>
+<ul class="navList">
+<li><a href="../../../index.html?de/linearbits/suda2/Timeable.html" target="_top">Frames</a></li>
+<li><a href="Timeable.html" target="_top">No Frames</a></li>
+</ul>
+<ul class="navList" id="allclasses_navbar_bottom">
+<li><a href="../../../allclasses-noframe.html">All Classes</a></li>
+</ul>
+<div>
+<script type="text/javascript"><!--
+  allClassesLink = document.getElementById("allclasses_navbar_bottom");
+  if(window==top) {
+    allClassesLink.style.display = "block";
+  }
+  else {
+    allClassesLink.style.display = "none";
+  }
+  //-->
+</script>
+</div>
+<div>
+<ul class="subNavList">
+<li>Summary:&nbsp;</li>
+<li>Nested&nbsp;|&nbsp;</li>
+<li><a href="#field_summary">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_summary">Method</a></li>
+</ul>
+<ul class="subNavList">
+<li>Detail:&nbsp;</li>
+<li><a href="#field_detail">Field</a>&nbsp;|&nbsp;</li>
+<li><a href="#constructor_detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method_detail">Method</a></li>
+</ul>
+</div>
+<a name="skip-navbar_bottom">
+<!--   -->
+</a></div>
+<!-- ======== END OF BOTTOM NAVBAR ======= -->
+</body>
+</html>
