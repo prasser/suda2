@@ -21,11 +21,18 @@ package de.linearbits.suda2;
  * 
  * @author Fabian Prasser
  */
-public interface SUDA2ListenerProgress {
+public abstract class SUDA2ListenerProgress {
 
     /**
      * Progress update
      * @param progress Number in [0, 1]
      */
-    public void update(double progress);
+    public abstract void update(double progress);
+
+    /**
+     * Overwrite to react on each and every tick
+     */
+    public void tick() {
+        // Empty by design
+    }
 }
