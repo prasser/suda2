@@ -419,6 +419,11 @@ public class SUDA2 {
     private List<SUDA2ItemSet> suda2(int maxK,
                                      SUDA2ItemRegistry registry,
                                      int numRecords) {
+        
+        // Tick
+        if (progressListener != null) {
+            progressListener.tick();
+        }
 
         // Find MSUs and clear list
         List<SUDA2Item> currentList = registry.getSortedItemList();
