@@ -37,6 +37,16 @@ public abstract class SUDA2ListenerMSU extends SUDA2ListenerKey {
      */
     public abstract void keyFound(int row, int[] columns, int size);
 
+    /**
+     * A MSU has been discovered
+     * 
+     * @param row
+     * @param size
+     */
+    public void keyFound(int row, int size) {
+    	throw new UnsupportedOperationException("Not implemented");
+    }
+
     @Override
     void init(int columns, int maxK, int numUniqueRecords, int numDuplicateRecords) {
         this.result = new int[columns];

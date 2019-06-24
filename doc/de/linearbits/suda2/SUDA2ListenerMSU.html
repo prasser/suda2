@@ -17,8 +17,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":10,"i1":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -150,12 +150,19 @@ extends <a href="../../../de/linearbits/suda2/SUDA2ListenerKey.html" title="clas
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../de/linearbits/suda2/SUDA2ListenerMSU.html#keyFound-int-int-">keyFound</a></span>(int&nbsp;row,
+        int&nbsp;size)</code>
+<div class="block">A MSU has been discovered</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>abstract void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../de/linearbits/suda2/SUDA2ListenerMSU.html#keyFound-int-int:A-int-">keyFound</a></span>(int&nbsp;row,
         int[]&nbsp;columns,
@@ -164,13 +171,6 @@ extends <a href="../../../de/linearbits/suda2/SUDA2ListenerKey.html" title="clas
 </td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.de.linearbits.suda2.SUDA2ListenerKey">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;de.linearbits.suda2.<a href="../../../de/linearbits/suda2/SUDA2ListenerKey.html" title="class in de.linearbits.suda2">SUDA2ListenerKey</a></h3>
-<code><a href="../../../de/linearbits/suda2/SUDA2ListenerKey.html#keyFound-int-int-">keyFound</a></code></li>
-</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
@@ -212,7 +212,7 @@ extends <a href="../../../de/linearbits/suda2/SUDA2ListenerKey.html" title="clas
 <a name="keyFound-int-int:A-int-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>keyFound</h4>
 <pre>public abstract&nbsp;void&nbsp;keyFound(int&nbsp;row,
@@ -223,6 +223,24 @@ extends <a href="../../../de/linearbits/suda2/SUDA2ListenerKey.html" title="clas
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>row</code> - </dd>
 <dd><code>columns</code> - </dd>
+<dd><code>size</code> - </dd>
+</dl>
+</li>
+</ul>
+<a name="keyFound-int-int-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>keyFound</h4>
+<pre>public&nbsp;void&nbsp;keyFound(int&nbsp;row,
+                     int&nbsp;size)</pre>
+<div class="block">A MSU has been discovered</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../de/linearbits/suda2/SUDA2ListenerKey.html#keyFound-int-int-">keyFound</a></code>&nbsp;in class&nbsp;<code><a href="../../../de/linearbits/suda2/SUDA2ListenerKey.html" title="class in de.linearbits.suda2">SUDA2ListenerKey</a></code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>row</code> - </dd>
 <dd><code>size</code> - </dd>
 </dl>
 </li>
