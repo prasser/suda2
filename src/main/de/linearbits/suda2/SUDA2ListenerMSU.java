@@ -23,8 +23,9 @@ import java.util.Set;
  * 
  * @author Fabian Prasser
  */
-public abstract class SUDA2ListenerMSU extends SUDA2Result {
+public abstract class SUDA2ListenerMSU extends SUDA2ListenerKey {
     
+	/** Result array*/
     private int[] result;
 
     /**
